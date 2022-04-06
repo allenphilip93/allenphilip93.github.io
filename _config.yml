@@ -88,7 +88,7 @@ avatar: https://media-exp1.licdn.com/dms/image/C5603AQGMDYXquKZC7g/profile-displ
 toc: true
 
 comments:
-  active: disqus        # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
+  active: gisqus        # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
   # The active options are as follows:
   disqus:
     shortname:    # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
@@ -98,10 +98,10 @@ comments:
     issue_term:   # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo:             # <gh-username>/<repo>
-    repo_id:
-    category:
-    category_id:
+    repo: allenphilip93/allenphilip93.github.io            # <gh-username>/<repo>
+    repo_id: R_kgDOHHsWnA       
+    category: General
+    category_id: DIC_kwDOHHsWnM4COcCB
     mapping:          # optional, default to 'pathname'
     input_position:   # optional, default to 'bottom'
     lang:             # optional, default to the value of `site.lang`
