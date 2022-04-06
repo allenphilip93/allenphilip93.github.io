@@ -46,9 +46,8 @@ social:
     # The first element serves as the copyright owner's link
     - https://twitter.com/allenphilip93      # change to your twitter homepage
     - https://github.com/allenphilip93       # change to your github homepage
-    # Uncomment below to add more social links
     - https://www.facebook.com/allenphilip93
-    - https://www.linkedin.com/in/allenphilip93
+    - https://www.linkedin.com/in/allen-phillip-b9147524/
 
 google_site_verification:               # fill in to your verification string
 
@@ -83,7 +82,7 @@ theme_mode:   dark # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://media-exp1.licdn.com/dms/image/C5603AQGMDYXquKZC7g/profile-displayphoto-shrink_800_800/0/1620822955702?e=1654732800&v=beta&t=27D7F0XWBpexe786a8VFNnMZ5ly0qMBWUZS7XZIzSlw
 
 # boolean type, the global switch for ToC in posts.
 toc: true
