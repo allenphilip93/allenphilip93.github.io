@@ -52,7 +52,7 @@ build() {
   fi
 
   # build
-  JEKYLL_ENV=production bundle exec jekyll b -d "$SITE_DIR$_baseurl" --config "$_config"
+  JEKYLL_ENV=production bundle exec jekyll b -d "$SITE_DIR$_baseurl" --config "$_config" --trace
 }
 
 test() {
