@@ -1,5 +1,5 @@
 ---
-title: Effective Java: Creating & Destroying objects
+title: Effective Java | Creating & Destroying objects
 date: 2020-12-21 15:05:00 +0530
 categories: [Java]
 tags: [Notes, Learning]
