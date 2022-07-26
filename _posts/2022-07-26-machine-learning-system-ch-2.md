@@ -149,3 +149,19 @@ $$ \alpha * quality\_score + \beta * engagement\_score $$
 
 Now you can tweak $\alpha$ and $\beta$ without retraining your models!
 
+# Mind vs Data
+
+One of the most popular debates in ML is which will improve the ML objectives: Data or Model. In other words, if we compare a simple model with lot of data & a complex model with minimal data, which will perform better?
+
+Both the research and industry trends in the recent decades show the success of ML relies more and more on the quality and quantity of data. Models are getting bigger and using more data. Back in 2013, people were getting excited when the One Billion Word Benchmark for Language Modeling was released, which contains 0.8 billion tokens. Six years later, OpenAI’s GPT-2 used a dataset of 10 billion tokens. And another year later, GPT-3 used 500 billion tokens.
+
+When asked how Google Search was doing so well, Peter Norvig, Google’s director of search quality, emphasized the importance of having a large amount of data over intelligent algorithms in their success: “We don’t have better algorithms. We just have more data.”
+
+Dr. Monica Rogati, former VP of data at Jawbone, argued that data lies at the foundation of data science, as shown in the figure below.
+![image](https://user-images.githubusercontent.com/20537002/180987771-de572541-3415-4aa3-8851-cb37e34db20b.png)
+
+In the mind-over-data camp, Dr. Judea Pearl emphasizes: “Data is profoundly dumb.” and also claims “ML will not be the same in 3–5 years, and ML folks who continue to follow the current data-centric paradigm will find themselves outdated, if not jobless. Take note.”
+
+There’s also a milder opinion from Professor Christopher Manning, director of the Stanford Artificial Intelligence Laboratory, who argued that huge computation and a massive amount of data with a simple learning algorithm create incredibly bad learners.
+
+Regardless of which camp will prove to be right eventually, no one can deny that data is essential, for now. Even though much of the progress in deep learning in the last decade was fueled by an increasingly large amount of data, more data doesn’t always lead to better performance for your model. More data at lower quality, such as data that is outdated or data with incorrect labels, might even hurt your model’s performance.
