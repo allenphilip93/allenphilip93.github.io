@@ -2,7 +2,7 @@
 title: Performance tuning the document distance problem
 date: 2022-07-26 10:05:00 +0530
 categories: [Algorithm]
-tags: [Course, Learning]
+tags: [Course, Learning, Python]
 math: true
 pin: false
 ---
