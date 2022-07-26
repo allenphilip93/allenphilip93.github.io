@@ -4,7 +4,7 @@ date: 2022-07-22 12:13:00 +0530
 categories: [ML]
 tags: [Notes, Learning]
 math: true
-pin: true
+pin: false
 ---
 
 # Reference
