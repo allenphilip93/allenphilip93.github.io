@@ -135,7 +135,7 @@ Similarly, to rank posts by engagement, you first need to predict the number of 
 
 One approach is to combine these two losses into one loss and train one model to minimize that loss:
 
-\\{ loss = ɑ quality_loss + β engagement_loss \\}
+$$ loss = alpha * quality_loss + beta * engagement_loss $$
 
 A problem with this approach is that each time you tune α and β—for example, if the quality of your users’ newsfeeds goes up but users’ engagement goes down, you might want to decrease α and increase β—you’ll have to retrain your model.
 
@@ -145,7 +145,7 @@ Another approach is to train two different models, each optimizing one loss. So 
 
 You can combine the models’ outputs and rank posts by their combined scores:
 
-\\{ ɑ quality_score + β engagement_score \\}
+$$ alpha * quality_score + beta * engagement_score $$
 
-Now you can tweak α and β without retraining your models!
+Now you can tweak $alpha$ and $beta$ without retraining your models!
 
