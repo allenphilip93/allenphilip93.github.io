@@ -173,3 +173,99 @@ A repository for storing structured data is called a data warehouse. A repositor
 | Stored in data warehouses                   | Stored in data lakes                                                                                                   |
 
 # Data Storage Engines and Processing
+
+Data formats and data models specify the interface for how users can store and retrieve data. Storage engines, also known as databases, are the implementation of how data is stored and retrieved on machines. It’s useful to understand different types of databases as your team or your adjacent team might need to select a database appropriate for your application.
+
+## Transactional and Analytical Processing
+
+Traditionally, a transaction refers to the action of buying or selling something. In the digital world, a transaction refers to any kind of action: tweeting, ordering a ride through a ride-sharing service, uploading a new model, watching a YouTube video, and so on. Though the data is of different types the transactions are inserted as they are generated, and occasionally updated when something changes, or deleted when they are no longer needed. This type of processing is known as online transaction processing (OLTP).
+
+Because these transactions often involve users, they need to be processed fast (low latency) so that they don’t keep users waiting. The processing method needs to have high availability—that is, the processing system needs to be available any time a user wants to make a transaction.
+
+Transactional databases are designed to process online transactions and satisfy the low latency, high availability requirements. When people hear transactional databases, they usually think of ACID (atomicity, consistency, isolation, durability).
+
+However, transactional databases don’t necessarily need to be ACID, and some developers find ACID to be too restrictive. According to Martin Kleppmann, “systems that do not meet the ACID criteria are sometimes called BASE, which stands for Basically Available, Soft state, and Eventual consistency. 
+
+Because each transaction is often processed as a unit separately from other transactions, transactional databases are often row-major. This also means that transactional databases might not be efficient for questions such as “What’s the average price for all the rides in September in San Francisco?” Analytical databases are designed for this purpose. They are efficient with queries that allow you to look at data from different viewpoints. We call this type of processing online analytical processing (OLAP).
+
+However, both the terms OLTP and OLAP have become outdated as of 2021 due to the fact that in the traditional OLTP or OLAP paradigms, storage and processing are **tightly coupled** — how data is stored is also how data is processed. An interesting paradigm in the last decade has been to **decouple storage from processing** (also known as compute), as adopted by many data vendors including Google’s BigQuery, Snowflake, IBM, and Teradata where the data can be stored in the same place, with a processing layer on top that can be optimized for different types of queries.
+
+## ETL: Extract, Transform, and Load
+
+In the early days of the relational data model, data was mostly structured. When data is extracted from different sources, it’s first transformed into the desired format before being loaded into the target destination such as a database or a data warehouse. This process is called ETL, which stands for extract, transform, and load.
+
+In the **extracting phase**, you need to validate your data and reject the data that doesn’t meet your requirements. **Transform** is the meaty part of the process, where most of the data processing is done. You might want to join data from multiple sources and clean it. You might want to standardize the value ranges and apply operations such as transposing, deduplicating, sorting, aggregating, deriving new features, more data validating, etc. **Load** is deciding how and how often to load your transformed data into the target destination which can be a file, a database, or a data warehouse.
+
+The idea of ETL sounds simple but powerful, and it’s the underlying structure of the data layer at many organizations. 
+![image](https://user-images.githubusercontent.com/20537002/181007890-de9abed4-1cc3-4e23-bd92-cc9235885631.png)
+
+When the internet first became ubiquitous and hardware had just become so much more powerful, collecting data suddenly became so much easier. The amount of data grew rapidly. 
+
+Finding it difficult to keep data structured, some companies had this idea: “Why not just store all data in a data lake so we don’t have to deal with schema changes? Whichever application needs data can just pull out raw data from there and process it.” This process of loading data into storage first then processing it later is sometimes called ELT (extract, load, transform). However, as data keeps on growing, this idea becomes less attractive. It’s inefficient to search through a massive amount of raw data for the data that you want.
+
+As companies weigh the pros and cons of storing structured data versus storing unstructured data, vendors evolve to offer hybrid solutions that combine the flexibility of data lakes and the data management aspect of data warehouses. For example, **Databricks and Snowflake** both provide **data lakehouse** solutions.
+
+# Modes of Dataflow
+
+When data is passed from one process to another, we say that the data flows from one process to another, which gives us a dataflow. There are three main modes of dataflow:
+- Data passing through databases
+- Data passing through services using requests such as the requests provided by REST and RPC APIs (e.g., POST/GET requests)
+- Data passing through a real-time transport like Apache Kafka and Amazon Kinesis
+
+## Data Passing Through Databases
+
+For example, to pass data from process A to process B, process A can write that data into a database, and process B simply reads from that database.
+
+This mode, however, doesn’t always work because of two reasons. 
+- It requires that both processes must be able to access the same database which might be infeasible, especially if the two processes are run by two different companies.
+- It requires both processes to access data from databases, and read/write from databases can be slow, making it unsuitable for applications with strict latency requirements.
+
+## Data Passing Through Services
+
+To pass data from process B to process A, process A first sends a request to process B that specifies the data A needs, and B returns the requested data through the same network. Because processes communicate through requests, we say that this is **request-driven**.
+
+This mode of data passing is tightly coupled with the service-oriented architecture. A service is a process that can be accessed remotely, e.g., through a network. Two services in communication with each other can be run by different companies in different applications. Two services in communication with each other can also be parts of the same application.
+
+The most popular styles of requests used for passing data through networks are REST (representational state transfer) and RPC (remote procedure call). REST seems to be the predominant style for public APIs. The main focus of RPC frameworks is on requests between services owned by the same organization, typically within the same data center.
+
+## Data Passing Through Real-Time Transport
+
+Request-driven data passing is synchronous: the target service has to listen to the request for the request to go through. So instead of having services request data directly from each other and creating a web of complex interservice data passing, each service only has to communicate with the broker. Whichever service wants data can check with the broker instead. 
+
+Technically, a database can be a broker but reading and writing from databases are too slow for applications with strict latency requirements. Instead we use in-memory storage to broker data. Real-time transports can be thought of as in-memory storage for data passing among services.
+
+A piece of data broadcast to a real-time transport is called an event. This architecture is, therefore, also called event-driven. A real-time transport is sometimes called an event bus.
+
+> Request-driven architecture works well for systems that rely more on logic than on data. Event-driven architecture works better for systems that are data-heavy.
+
+The two most common types of real-time transports are:
+
+**PubSub model**
+Any service can publish to different topics in a real-time transport, and any service that subscribes to a topic can read all the events in that topic. The services that produce data don’t care about what services consume their data. Pubsub solutions often have a retention policy—data will be retained in the real-time transport for a certain period of time (e.g., seven days) before being deleted or moved to a permanent storage (like Amazon S3).
+
+**Message Queue model**
+In a message queue model, an event often has intended consumers (an event with intended consumers is called a message), and the message queue is responsible for getting the message to the right consumers.
+
+Examples of pubsub solutions are Apache Kafka and Amazon Kinesis. Examples of message queues are Apache RocketMQ and RabbitMQ. Both paradigms have gained a lot of traction in the last few years.
+
+# Batch Processing Versus Stream Processing
+
+Once your data arrives in data storage engines like databases, data lakes, or data warehouses, it becomes historical data. This is opposed to streaming data (data that is still streaming in). Historical data is often processed in batch jobs—jobs that are kicked off periodically.
+
+When data is processed in batch jobs, we refer to it as batch processing. Batch processing has been a research subject for many decades, and companies have come up with distributed systems like MapReduce and Spark to process batch data efficiently.
+
+When you have data in real-time transports like Apache Kafka and Amazon Kinesis, we say that you have streaming data. Stream processing refers to doing computation on streaming data. Computation on streaming data can also be kicked off periodically, but the periods are usually much shorter than the periods for batch jobs (e.g., every five minutes instead of every day). Computation on streaming data can also be kicked off whenever the need arises. For example, whenever a user requests a ride, you process your data stream to see what drivers are currently available.
+
+Stream processing, when done right, can give low latency because you can process data as soon as data is generated, without having to first write it into databases.
+
+Because batch processing happens much less frequently than stream processing, in ML, batch processing is usually used to compute features that change less often, such as drivers’ ratings
+
+Stream processing is used to compute features that change quickly, such as how many drivers are available right now, how many rides have been requested in the last minute, how many rides will be finished in the next two minutes, the median price of the last 10 rides in this area, etc.
+
+To do computation on data streams, you need a stream computation engine (the way Spark and MapReduce are batch computation engines). For ML systems that leverage streaming features, the streaming computation is rarely simple. The stream feature extraction logic can require complex queries with join and aggregation along different dimensions. To extract these features requires efficient stream processing engines. For this purpose, you might want to look into tools like Apache Flink, KSQL, and Spark Streaming.
+
+Stream processing is more difficult because the data amount is unbounded and the data comes in at variable rates and speeds. It’s easier to make a stream processor do batch processing than to make a batch processor do stream processing. 
+> Apache Flink’s core maintainers have been arguing for years that batch processing is a special case of stream processing.
+
+
+
