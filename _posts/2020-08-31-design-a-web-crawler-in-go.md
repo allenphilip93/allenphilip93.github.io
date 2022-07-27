@@ -1,6 +1,6 @@
 ---
 title: Design Web Crawler from Go Tutorial
-date: 2022-08-31 13:05:00 +0530
+date: 2020-08-31 13:05:00 +0530
 categories: [Golang]
 tags: [Course, Learning]
 math: true
