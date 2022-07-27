@@ -15,7 +15,7 @@ This integrates right back into your GitHub account which allows us to create ac
 
 ## Prerequisites
 
-Ensure that you have a Github repository with a basic NodeJS webapp. For more information, check out [Create a website using NodeJS in 5 mins](/create-a-website-using-nodejs-in-5-mins/).
+Ensure that you have a Github repository with a basic NodeJS webapp. For more information, check out [Create a website using NodeJS in 5 mins]().
 
 Create an account on Azure at [https://portal.azure.com/#home](https://portal.azure.com/#home).
 
