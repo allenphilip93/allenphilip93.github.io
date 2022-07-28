@@ -150,5 +150,11 @@ One common mistake is to use the entire training data to generate global statist
 
 To avoid this type of leakage, always split your data first before scaling, then use the statistics from the train split to scale all the splits.
 
+### Filling in missing data with statistics from the test split
 
+One common way to handle the missing values of a feature is to fill (input) them with the mean or median of all values present. Leakage might occur if the mean or median is calculated using entire data instead of just the train split.
+
+### Poor handling of data duplication before splitting
+
+If you have duplicates or near-duplicates in your data, failing to remove them before splitting your data might cause the same samples to appear in both train and validation/test splits. Data duplication can result from data collection or merging of different data sources.
 
