@@ -158,3 +158,54 @@ One common way to handle the missing values of a feature is to fill (input) them
 
 If you have duplicates or near-duplicates in your data, failing to remove them before splitting your data might cause the same samples to appear in both train and validation/test splits. Data duplication can result from data collection or merging of different data sources.
 
+### Leakage from data generation process
+
+The example earlier about how information on whether a CT scan shows signs of lung cancer is leaked via the scan machine is an example of this type of leakage. Detecting this type of data leakage requires a deep understanding of the way data is collected. 
+
+## Detecting Data Leakage
+
+> Data leakage can happen during many steps, from generating, collecting, sampling, splitting, and processing data to feature engineering. 
+
+Measure the predictive power of each feature or a set of features with respect to the target variable (label). If a feature has unusually high correlation, investigate how this feature is generated and whether the correlation makes sense.
+
+Do ablation studies to measure how important a feature or a set of features is to your model. If removing a feature causes the model’s performance to deteriorate significantly, investigate why that feature is so important.
+
+Keep an eye out for new features added to your model. If adding a new feature significantly improves your model’s performance, either that feature is really good or that feature just contains leaked information about labels.
+
+Lastly be very careful every time you look at the test split. If you use the test split in any way other than to report a model’s final performance, whether to come up with ideas for new features or to tune hyperparameters, you risk leaking information from the future into your training process.
+
+# Engineering Good Features
+
+> Generally, adding more features leads to better model performance.
+
+However, having too many features can be bad both during training and serving your model for the following reasons:
+- The more features you have, the more opportunities there are for data leakage.
+- Too many features can cause overfitting.
+- Too many features can increase memory required to serve a model driving the expenses up.
+- Too many features can increase inference latency when doing online prediction, especially if you need to extract these features from raw data.
+- Useless features become technical debts. 
+
+Though we can employ regularization techniques like L1 regularization to reduce the useless feature weights to 0, in practice, removing such features helps the model run faster and prioritize good features.
+
+There are two factors you might want to consider when evaluating whether a feature is good for a model: importance to the model and generalization to unseen data.
+
+## Feature Importance
+
+There are many different methods for measuring a feature’s importance like the:
+- In-build feature importance feature in xgboost
+- SHAP values for a model-agnostic method
+- InterpretML opensource package
+
+The exact algorithm for feature importance measurement is complex, but intuitively, a feature’s importance to a model is measured by how much that model’s performance deteriorates if that feature or a set of features containing that feature is removed from the model. 
+
+> SHAP is great because it not only measures a feature’s importance to an entire model, it also measures each feature’s contribution to a model’s specific prediction. 
+
+Often, a small number of features accounts for a large portion of your model’s feature importance.Not only good for choosing the right features, feature importance techniques are also great for interpretability as they help you understand how your models work under the hood.
+
+## Feature Generalization
+
+Since the goal of an ML model is to make correct predictions on unseen data, features used for the model should generalize to unseen data. Measuring feature generalization is a lot less scientific than measuring feature importance, and it requires both intuition and subject matter expertise on top of statistical knowledge.
+
+Coverage is the percentage of the samples that has values for this feature in the data—so the fewer values that are missing, the higher the coverage. A rough rule of thumb is that if this feature appears in a very small percentage of your data, it’s not going to be very generalizable.
+
+Also for the feature values that are present, you might want to look into their distribution. If the set of values that appears in the seen data (such as the train split) has no overlap with the set of values that appears in the unseen data (such as the test split), this feature might even hurt your model’s performance.
