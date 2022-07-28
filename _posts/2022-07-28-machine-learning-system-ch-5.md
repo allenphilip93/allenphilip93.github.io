@@ -128,4 +128,27 @@ Because feature crossing helps model nonlinear relationships between variables, 
 
 # Data Leakage
 
+In one example, researchers trained their model on a mix of scans taken when patients were lying down and standing up. “Because patients scanned while lying down were more likely to be seriously ill, the model learned to predict serious covid risk from a person’s position.”
+
+In some other cases, models were “found to be picking up on the text font that certain hospitals used to label the scans. As a result, fonts from hospitals with more serious caseloads became predictors of covid risk.”
+
+> Data leakage refers to the phenomenon when a form of the label “leaks” into the set of features used for making predictions, and this same information is not available during inference.
+
+Data leakage is challenging because often the leakage is nonobvious. It’s dangerous because it can cause your models to fail in an unexpected and spectacular way, even after extensive evaluation and testing.
+
+## Common Causes for Data Leakage
+
+### Splitting time-correlated data randomly instead of by time
+
+In many cases, data is time-correlated, which means that the time the data is generated affects its label distribution. Sometimes, the correlation is obvious, as in the case of stock prices. If 90% of the tech stocks go down today, it’s very likely the other 10% of the tech stocks go down too. When building models to predict the future stock prices, you want to split your training data by time, such as training your model on data from the first six days and evaluating it on data from the seventh day. If you randomly split your data, prices from the seventh day will be included in your train split and leak into your model the condition of the market on that day.
+
+![image](https://user-images.githubusercontent.com/20537002/181435467-02c0731f-2429-4262-9616-4e398bda1436.png)
+
+### Scaling before splitting
+
+One common mistake is to use the entire training data to generate global statistics before splitting it into different splits, leaking the mean and variance of the test samples into the training process, allowing a model to adjust its predictions for the test samples.
+
+To avoid this type of leakage, always split your data first before scaling, then use the statistics from the train split to scale all the splits.
+
+
 
