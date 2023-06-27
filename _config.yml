@@ -23,7 +23,7 @@ title: Allen Philip J # the main title
 tagline: Blog for my learnings, opinions & code   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  I'm working as a software engineer for over 9 years now and this is a personal blog for sharing any interesting finds, learnings, ideas both from my profession as well as personal.
+  This is a personal blog for sharing any interesting finds, learnings, opinions both from my professional as well as personal life.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://allenphilip93.github.io'
