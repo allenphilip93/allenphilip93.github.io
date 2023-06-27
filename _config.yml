@@ -96,9 +96,9 @@ comments:
   # Giscus options › https://giscus.app
   giscus:
     repo: allenphilip93/allenphilip93.github.io
-    repo_id: R_kgDOHHsWnA
+    repo_id: R_kgDOJ0hiqw
     category: General
-    category_id: DIC_kwDOHHsWnM4COcCB
+    category_id: DIC_kwDOJ0hiq84CXf7A
     mapping: # optional, default to 'pathname'
     input_position: # optional, default to 'bottom'
     lang: # optional, default to the value of `site.lang`
