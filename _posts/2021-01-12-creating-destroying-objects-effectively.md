@@ -1,10 +1,14 @@
 ---
 title: Effective Java | Creating & Destroying objects
 date: 2020-12-21 15:05:00 +0530
-categories: [Java]
-tags: [Notes, Learning]
+categories: [Book Summary, Java]
+tags: [Notes, Effective Java]
 math: true
 pin: false
+image:
+  path: https://m.media-amazon.com/images/I/515t2W6f5QL.jpg
+  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
+  alt: Effective Java | Creating & Destroying objects
 ---
 
 # Core Principle

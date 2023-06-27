@@ -5,6 +5,10 @@ categories: [Tutorial]
 tags: [Spotify, Podcast]
 math: true
 pin: false
+image:
+  path: https://wallpapers.com/images/hd/podcast-background-1362-x-1362-yz159o2n8wnrl0cn.jpg
+  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
+  alt: Create your own podcast on Spotify for free
 ---
 
 ## What is a podcast?

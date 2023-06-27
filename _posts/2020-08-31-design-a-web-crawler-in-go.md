@@ -1,10 +1,14 @@
 ---
 title: Design Web Crawler from Go Tutorial
 date: 2020-08-31 13:05:00 +0530
-categories: [Golang]
-tags: [Course, Learning]
+categories: [Learning, Golang]
+tags: [Course]
 math: true
 pin: false
+image:
+  path: https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_Web_Crawler.jpg
+  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
+  alt: Design Web Crawler from Go Tutorial
 ---
 
 ## What is a Web Crawler?
