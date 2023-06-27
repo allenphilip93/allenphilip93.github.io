@@ -1,8 +1,8 @@
 ---
 title: Understanding Training Data
 date: 2022-07-27 15:10:00 +0530
-categories: [Book Summary, ML]
-tags: [Notes, Designing ML Systems]
+categories: [Book Summary, Designing ML Systems]
+tags: [Notes, ML]
 math: true
 pin: false
 image:

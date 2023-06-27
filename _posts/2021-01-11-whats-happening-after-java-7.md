@@ -2,7 +2,7 @@
 title: What's happening after Java 7
 date: 2021-01-11 16:48:59 +0530
 categories: [Learning, Java]
-tags: [Notes]
+tags: [Notes, Java]
 math: true
 pin: false
 image:

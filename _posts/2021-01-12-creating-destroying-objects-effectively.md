@@ -1,8 +1,8 @@
 ---
 title: Effective Java | Creating & Destroying objects
 date: 2020-12-21 15:05:00 +0530
-categories: [Book Summary, Java]
-tags: [Notes, Effective Java]
+categories: [Book Summary, Effective Java]
+tags: [Notes, Java]
 math: true
 pin: false
 image:

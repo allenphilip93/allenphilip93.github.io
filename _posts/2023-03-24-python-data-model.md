@@ -1,13 +1,13 @@
 ---
 title: Python Data Model
 date: 2023-03-24 16:20:00 +0530
-categories: [Book Summary, Python]
-tags: [Notes, Fluent Python]
+categories: [Book Summary, Fluent Python]
+tags: [Notes, Python]
 math: false
 pin: false
 image:
   path: https://m.media-amazon.com/images/I/71RiBEY6mWL._AC_UF1000,1000_QL80_.jpg
-  lqip: https://m.media-amazon.com/images/I/71RiBEY6mWL._AC_UF1000,1000_QL80_.jpg
+  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt: Fluent Python by Luciano Ramalho
 ---
 

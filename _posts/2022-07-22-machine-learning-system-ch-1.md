@@ -1,8 +1,8 @@
 ---
 title: Machine Learning Systems
 date: 2022-07-22 12:13:00 +0530
-categories: [Book Summary, ML]
-tags: [Notes, Designing ML Systems]
+categories: [Book Summary, Designing ML Systems]
+tags: [Notes, ML]
 math: true
 pin: false
 image:
