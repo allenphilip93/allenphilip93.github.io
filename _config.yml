@@ -20,32 +20,31 @@ timezone:
 
 title: Allen Philip J # the main title
 
-tagline: Blog for my learnings, opinions & code # it will display as the sub-title
+tagline: Blog for my learnings, opinions & code   # it will display as the sub-title
 
-description: >- # used by seo meta and the atom feed
-  A minimal, responsive and feature-rich Jekyll theme for technical writing.
+description: >-                        # used by seo meta and the atom feed
+  I'm working as a software engineer for over 9 years now and this is a personal blog for sharing any interesting finds, learnings, ideas both from my profession as well as personal.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://allenphilip93.github.io'
 
 github:
-  username: github_username # change to your github username
+  username: allenphilip93 # change to your github username
 
 twitter:
-  username: twitter_username # change to your twitter username
+  username: allenphilip93 # change to your twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
-  email: example@domain.com # change to your email address
+  name: Allen Philip J
+  email: allenphilip93@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your twitter homepage
-    - https://github.com/username # change to your github homepage
-    # Uncomment below to add more social links
-    # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://twitter.com/allenphilip93      # change to your twitter homepage
+    - https://github.com/allenphilip93       # change to your github homepage
+    - https://www.facebook.com/allenphilip93
+    - https://www.linkedin.com/in/allen-phillip-b9147524/
 
 google_site_verification: # fill in to your verification string
 
@@ -80,13 +79,13 @@ theme_mode: # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://store.playstation.com/store/api/chihiro/00_09_000/container/IN/en/99/EP2402-CUSA05624_00-AV00000000000206/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720
 
 # boolean type, the global switch for TOC in posts.
 toc: true
 
 comments:
-  active: # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
+  active: giscus # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
   # The active options are as follows:
   disqus:
     shortname: # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
@@ -96,10 +95,10 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: # <gh-username>/<repo>
-    repo_id:
-    category:
-    category_id:
+    repo: allenphilip93/allenphilip93.github.io
+    repo_id: R_kgDOHHsWnA
+    category: General
+    category_id: DIC_kwDOHHsWnM4COcCB
     mapping: # optional, default to 'pathname'
     input_position: # optional, default to 'bottom'
     lang: # optional, default to the value of `site.lang`
