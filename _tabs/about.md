@@ -15,8 +15,7 @@ order: 4
 
 I'm a B.Tech graduate in Electrical Engineering 🎓 from IIT Madras 🏛. I'm a passionate learner who's always willing to learn and work across technologies and domains 💡. I love to explore new technologies and leverage them to solve real-life problems ✨.
 
-<a href='https://github.com/allenphilip93/allenphilip93.github.io/blob/main/AllenPhilipCV_ver10.pdf' target="_blank"><img alt='readthedocs' height="50px" src='https://img.shields.io/badge/Resume-100000?style=for-the-badge&logo=readthedocs&logoColor=000000&labelColor=FAFAFA&color=FFFFFF'/></a>&nbsp;&nbsp;
-<a href="https://www.buymeacoffee.com/allenphilip93" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="60px" width="217px" ></a>
+[!["Resume"](https://img.shields.io/badge/Resume-100000?style=for-the-badge&logo=readthedocs&logoColor=000000&labelColor=FAFAFA&color=FFFFFF)](https://github.com/allenphilip93/allenphilip93.github.io/blob/main/AllenPhilipCV_ver10.pdf)
 
 ### Talking about Personal Stuffs:
 
