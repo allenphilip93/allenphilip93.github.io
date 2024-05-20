@@ -1,14 +1,14 @@
 ---
-title: How does the internet work?
-date: 2023-06-07 08:42:00 +0530
+title: Authentication Fundamentals
+date: 2023-06-18 18:22:00 +0530
 categories: [Learning, Cloud]
 tags: [Essentials]
 math: false
 pin: false
 image:
-  path: https://wallpaperaccess.com/full/1445467.jpg
+  path: https://nordvpn.com/wp-content/uploads/blog-social-securing-cryptocurrency-a-way-out-of-the-hackers-target.svg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: How does the internet work?
+  alt: Authentication Fundamentals
 ---
 
 # Reference
