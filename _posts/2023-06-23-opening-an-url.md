@@ -23,7 +23,7 @@ When we enter a URL into the browser's address bar, the browser has no idea what
 
 When users type [domain names](https://www.cloudflare.com/learning/dns/glossary/what-is-a-domain-name/) such as ‘google.com’ or ‘nytimes.com’ into web browsers, DNS is responsible for finding the correct [IP address](https://www.cloudflare.com/learning/dns/glossary/what-is-my-ip-address/) for those sites. Browsers then use those addresses to communicate with [origin servers](https://www.cloudflare.com/learning/cdn/glossary/origin-server/) or [CDN edge servers](https://www.cloudflare.com/learning/cdn/glossary/edge-server/) to access website information.
 
-![[Pasted image 20230607111004.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230607111004.png)
 
 ## Finding the DNS Resolver
 
@@ -69,7 +69,7 @@ The recursive DNS resolver it at the beginning of the DNS query and gets the req
 
 Since the DNS root zone is at the top of the DNS hierarchy, recursive resolvers cannot be directed to them in a DNS lookup. Because of this, every DNS resolver has a list of the 13 IP root server addresses built into its software. Whenever a DNS lookup is initiated, the recursor’s first communication is with one of those 13 IP addresses.
 
-![[Pasted image 20230607115334.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230607115334.png)
 
 A root server accepts a recursive resolver’s query which includes a domain name, and the root nameserver responds by directing the recursive resolver to a TLD nameserver, based on the extension of that domain (.com, .net, .org, etc.).
 
@@ -87,7 +87,7 @@ At times, the TLD might have multiple authoritative nameservers to point to for 
 
 ## DNS Lookup - Full Journey
 
-![[Pasted image 20230607120624.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230607120624.png)
 
 # TCP Handshake
 
@@ -106,18 +106,18 @@ That’s where protocols such as TCP come in. TCP is used in conjunction with IP
 
 When a message is sent over TCP, a connection is established and a 3-way handshake is made. First, the source sends an **SYN “initial request” packet** to the target server in order to start the dialogue. Then the target server sends a **SYN-ACK packet** to agree to the process. Lastly, the source sends an **ACK packet** to the target to confirm the process, after which the message contents can be sent.
 
-![[Pasted image 20230607122239.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230607122239.png)
 
 The message is ultimately broken down into packets before each packet is sent out into the Internet, where it traverses a series of gateways before arriving at the target device where the group of packets are reassembled by TCP into the original contents of the email.
 
 The recipient will send a message back to the sender for each packet, **acknowledging** that they’ve been received. Any packets not acknowledged by the recipient are sent again. Packets are checked for errors using a **checksum**, which is also included in the header.
 
-![[Pasted image 20230717102752.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230717102752.png)
 
 > **NOTE**
 > The UDP protocol is also build on top of IP and the datagram structure is very similar to TCP/IP as shown below. The main difference is that its faster and simpler because there is no sequencing of datagrams and packets will not be resent.
 
-![[Pasted image 20230717103036.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230717103036.png)
 ## Why is the handshake important?
 
 TCP’s three-way handshake has two important functions:
@@ -153,7 +153,7 @@ There are three main components to what the TLS protocol accomplishes: [Encrypt
 
 HTTPS uses an [encryption](https://www.cloudflare.com/learning/ssl/what-is-encryption/) protocol to encrypt communications. The protocol is called [Transport Layer Security (TLS)](https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/), although formerly it was known as [Secure Sockets Layer (SSL)](https://www.cloudflare.com/learning/ssl/what-is-ssl/).
 
-![[Pasted image 20230612120339.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230612120339.png)
 
 **Step 1** - The client (browser) and the server establish a TCP connection.
 
@@ -180,16 +180,16 @@ The Hypertext Transfer Protocol (HTTP) is the **foundation of the World Wide Web
 
 > An HTTP request is the way Internet communications platforms such as web browsers ask for the information they need to load a website.
 
-![[Pasted image 20230718112056.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230718112056.png)
 
-![[Pasted image 20230725113307.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230725113307.png)
 ## Components of HTTP based system
 
 HTTP is a client-server protocol: requests are sent by one entity, the user-agent (or a proxy on behalf of it). Most of the time the user-agent is a Web browser, but it can be anything, for example, a robot that crawls the Web to populate and maintain a search engine index.
 
 Each individual request is sent to a server, which handles it and provides an answer called the _response_. Between the client and the server there are numerous entities, collectively called [proxies](https://developer.mozilla.org/en-US/docs/Glossary/Proxy_server), which perform different operations and act as gateways or [caches](https://developer.mozilla.org/en-US/docs/Glossary/Cache), for example.
 
-![[Pasted image 20230718112654.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230718112654.png)
 
 Proxies may perform numerous functions:
 
@@ -263,7 +263,7 @@ The HTTP/2 protocol differs from HTTP/1.1 in a few ways:
 
 > Not all types of HTTP requests can be pipelined: only [idempotent](https://developer.mozilla.org/en-US/docs/Glossary/Idempotent) methods, that is [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET), [`HEAD`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD), [`PUT`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT) and [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE), can be replayed safely.
 
-![[Pasted image 20230718115809.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230718115809.png)
 
 ### HTTP/3 - HTTP over QUIC
 
@@ -277,7 +277,7 @@ The next major version of HTTP, HTTP/3 has the same semantics as earlier version
 
 - HTTP/2 is a multiplexed protocol, allowing multiple simultaneous HTTP transactions. However, the transactions are multiplexed over a single TCP connection, meaning that packet loss and subsequent retransmissions at the TCP layer can block all transactions. QUIC avoids this by running over UDP and implementing packet loss detection and retransmission separately for each stream, meaning that packet loss only blocks the particular stream whose packets were lost.
 
-![[Pasted image 20230718120044.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230718120044.png)
 
 # Layers above HTTP
 
@@ -345,7 +345,7 @@ WebSocket is a **duplex protocol** used mainly in the **client-server communicat
 
 WebSocket need support from [HTTP](https://www.wallarm.com/what/what-is-http-2-and-how-is-it-different-from-http-1) to initiate the connection.
 
-![[Pasted image 20230719100643.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230719100643.png)
 
 Websockets are typically used in the following use cases:
 
@@ -399,7 +399,7 @@ WebRTC consists of several interrelated APIs. Here are the key ones:
     
 - `MediaStream`. Designed to let you access streams of media from local input devices like cameras and microphones. It serves as a way to manage actions on a data stream, like recording, sending, resizing, and displaying the stream’s content.
 
-![[Pasted image 20230719112210.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230719112210.png)
 
 WebRTC is a good choice for the following use cases:
 
@@ -424,7 +424,7 @@ An RPC is initiated by the _client_, which sends a request message to a known r
 5. The server stub unpacks the parameters from the message. Unpacking the parameters is called unmarshalling.
 6. Finally, the server stub calls the server procedure. The reply traces the same steps in the reverse direction.
 
-![[Pasted image 20230719115841.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230719115841.png)
 
 ### When to use RPC?
 
@@ -451,7 +451,7 @@ An RPC is initiated by the _client_, which sends a request message to a known r
 
 In gRPC, a client application can directly call a method on a server application on a different machine as if it were a local object, making it easier for you to create distributed applications and services.
 
-![[Pasted image 20230719121900.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230719121900.png)
 
 By default, gRPC uses [Protocol Buffers](https://protobuf.dev/overview), Google’s mature open source mechanism for serializing structured data. 
 
@@ -485,8 +485,8 @@ It's worth noting that while Google uses REST in public-facing APIs, they may al
 
 ### Architecture
 
-![[Pasted image 20230719124306.png]]
-![[Pasted image 20230719124347.png]]
+![Image Missing](../assets/img/Pasted%20image%2020230719124306.png)
+![Image Missing](../assets/img/Pasted%20image%2020230719124347.png)
 
 
 # Render the response from server
