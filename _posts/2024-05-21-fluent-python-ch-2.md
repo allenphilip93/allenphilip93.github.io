@@ -1,6 +1,6 @@
 ---
 title: Python Sequences
-date: 2023-03-24 16:20:00 +0530
+date: 2024-05-21 13:11:00 +0530
 categories: [Book Summary, Fluent Python]
 tags: [Notes, Python]
 math: false
