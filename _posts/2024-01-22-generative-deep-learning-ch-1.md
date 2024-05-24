@@ -11,11 +11,11 @@ image:
   alt: Generative Modeling
 ---
 
-# Reference
+## Reference
 
 [Generative Deep Learning - Chapter 1](https://learning.oreilly.com/library/view/generative-deep-learning/9781098134174/ch01.html)
 
-# Overview
+## Overview
 
 Generative modeling can be broadly defined as follows:
 
@@ -29,7 +29,7 @@ A generative model must be probabilistic and not deterministic in nature since w
 
 Think of it this way, a generative model is like a creative dataset generator. Given a fixed set of images of horses, the generative model is able to create new images of horses by understanding what a horse should look like based on the input dataset.
 
-# Generative vs Discriminative
+## Generative vs Discriminative
 
 In order to understand generative modelling better like try to understand its more conventional counterpart, discriminative modelling.
 
@@ -43,7 +43,7 @@ Now image if we want to train a model that converts an input image into the styl
 
 > Discriminative modelling estimates ${p(y|x)}$ whereas generative modelling estimates $p(x)$
 
-# Representational Learning
+## Representational Learning
 
 Learning the probabilistic distribution of a dataset can be challenging task owning to the high dimensionality of the space. This is where representational learning comes into play.
 
@@ -59,7 +59,7 @@ The concept of encoding the training dataset into a latent space so that we can 
 
 ![Image Missing](../assets/img/Pasted%20image%2020240226103245.png)
 
-# Generative Model Taxonomy
+## Generative Model Taxonomy
 
 While all types of generative models ultimately aim to solve the same task, they all take slightly different approaches to modeling the density function $p_\theta(X)$ . Broadly speaking, there are three possible approaches:
 

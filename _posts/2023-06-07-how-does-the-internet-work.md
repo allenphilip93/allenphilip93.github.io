@@ -11,29 +11,29 @@ image:
   alt: How does the internet work?
 ---
 
-# Reference
+## Reference
 
 [Cloudfare Learning](https://www.cloudflare.com/en-gb/learning/network-layer/what-is-the-network-layer/)
 
-# What is a network?
+## What is a network?
 
 In the simplest of terms, a network is nothing but a bunch of connect devices that can communicate with one another. Usually all these devices are connected to a central hub - for example a **router**.
 
 A network can be of varied sizes and consequently be organized in different ways. Large networks tend to have subnetworks like how an ISP manages thousands of IP addresses and connected devices.
 
-# What is the internet?
+## What is the internet?
 
 > The Internet is a vast, sprawling collection of networks that connect to each other. In fact, the word "Internet" could be said to come from this concept: _inter_connected _net_works.
 
 Since computers connect to each other within networks and these networks also all connect with each other, one computer can talk to another computer in a faraway network thanks to the Internet. This makes it possible to rapidly exchange information between computers across the world.
 
-# What happens at the network layer?
+## What happens at the network layer?
 
 > The layer at which any communication between connected devices in network happen is called the network layer.
 
 For example when Alice send a message on an IM to Bob over a network, there message is first broken down into smaller pieces called "packets" and sent over the network. These packets are then reassembled in Bob's device.
 
-## Packets
+### Packets
 
 The question probably in our minds is, how does Bob's device know how to put the packets together?
 
@@ -41,13 +41,13 @@ At the network layer, networking software attaches a header to each packet when 
 
 A header contains information about the content, source, and destination of each packet (somewhat like stamping an envelope with a destination and return address). For example, an IP header contains the destination [IP address](https://www.cloudflare.com/learning/dns/glossary/what-is-my-ip-address/) of each packet, the total size of the packet, an indication of whether or not the packet has been fragmented (broken up into still smaller pieces) in transit, and a count of how many networks the packet has traveled through.
 
-### Packet Switching
+#### Packet Switching
 
 Packets are sent across the Internet using a technique called packet switching. Intermediary routers and switches are able to process packets independently from each other, without accounting for their source or destination. This is by design so that no single connection dominates the network. If data was sent between computers all at once with no packet switching, a connection between two computers could occupy multiple cables, routers, and switches for minutes at a time. Essentially, only two people would be able to use the Internet at a time — instead of an almost unlimited number of people, as is the case in reality.
 
 > Very good video on packets: https://www.youtube.com/watch?v=k8rJFgeuZRw
 
-## Protocols
+### Protocols
 
 Connecting two computers, both of which may use different hardware and run different software, is one of the main challenges that the creators of the Internet had to solve. It requires the use of communications techniques that are understandable by all connected computers, just as two people who grew up in different parts of the world may need to speak a common language to understand each other.
 
@@ -63,7 +63,7 @@ In addition to these foundational protocols, there are also protocols for routin
 
 Because all Internet-connected computers and other devices can interpret and understand these protocols, the Internet works no matter who or what connects to it.
 
-# What physical infrastructure makes the Internet work?
+## What physical infrastructure makes the Internet work?
 
 A lot of different kinds of hardware and infrastructure go into making the Internet work for everyone. Some of the most important types include the following:
 
@@ -71,11 +71,11 @@ A lot of different kinds of hardware and infrastructure go into making the Inter
 -   [Switches](https://www.cloudflare.com/learning/network-layer/what-is-a-network-switch/) connect devices that share a single network. They use packet switching to forward packets to the correct devices. They also receive outbound packets from those devices and pass them along to the right destination.
 -   Web servers are specialized high-powered computers that store and serve content (webpages, images, videos) to users, in addition to hosting applications and databases. Servers also respond to [DNS](https://www.cloudflare.com/learning/dns/what-is-dns/) queries and perform other important tasks to keep the Internet up and running. Most servers are kept in large data centers, which are located throughout the world.
 
-# Standardization of network communication
+## Standardization of network communication
 
 Network communication can be summarized and encapsulated using a couple of models which are quite prevalent in the community.
 
-## OSI Model
+### OSI Model
 
 The Open Systems Interconnection (OSI) Model is a description of how the Internet works. It breaks down the functions involved in sending data over the Internet into seven layers. Each layer has some function that prepares the data to be sent over wires, cables, and radio waves as a series of bits.
 
@@ -89,7 +89,7 @@ The seven layers of the OSI model are:
 -   **2. Data link layer:** Handles communications between devices on the same network. If layer 3 is like the address on a piece of mail, then layer 2 is like indicating the office number or apartment number at that address. Ethernet is the protocol most used here.
 -   **1. Physical layer:** Packets are converted into electrical, radio, or optical pulses and transmitted as bits (the smallest possible units of information) over wires, radio waves, or cables.
 
-## TCP/IP Model
+### TCP/IP Model
 
 In the TCP/IP model, the four layers are:
 

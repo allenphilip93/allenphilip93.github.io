@@ -11,11 +11,11 @@ image:
   alt: Effective Java | Creating & Destroying objects
 ---
 
-# Core Principle
+## Core Principle
 
 When writing any piece of code, clarity and simplicity are of paramount importance. Code should be reused rather than copied. The dependencies should be kept to a minimum. Errors should be detected as soon as they're made and preferably at compile time.
 
-# Static factory methods over constructors
+## Static factory methods over constructors
 
 A class can provide a public static factory method, which is simply a static method that returns an instance of the class.
 
@@ -23,7 +23,7 @@ A class can provide a public static factory method, which is simply a static met
     	return b ? Boolean.TRUE : Boolean.FALSE;
     }
 
-## Advantages
+### Advantages
 
 Unlike constructors, static factory methods have names. For example, *BigInteger(int, int, Random)* was used to return a *BigInteger* that is probably prime. This would have been better represented as a static factory method name *BigInteger.probablePrime *which was introduced in Java 4.
 
@@ -40,13 +40,13 @@ Another advantage is that the class of the returned object can vary from call to
         	return new LinkedList();
     }
 
-## Limitations
+### Limitations
 
 The main limitation with providing only static factory methods is that classes without  public or protected constructors can't be subclasses!
 
 A second shortcoming is that static methods are hard for programmers to spot since they don't stand out in the documentation.
 
-## Naming Conventions
+### Naming Conventions
 
 - *from - *A type-conversion method
 ```java
@@ -77,7 +77,7 @@ A second shortcoming is that static methods are hard for programmers to spot sin
 ```java
     List<Complaint> library = Collections.list(oldBooks);
 ```
-# Builder for creating objects
+## Builder for creating objects
 
 Static factories and constructors share a limitation, they do not scale well to large number of optional parameters. Normally this is solved in two ways:
 
@@ -99,7 +99,7 @@ Static factories and constructors share a limitation, they do not scale well to 
 
 - **JavaBeans pattern** - We use the default constructor to create an instance and set the parameters using the setter methods. But this bears the risk of the object being in an inconsistent state partway through construction. Also this pattern prevents the class from being immutable.
 
-## Builder Pattern
+### Builder Pattern
 
 Instead of making the desired object directly, the client calls a constructor (or static factory) with all of the required parameters and gets a builder object. The client calls the setter-like method on the builder object to set each optional parameter of interest. Finally, the client call the parameterless *build()* method to create an instance of the object.
 
@@ -192,7 +192,7 @@ Builder pattern is well suited to class hierarchies for example.
 ```
 It is important to note that builder pattern is more verbose than the telescoping pattern and should be used only if there are enough parameters to make it worthwhile.
 
-# Enforcing the Singleton pattern
+## Enforcing the Singleton pattern
 
 A singleton is a class that can be instantiated only once. At times singletons can prove to be difficult to write unit test cases for. If a singleton is called from another class it may be difficult to mock it in certain cases.
 
@@ -258,7 +258,7 @@ The preferred way to implement a Singleton where lazy initiation is absolutely r
         }
     }
 ```
-# Noninstantiablity with a private constructor
+## Noninstantiablity with a private constructor
 
 Utility classes with only static methods are not designed to be instantiated. A default constructor is provided to every class by the compiler so a class can be made noninstantiable by including a private constructor.
 ```java
@@ -269,7 +269,7 @@ Utility classes with only static methods are not designed to be instantiated. A 
 ```
 As a side effect, this prevents the class from being subclasses.
 
-# Dependency Injection over hardwiring resources
+## Dependency Injection over hardwiring resources
 
 Static utility classes and singletons are inappropriate for classes whose behavior is parameterized by an underlying resource. In such cases, a simple approach is to pass the resource into the constructor when creating the new instance. This is one form of *dependency injection*.
 
@@ -277,7 +277,7 @@ A useful variant of the pattern is to pass a *resource factory* to the construct
 
 Dependency injection greatly improved flexibility and testability but it can clutter up large projects. This clutter can be eliminated by using dependency injection frameworks like Spring, Guice or Dagger.
 
-# Avoiding unnecessary object creation
+## Avoiding unnecessary object creation
 ```java
     String s = new String("BAD"); // Not good practice
 ```
@@ -301,17 +301,17 @@ Another unnecessary object creation that's easy to miss is autoboxing. Always pr
 ```
 Lastly we wary of creating and maintaining your own object pools. Only implement such object pools when the objects are extremely heavyweight like in the case of database connections. Otherwise it just increases memory footprint and harms performance.
 
-# Eliminate obsolete object references
+## Eliminate obsolete object references
 
 Nulling out obsolete references ensures that if they're accessed by mistake it throws a null pointer exception. But the best way to eliminate an object reference is to let the variable that contained the reference fall out of scope. 
 
 In general whenever a class maintains its own memory the programmer should be wary of memory leaks like the case of caches. Other common culprits include listeners and other callbacks.
 
-# Avoid finalizers and cleaners
+## Avoid finalizers and cleaners
 
 Finalizers are unpredictable, often dangerous and generally unnecessary. Cleaners are less dangerous than finalizers but still unpredictable, slow and generally unnecessary. Finalizers also open you up to finalizer attacks and is a security concern. In the case where you have to use it, you should never do anything time critical within them.
 
-# Prefer try-with-resources to try-finally
+## Prefer try-with-resources to try-finally
 
 Lost of resources like InputStream, Connection needs to be explicitly closed using the close method otherwise it leads to dire performance issues. Historically, try-finally was the best way to guarantee the same.
 ```java
@@ -334,6 +334,6 @@ This approach becomes increasingly difficult when there are more resources. The 
         }
     }
 ```
-# References
+## References
 
 - [Effective Java by Joshua Bloch](https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwjol9i37d7tAhW0guYKHb3AD2UQFjABegQIARAC&amp;url=https%3A%2F%2Fwww.oreilly.com%2Flibrary%2Fview%2Feffective-java%2F9780134686097%2F&amp;usg=AOvVaw0_9_MCcKlk9FKgFO4yrZr2)

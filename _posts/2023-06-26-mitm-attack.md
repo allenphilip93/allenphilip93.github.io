@@ -11,13 +11,13 @@ image:
   alt: Man In The Middle (MITM) attack
 ---
 
-# What is MITM?
+## What is MITM?
 
 A man in the middle (MITM) attack is a general term for when a perpetrator positions himself in a conversation between a user and an application—either to eavesdrop or to impersonate one of the parties, making it appear as if a normal exchange of information is underway.
 
 The goal of an attack is to steal personal information, such as login credentials, account details and credit card numbers. Targets are typically the users of financial applications, SaaS businesses, e-commerce sites and other websites where logging in is required.
 
-# Example of MITM attack
+## Example of MITM attack
 
 Let's consider an example of a man-in-the-middle (MITM) attack on an unsecure HTTP connection:
 
@@ -46,7 +46,7 @@ Let's consider an example of a man-in-the-middle (MITM) attack on an unsecure HT
     -   Eve intercepts the response from Bob's server and creates a new HTTP response to send back to Alice.
     -   She can inject malicious code, modify the content, or even replace the entire response with a different one.
 
-# Intercepting the DNS resolution process
+## Intercepting the DNS resolution process
 
 There are several methods an attacker can employ to intercept the DNS resolution process. Here are a few common techniques used in man-in-the-middle (MITM) attacks:
 

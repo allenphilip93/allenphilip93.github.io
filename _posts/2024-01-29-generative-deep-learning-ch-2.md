@@ -11,19 +11,19 @@ image:
   alt: Deep Learning Basics
 ---
 
-# Reference
+## Reference
 
 [Generative Deep Learning - Chapter 2](https://learning.oreilly.com/library/view/generative-deep-learning/9781098134174/ch02.html)
 
-# Deep Learning
+## Deep Learning
 
 > Deep learning is a class of machine learning algorithms that uses _multiple stacked layers of processing units_ to learn high-level representations from _unstructured_ data.
 
 Deep learning differs from the traditional ML models in the sense that the former can learn how to build high-level information by itself from unstructured data. While ML models like Xgboost, logistic regression etc rely on the input features to be informative & not spatially dependent like pixels on a image.
 
-# Deep Neural Networks
+## Deep Neural Networks
 
-## What is a neural network?
+### What is a neural network?
 
 A neural network consists of a series of stacked _layers_. Each layer contains _units_ that are connected to the previous layer’s units through a set of _weights_. Neural networks where all adjacent layers are fully connected are called _multilayer perceptrons_ (MLPs).
 
@@ -37,13 +37,13 @@ During the training process, batches of images are passed through the network a
 
 Gradually, each unit becomes skilled at identifying a particular feature that ultimately helps the network to make better predictions.
 
-## Learning high-level features
+### Learning high-level features
 
 The critical property that makes neural networks so powerful is their ability to learn features from the input data, without human guidance. In other words, we do not need to do any feature engineering, which is why neural networks are so useful! We can let the model decide how it wants to arrange its weights, guided only by its desire to minimize the error in its predictions.
 
-# MLP on CIFAR-10 dataset
+## MLP on CIFAR-10 dataset
 
-## Multi Layer Perceptron (MLP)
+### Multi Layer Perceptron (MLP)
 
 It is a type of feedforward artificial neural network (ANN) composed of multiple layers of nodes (neurons), organized in a sequence of interconnected layers: an input layer, one or more hidden layers, and an output layer.
 
@@ -62,7 +62,7 @@ Here are some key characteristics of MLPs:
 
 MLPs have been widely used in various machine learning tasks, including classification, regression, and pattern recognition. However, they may struggle with tasks involving sequential or spatial data, where other architectures like recurrent neural networks (RNNs) or convolutional neural networks (CNNs) might be more suitable.
 
-## CIFAR-10 dataset
+### CIFAR-10 dataset
 
 The CIFAR-10 dataset is a widely used benchmark dataset in the field of computer vision. It stands for `Canadian Institute for Advanced Research - 10`, indicating that it was collected and labeled by researchers at CIFAR. The dataset consists of `60,000` `32x32` color images in 10 classes, with 6,000 images per class. The classes are mutually exclusive and include:
 
@@ -79,7 +79,7 @@ The CIFAR-10 dataset is a widely used benchmark dataset in the field of computer
 
 CIFAR-10 is often used for image classification tasks, and its relatively small size makes it suitable for testing and prototyping machine learning and deep learning models. It's also a standard benchmark for evaluating the performance of different algorithms in the computer vision community.
 
-## Model Definition
+### Model Definition
 
 A sample MLP can be defined in pytorch as follows:
 
@@ -115,14 +115,14 @@ To break down the model further:
 	- The _sigmoid_ activation is useful if you wish the output from the layer to be scaled between 0 and 1
 - Each dense layer is followed by an activation layer for the aforementioned reasons and finally we gather the output via a sigmoid function to model the probability that the img belongs to one of the labels.
 
-## Loss Functions
+### Loss Functions
 
 The _loss function_ is used by the neural network to compare its predicted output to the ground truth. It returns a single number for each observation; the greater this number, the worse the network has performed for this observation.
 
 If your neural network is designed to solve a regression problem (i.e., the output is continuous), then you might use the _mean squared error_ loss. This is the mean of the squared difference between the ground truth $y_i$ and predicted value $\hat{y_i}$ of each output unit, where the mean is taken over all $n$ output units: $$ \text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 $$
 If you are working on a classification problem where each observation only belongs to one class, then _categorical cross-entropy_ is the correct loss function. This is defined as follows: $$\text{Categorical Cross Entropy} = -\sum_{i} y_i \log(\hat{y}_i)$$
 Finally, if you are working on a binary classification problem with one output unit, or a multilabel problem where each observation can belong to multiple classes simultaneously, you should use _binary cross-entropy_: $$BCE(y, \hat{y}) = -\frac{1}{N} \sum_{i=1}^{N} \left( y_i \cdot \log(\hat{y}_i) + (1 - y_i) \cdot \log(1 - \hat{y}_i) \right)$$
-## Optimizers
+### Optimizers
 
 The _optimizer_ is the algorithm that will be used to update the weights in the neural network based on the gradient of the loss function. One of the most commonly used and stable optimizers is _Adam_ (Adaptive Moment Estimation).
 
@@ -130,7 +130,7 @@ In most cases, you shouldn’t need to tweak the default parameters of the Adam 
 
 Another common optimizer that you may come across is _RMSProp_ (Root Mean Squared Propagation).
 
-## Code
+### Code
 
 ```python
 import torch
@@ -139,7 +139,7 @@ import torchvision
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 
-# Define the neural network
+## Define the neural network
 class MLP(nn.Module):
     def __init__(self, input_size, hidden_size, num_classes):
         super(MLP, self).__init__()
@@ -153,10 +153,10 @@ class MLP(nn.Module):
         out = self.fc2(out)
         return out
 
-# Device configuration
+## Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-# Hyperparameters
+## Hyperparameters
 input_size = 32 * 32 * 3  # CIFAR-10 image size is 32x32x3
 hidden_size = 100
 num_classes = 10
@@ -164,7 +164,7 @@ learning_rate = 0.001
 num_epochs = 5
 batch_size = 100
 
-# Load CIFAR-10 dataset
+## Load CIFAR-10 dataset
 transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
@@ -176,14 +176,14 @@ train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=
 test_dataset = torchvision.datasets.CIFAR10(root='./data', train=False, download=True, transform=transform)
 test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
 
-# Initialize the model
+## Initialize the model
 model = MLP(input_size, hidden_size, num_classes).to(device)
 
-# Loss and optimizer
+## Loss and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-# Training the model
+## Training the model
 total_step = len(train_loader)
 for epoch in range(num_epochs):
     correct = 0
@@ -211,7 +211,7 @@ for epoch in range(num_epochs):
             print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Accuracy: {:.2f} %' 
                    .format(epoch+1, num_epochs, i+1, total_step, loss.item(), (correct/total)*100))
 
-# Test the model
+## Test the model
 model.eval()  
 with torch.no_grad():
     correct = 0
@@ -251,16 +251,16 @@ Most of the code is self-explanatory so we'll go into the details for just a few
 	* Disabling gradient tracking using `torch.no_grad()` reduces memory consumption and speeds up computations by avoiding the computation of unnecessary gradients during inference. 
 	* It ensures that operations inside the context manager do not build the computational graph required for gradient computation.
 
-## Evaluation
+### Evaluation
 
 > Final evaluation of the trained model on the test dataset, show that accuracy of the network on the test dataset is 49.96 %
 
 Let's see if we can do better.
 
-# CNN on CIFAR-10 dataset
+## CNN on CIFAR-10 dataset
 
 One of the reasons our network isn’t yet performing as well as it might is because there isn’t anything in the network that takes into account the spatial structure of the input images. In fact, our first step is to flatten the image into a single vector, so that we can pass it to the first `Dense` layer!
-## Convolutional Layers
+### Convolutional Layers
 
 The figure below shows two different 3 × 3 × 1 portions of a grayscale image being convoluted with a 3 × 3 × 1 _filter_ (or _kernel_). The convolution is performed by multiplying the filter pixelwise with the portion of the image, and summing the results. The output is more positive when the portion of the image closely matches the filter and more negative when the portion of the image is the inverse of the filter. The top example resonates strongly with the filter, so it produces a large positive value. The bottom example does not resonate much with the filter, so it produces a value near zero.
 
@@ -275,22 +275,22 @@ Sample convolution layer in pytorch:
 nn.Conv2d(in_channels=3, out_channels=32, kernel_size=3, stride=1, padding=1)
 ```
 
-### In Channels
+#### In Channels
 - This specifies the number of input channels, which corresponds to the number of color channels in the input image (3 for RGB).
 
-### Out Channels
+#### Out Channels
 - This specifies the number of output channels, which corresponds to the number of filters (or kernels) applied in this layer.
 
-### Kernel Size
+#### Kernel Size
 - The `kernel_size` parameter determines the size of the convolutional filter or kernel. It's usually specified as a single integer or a tuple (height, width).
 - For example, `kernel_size=3` means a 3x3 convolutional filter will be used.
 
-### Stride
+#### Stride
 - Stride refers to the number of pixels the filter moves across the input image.
 - A stride of 1 (default) means the filter moves one pixel at a time.
 - Increasing the stride reduces the spatial dimensions of the output feature map.
 
-### Padding
+#### Padding
 - Padding refers to the number of pixels added to an input image when it is being processed by the convolutional layer.
 - It helps to preserve the spatial dimensions of the input volume.
 - Padding is usually specified as either 'valid' or 'same'.
@@ -300,7 +300,7 @@ nn.Conv2d(in_channels=3, out_channels=32, kernel_size=3, stride=1, padding=1)
 
 ![Image Missing](../assets/img/Pasted%20image%2020240410110751.png)
 
-### Stacking Convolution Layers
+#### Stacking Convolution Layers
 
 The output of a `Conv2D` layer is another four-dimensional tensor, now of shape `(batch_size, height, width, filters)`, so we can stack `Conv2D` layers on top of each other to grow the depth of our neural network and make it more powerful.
 
@@ -308,19 +308,19 @@ The output of a `Conv2D` layer is another four-dimensional tensor, now of shap
 
 Note that now that we are working with color images, each filter in the first convolutional layer has a depth of 3 rather than 1 (i.e., each filter has shape 4 × 4 × 3, rather than 4 × 4 × 1). This is to match the three channels (red, green, blue) of the input image. The same idea applies to the filters in the second convolutional layer that have a depth of 10, to match the 10 channels output by the first convolutional layer.
 
-## Batch Normalization
+### Batch Normalization
 
 One common problem when training a deep neural network is ensuring that the weights of the network remain within a reasonable range of values—if they start to become too large, this is a sign that your network is suffering from what is known as the _exploding gradient_ problem. As errors are propagated backward through the network, the calculation of the gradient in the earlier layers can sometimes grow exponentially large, causing wild fluctuations in the weight values.
 
 This doesn’t necessarily happen immediately as you start training the network. Sometimes it can be happily training for hours when suddenly the loss function returns `NaN` and your network has exploded. This can be incredibly annoying. To prevent it from happening, you need to understand the root cause of the exploding gradient problem.
 
-### Covariate Shift
+#### Covariate Shift
 
 One of the reasons for scaling input data to a neural network is to ensure a stable start to training over the first few iterations. Since the weights of the network are initially randomized, unscaled input could potentially create huge activation values that immediately lead to exploding gradients. For example, instead of passing pixel values from 0–255 into the input layer, we usually scale these values to between –1 and 1.
 
 Because the input is scaled, it’s natural to expect the activations from all future layers to be relatively well scaled as well. Initially this may be true, but as the network trains and the weights move further away from their random initial values, this assumption can start to break down. This phenomenon is known as _covariate shift_.
 
-### Training using batch normalization
+#### Training using batch normalization
 
 During training, a batch normalization layer calculates the mean and standard deviation of each of its input channels across the batch and normalizes by subtracting the mean and dividing by the standard deviation.
 
@@ -328,7 +328,7 @@ During training, a batch normalization layer calculates the mean and standard de
 
 There are then two learned parameters for each channel, the scale (gamma) and shift (beta). The output is simply the normalized input, scaled by gamma and shifted by beta. We can place batch normalization layers after dense or convolutional layers to normalize the output.
 
-### Prediction using Batch Normalization
+#### Prediction using Batch Normalization
 
 When it comes to prediction, we may only want to predict a single observation, so there is no _batch_ over which to calculate the mean and standard deviation. To get around this problem, during training a batch normalization layer also calculates the moving average of the mean and standard deviation of each channel and stores this value as part of the layer to use at test time.
 
@@ -338,7 +338,7 @@ m = nn.BatchNorm2d(100, momentum=0.9)
 
 The `momentum` parameter is the weight given to the previous value when calculating the moving average and moving standard deviation.
 
-## Dropout
+### Dropout
 
 Any successful machine learning algorithm must ensure that it generalizes to unseen data, rather than simply _remembering_ the training dataset. If an algorithm performs well on the training dataset, but not the test dataset, we say that it is suffering from _overfitting_. To counteract this problem, we use _regularization_ techniques, which ensure that the model is penalized if it starts to overfit.
 
@@ -347,7 +347,7 @@ Dropout layers are a very common technique used for regularization in deep learn
 Dropout layers are used most commonly after dense layers since these are the most prone to overfitting due to the higher number of weights, though you can also use them after convolutional layers.
 
 
-## Model Definition
+### Model Definition
 
 Now let's look at how a basic CNN would look like.
 
@@ -394,11 +394,11 @@ class CNN(nn.Module):
         x = self.fc2(x)
         return x
 
-# Create the model
+## Create the model
 model = CNN(num_classes=10)
 ```
 
-## Evaluation
+### Evaluation
 
 > Final evaluation of the trained model on the test dataset, show that accuracy of the network on the test dataset is 75.52 %
 

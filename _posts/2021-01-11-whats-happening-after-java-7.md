@@ -11,7 +11,7 @@ image:
   alt: What's happening after Java 7
 ---
 
-# Introduction
+## Introduction
 
 Java has changed so much over the past few years most profound so far being the Java 8 release. For example, remember when the code for sorting a collections based on a member variable used to look like this:
 ```java
@@ -26,7 +26,7 @@ In Java 8 this could be rewritten as:
     inventory.sort(comparing(Apple::getWeight));
 ```
 
-# Java's claim to fame
+## Java's claim to fame
 
 Object orientation became popular in 1990s for two reasons:
 
@@ -35,23 +35,23 @@ Object orientation became popular in 1990s for two reasons:
 
 There was an initial resistance to the additional run cost of Java vs C/C++ but with time machines got faster and programmer time became more and more important.
 
-# Evolution of Java
+## Evolution of Java
 
 Java has a rich history and has constantly evolved over the years with the prime goal of making concurrency simpler to use and less error-prone. At the time Java 1.0 came out, it had threads and even a memory model. Java 5 added more abstracted concurrency tools like thread pools and concurrent collections. Java 7 built on top of that and added the fork/join framework making parallelism even more practical but difficult.
 
 Over the past few years commodity CPUs have become multicore. Java as a language didn't leverage this power available hence the vast majority of the Java program use only one of these cores.
 
-# Stream Processing
+## Stream Processing
 
 Java 8 provided a simpler way to look at parallelism. Java 8 provided a new API called Streams that supports many parallel operations to process and modify data in a way similar to database query languages.
 
 Streams abstract away all the code that uses "synchronized" etc to exploit the multi-core capabilities of CPUs so that the code is less error-prone and easy to use. Using Streams API we don't have to use loops or code for parallelism since it is abstracted away within the library. Streams API takes care of partitioning and forks/joins are abstracted away. But it's important to note that the methods passed to the library methods **must not interact and have no shared mutable state**.
 
-# Behavior Parameterization
+## Behavior Parameterization
 
 Looking at the above Java 8 code for sorting, we are actually passing a function as a parameter to the method "comparing()". Java 8 introduced "*behavior parameterization*" wherein we can pass functions like variables in a concise way. This feature of passing functions like variables gave access to a range of addition techniques commonly referred to as *functional-style programming*.
 
-# Methods as first-class citizens
+## Methods as first-class citizens
 
 In a way, the whole point of a programming language is to manipulate values. Values were previously listed as first-class Java citizens but methods and classes exemplify second-class citizens. For example, methods are used to defined classes which in turn may be instantiated to product values but neither are values themselves.
 
@@ -74,7 +74,7 @@ For example the above code would mean "the function that when called with argume
 
 Though we could achieve the same by defining a function and use the method reference, but it's annoying to write definitions for short methods when they're used perhaps once or twice.
 
-# Default methods for interfaces
+## Default methods for interfaces
 
 Prior to Java 8 you can update an interface only if you update all the classes that implement it! This prevented any attempt for the Java libraries to evolve and be modified. Default methods prepared Java to deal with API evolution in an elegant way.
 
@@ -88,7 +88,7 @@ Previously we could sort a list only from the "Collections" utility class method
 ```
 Default interfaces also introduce a form of multiple inheritance in Java. Since a class can implement multiple interfaces we can inherit multiple default implementations.
 
-# Other good ideas from functional programming
+## Other good ideas from functional programming
 
 One good practice is avoiding the use of *null* in favor of more descriptive datatype, case in point, *Optional<T> *class that was introduced in Java 8. If and when used consistently, it can help avoid null-pointer exceptions altogether.
 
@@ -96,6 +96,6 @@ It's basically a container object which may or may not contain a value and inclu
 
 Another thought is why should the *switch* statement be limited to primitive values and strings. Functional languages then to allow switch to be used on many more datatypes. including allowing pattern matching.
 
-# References
+## References
 
 - [Modern Java in Action by Raoul-Gabriel Urma, Alan Mycroft, Mario Fusco](https://www.oreilly.com/library/view/modern-java-in/9781617293566/)

@@ -11,11 +11,11 @@ image:
   alt: What happens when you open a website?
 ---
 
-# Overview
+## Overview
 
 Ever wondered what happens when you type "www.google.com" in your browser? This article aims to delve deeper in what happens right from the browser, to the network layer and right down to the physical layer.
 
-# DNS Lookup
+## DNS Lookup
 
 When we enter a URL into the browser's address bar, the browser has no idea what it means. The browser's not equipped with the tools to figure out where to look for the address given by the user. Hence it takes the help of someone who is an expert at it - the DNS Server.
 
@@ -25,7 +25,7 @@ When users type [domain names](https://www.cloudflare.com/learning/dns/glossary
 
 ![Image Missing](../assets/img/Pasted%20image%2020230607111004.png)
 
-## Finding the DNS Resolver
+### Finding the DNS Resolver
 
 First and foremost the browser makes a DNS query to figure out what is the IP address of the url entered by the user. 
 
@@ -33,19 +33,19 @@ Now the browser must know two things to make this call:
 - What is the DNS resolver server IP address?
 - How should I send?
 
-### Identifying IP address
+#### Identifying IP address
 
 Browser has two ways for selecting a DNS server IP:
 - Use the OS level DNS which is configured from the DHCP server when the device was connected to the internet
 - Use a custom DNS server like Cloudfare or Google DNS
 
-### Communication Protocol
+#### Communication Protocol
 
 DNS primarily uses the User Datagram Protocol (UDP) on port number 53 to serve requests. DNS queries consist of a single UDP request from the client followed by a single UDP reply from the server. 
 
 When the length of the answer exceeds 512 bytes and both client and server support EDNS, larger UDP packets are used. Otherwise, the query is sent again using the Transmission Control Protocol (TCP). TCP is also used for tasks such as zone transfers. Some resolver implementations use TCP for all queries.
 
-## Browser makes a DNS query
+### Browser makes a DNS query
 
 In a typical DNS lookup three types of queries occur. By using a combination of these queries, an optimized process for DNS resolution can result in a reduction of distance traveled.
 
@@ -53,7 +53,7 @@ In a typical DNS lookup three types of queries occur. By using a combination of 
 2.  **Iterative query** - in this situation the DNS client will allow a DNS server to return the best answer it can. If the queried DNS server does not have a match for the query name, it will return a referral to a DNS server authoritative for a lower level of the domain namespace. The DNS client will then make a query to the referral address. This process continues with additional DNS servers down the query chain until either an error or timeout occurs.
 3.  **Non-recursive query** - typically this will occur when a DNS resolver client queries a DNS server for a record that it has access to either because it's authoritative for the record or the record exists inside of its cache. Typically, a DNS server will cache DNS records to prevent additional bandwidth consumption and load on upstream servers.
 
-### Local DNS Caching
+#### Local DNS Caching
 
 Before the DNS query leaves the client, it checks the cache if the resolution is already available and not add to the load of the upstream servers.
 
@@ -61,11 +61,11 @@ There are two levels of cache checks that happen before a DNS query to the resol
 - **Browser DNS caching** - Modern web browsers are designed by default to cache DNS records for a set amount of time
 - **OS level DNS caching** - When a stub resolver gets a request from an application, it first checks its own cache to see if it has the record. If it does not, it then sends a DNS query (with a recursive flag set), outside the local network to a DNS recursive resolver inside the Internet service provider (ISP).
 
-## Recursive DNS Resolver
+### Recursive DNS Resolver
 
 The recursive DNS resolver it at the beginning of the DNS query and gets the request from the browser. The goal of the DNS resolver is to figure out the DNS record against the URL from the browser.
 
-## DNS root nameserver
+### DNS root nameserver
 
 Since the DNS root zone is at the top of the DNS hierarchy, recursive resolvers cannot be directed to them in a DNS lookup. Because of this, every DNS resolver has a list of the 13 IP root server addresses built into its software. Whenever a DNS lookup is initiated, the recursor’s first communication is with one of those 13 IP addresses.
 
@@ -73,27 +73,27 @@ Since the DNS root zone is at the top of the DNS hierarchy, recursive resolvers 
 
 A root server accepts a recursive resolver’s query which includes a domain name, and the root nameserver responds by directing the recursive resolver to a TLD nameserver, based on the extension of that domain (.com, .net, .org, etc.).
 
-## DNS TLD nameserver
+### DNS TLD nameserver
 
 A TLD nameserver maintains information for all the domain names that share a common domain extension, such as .com, .net, or whatever comes after the last dot in a URL.
 
 If a user was searching for google.com, after receiving a response from a root nameserver, the recursive resolver would then send a query to a .com TLD nameserver, which would respond by pointing to the authoritative nameserver for that domain.
 
-## DNS authoritative nameserver
+### DNS authoritative nameserver
 
 The authoritative nameserver is usually the resolver’s last step in the journey for an IP address. The authoritative nameserver contains information specific to the domain name it serves (e.g. google.com) and it can provide a recursive resolver with the IP address of that server.
 
 At times, the TLD might have multiple authoritative nameservers to point to for the domain passed from the browser. This is largely to add a bit of resiliency & fault tolerance, so any of them can help with resolving the domain.
 
-## DNS Lookup - Full Journey
+### DNS Lookup - Full Journey
 
 ![Image Missing](../assets/img/Pasted%20image%2020230607120624.png)
 
-# TCP Handshake
+## TCP Handshake
 
 Now that the browser has the IP address for the URL entered by the user, it can now communicate with the server. In order to fetch information from the server, the browser first opens a TCP connection with the target server with the IP address from the DNS lookup query.
 
-## What is TCP/IP?
+### What is TCP/IP?
 The [Internet Protocol (IP)](https://www.cloudflare.com/learning/network-layer/internet-protocol/) is the address system of the Internet and has the core function of delivering [packets](https://www.cloudflare.com/learning/network-layer/what-is-a-packet/) of information from a source device to a target device. IP is the primary way in which network connections are made, and it establishes the basis of the Internet. 
 
 IP does not handle packet ordering or error checking. Such functionality requires another protocol, often the Transmission Control Protocol (TCP).
@@ -102,7 +102,7 @@ IP does not handle packet ordering or error checking. Such functionality require
 
 That’s where protocols such as TCP come in. TCP is used in conjunction with IP in order to maintain a connection between the sender and the target and to ensure packet order.
 
-## Handshake
+### Handshake
 
 When a message is sent over TCP, a connection is established and a 3-way handshake is made. First, the source sends an **SYN “initial request” packet** to the target server in order to start the dialogue. Then the target server sends a **SYN-ACK packet** to agree to the process. Lastly, the source sends an **ACK packet** to the target to confirm the process, after which the message contents can be sent.
 
@@ -118,16 +118,16 @@ The recipient will send a message back to the sender for each packet, **acknowl
 > The UDP protocol is also build on top of IP and the datagram structure is very similar to TCP/IP as shown below. The main difference is that its faster and simpler because there is no sequencing of datagrams and packets will not be resent.
 
 ![Image Missing](../assets/img/Pasted%20image%2020230717103036.png)
-## Why is the handshake important?
+### Why is the handshake important?
 
 TCP’s three-way handshake has two important functions:
 - It makes sure that both sides know that they are ready to transfer data
 - It also allows both sides to agree on the initial sequence numbers, which are sent and acknowledged (so there is no mistake about them) during the handshake.
-# TLS Handshake
+## TLS Handshake
 
 Browser has now established a TCP/IP connection with the server and can we ready to start sending data? Nope! Though we have established connection, it is not protected and hence is at risk of being exploited upon by malicious actors. Imagine the risk if its bank application or anything with commercial implications.
 
-## What is TLS?
+### What is TLS?
 
 Transport Layer Security, or TLS, is a widely adopted security [protocol](https://www.cloudflare.com/learning/network-layer/what-is-a-protocol/) designed to facilitate privacy and data security for communications over the Internet.
 
@@ -137,11 +137,11 @@ TLS evolved from Secure Socket Layers (SSL) which was originally developed by Ne
 
 TLS is normally implemented on top of TCP in order to encrypt Application Layer protocols such as HTTP, FTP, SMTP and IMAP, although it can also be implemented on UDP, DCCP and SCTP as well (e.g. for VPN and SIP-based application uses) and is known as Datagram Transport Layer Security (DTLS).
 
-## Why is TLS needed?
+### Why is TLS needed?
 
 An unprotected TCP connection is susceptible to a man-in-the-middle (MITM) attack. You can read more at [[Man In The Middle (MITM) attack]]
 
-## What does TLS do?
+### What does TLS do?
 
 There are three main components to what the TLS protocol accomplishes: [Encryption](https://www.cloudflare.com/learning/ssl/what-is-encryption/), Authentication, and Integrity.
 
@@ -149,7 +149,7 @@ There are three main components to what the TLS protocol accomplishes: [Encrypt
 -   **Authentication:** ensures that the parties exchanging information are who they claim to be.
 -   **Integrity:** verifies that the data has not been forged or tampered with.
 
-# How does TLS work?
+## How does TLS work?
 
 HTTPS uses an [encryption](https://www.cloudflare.com/learning/ssl/what-is-encryption/) protocol to encrypt communications. The protocol is called [Transport Layer Security (TLS)](https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/), although formerly it was known as [Secure Sockets Layer (SSL)](https://www.cloudflare.com/learning/ssl/what-is-ssl/).
 
@@ -165,7 +165,7 @@ The server then sends the SSL certificate to the client. The **certificate conta
 
 **Step 4** - Now that both the client and the server hold the same session key (symmetric encryption), the encrypted data is transmitted in a secure bi-directional channel.
 
-### Why does HTTPS switch to symmetric encryption during data transmission? 
+#### Why does HTTPS switch to symmetric encryption during data transmission? 
 
 There are two main reasons:
 
@@ -173,9 +173,9 @@ There are two main reasons:
 
 2. **Server resources**: The asymmetric encryption adds quite a lot of mathematical overhead. It is not suitable for data transmissions in long sessions.
 
-# Making a HTTP request
+## Making a HTTP request
 
-## What is HTTP?
+### What is HTTP?
 The Hypertext Transfer Protocol (HTTP) is the **foundation of the World Wide Web**, and is used to load webpages using hypertext links. HTTP is an [application layer](https://www.cloudflare.com/learning/ddos/application-layer-ddos-attack/) protocol designed to transfer information between networked devices and runs on top of other layers of the network [protocol](https://www.cloudflare.com/learning/network-layer/what-is-a-protocol/) stack. A typical flow over HTTP involves a client machine making a request to a server, which then sends a response message.
 
 > An HTTP request is the way Internet communications platforms such as web browsers ask for the information they need to load a website.
@@ -183,7 +183,7 @@ The Hypertext Transfer Protocol (HTTP) is the **foundation of the World Wide Web
 ![Image Missing](../assets/img/Pasted%20image%2020230718112056.png)
 
 ![Image Missing](../assets/img/Pasted%20image%2020230725113307.png)
-## Components of HTTP based system
+### Components of HTTP based system
 
 HTTP is a client-server protocol: requests are sent by one entity, the user-agent (or a proxy on behalf of it). Most of the time the user-agent is a Web browser, but it can be anything, for example, a robot that crawls the Web to populate and maintain a search engine index.
 
@@ -199,15 +199,15 @@ Proxies may perform numerous functions:
 - authentication (to control access to different resources)
 - logging (allowing the storage of historical information)
 
-## HTTP & Connection
+### HTTP & Connection
 
 A connection is controlled at the transport layer, and therefore fundamentally out of scope for HTTP. HTTP doesn't require the underlying transport protocol to be connection-based; it only requires it to be _reliable_, or not lose messages.
 
 Among the two most common transport protocols on the Internet, TCP is reliable and UDP isn't. HTTP therefore relies on the TCP standard, which is connection-based.
 
-## HTTP Types & History
+### HTTP Types & History
 
-### Invention of WWW
+#### Invention of WWW
 
 In 1989, while working at CERN, Tim Berners-Lee wrote a proposal to build a hypertext system over the internet. Initially called the _Mesh_, it was later renamed the _World Wide Web_ during its implementation in 1990. Built over the existing TCP and IP protocols, it consisted of 4 building blocks:
 
@@ -216,20 +216,20 @@ In 1989, while working at CERN, Tim Berners-Lee wrote a proposal to build a hype
 - A client to display (and edit) these documents, the first web browser called the _WorldWideWeb_.
 - A server to give access to the document, an early version of _httpd_.
 
-### HTTP/0.9
+#### HTTP/0.9
 
 HTTP/0.9 was extremely simple: requests consisted of a single line and started with the only possible method [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) followed by the path to the resource. The full URL wasn't included as the protocol, server, and port weren't necessary once connected to the server.
 
 The response was extremely simple, too: it only consisted of the file itself. Unlike subsequent evolutions, there were no HTTP headers. This meant that only HTML files could be transmitted. There were no status or error codes.
 
-### HTTP/1.0
+#### HTTP/1.0
 
 - Versioning information was sent within each request (`HTTP/1.0` was appended to the `GET` line).
 - A status code line was also sent at the beginning of a response. This allowed the browser itself to recognize the success or failure of a request and adapt its behavior accordingly. *For example, updating or using its local cache in a specific way.*
 - The concept of HTTP headers was introduced for both requests and responses. Metadata could be transmitted and the protocol became extremely flexible and extensible.
 - Documents other than plain HTML files could be transmitted thanks to the [`Content-Type`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) header.
 
-### HTTP/1.1
+#### HTTP/1.1
 
 - A connection could be reused, which saved time. It no longer needed to be opened multiple times to display the resources embedded in the single original document.
 - Pipelining was added. This allowed a second request to be sent before the answer to the first one was fully transmitted. This lowered the latency of the communication.
@@ -238,19 +238,19 @@ The response was extremely simple, too: it only consisted of the file itself. Un
 - Content negotiation, including language, encoding, and type, was introduced. A client and a server could now agree on which content to exchange.
 - Thanks to the [`Host`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Host) header, the ability to host different domains from the same IP address allowed server collocation.
 
-### HTTP for secure transmissions
+#### HTTP for secure transmissions
 
 The largest change to HTTP was made at the end of 1994. Instead of sending HTTP over a basic TCP/IP stack, the computer-services company Netscape Communications created an additional encrypted transmission layer on top of it: SSL.
 
 To do this, they encrypted and guaranteed the authenticity of the messages exchanged between the server and client. SSL was eventually standardized and became TLS. During the same time period, it became clear that an encrypted transport layer was needed. The web was no longer a mostly academic network, and instead became a jungle where advertisers, random individuals, and criminals competed for as much private data as possible.
 
-### HTTP for complex applications
+#### HTTP for complex applications
 
 Tim Berners-Lee didn't originally envision HTTP as a read-only medium. He wanted to create a web where people could add and move documents remotely—a kind of distributed file system.
 
 In 2000, a new pattern for using HTTP was designed: [representational state transfer](https://developer.mozilla.org/en-US/docs/Glossary/REST) (or REST). The API wasn't based on the new HTTP methods, but instead relied on access to specific URIs with basic HTTP/1.1 methods.
 
-### HTTP/2
+#### HTTP/2
 
 Over the years, web pages became more complex. Much more data was transmitted over significantly more HTTP requests and this created more complexity and overhead for HTTP/1.1 connections.
 
@@ -265,11 +265,11 @@ The HTTP/2 protocol differs from HTTP/1.1 in a few ways:
 
 ![Image Missing](../assets/img/Pasted%20image%2020230718115809.png)
 
-### HTTP/3 - HTTP over QUIC
+#### HTTP/3 - HTTP over QUIC
 
 The next major version of HTTP, HTTP/3 has the same semantics as earlier versions of HTTP but uses [QUIC](https://developer.mozilla.org/en-US/docs/Glossary/QUIC) instead of [TCP](https://developer.mozilla.org/en-US/docs/Glossary/TCP) for the transport layer portion. QUIC is designed to provide much lower latency for HTTP connections.
 
-### QUIC
+#### QUIC
 
 **QUIC** is a multiplexed transport protocol implemented on UDP. It is used instead of [TCP](https://developer.mozilla.org/en-US/docs/Glossary/TCP) as the transport layer in HTTP/3. QUIC was designed to provide quicker setup and lower latency for HTTP connections. In particular:
 
@@ -279,17 +279,17 @@ The next major version of HTTP, HTTP/3 has the same semantics as earlier version
 
 ![Image Missing](../assets/img/Pasted%20image%2020230718120044.png)
 
-# Layers above HTTP
+## Layers above HTTP
 
-## REST
+### REST
 
-### History
+#### History
 
 Given the new, rapidly growing demand and use case for the Web, many _working groups_ got formed to develop the web further. One of these groups was the HTTP Working Group, which worked on the new requirements to support the future of the growing World Wide Web. One member of the HTTP Working Group was Roy Thomas Fielding, who simultaneously worked on a broader architectural concept called Representational State Transfer — REST.
 
 So REST architecture and HTTP 1.1 protocol are independent of each other, but the HTTP 1.1 protocol was built to be the ideal protocol to follow the principles and constraints of REST.
 
-### Definition
+#### Definition
 
 > REST stands for **RE**presentational **S**tate **T**ransfer.
 
@@ -297,7 +297,7 @@ It means when a RESTful API is called, the server will _transfer_ to the clien
 
 REST doesn't add any functionality onto HTTP but is an architectural style alongside HTTP. REST is a set of 'rules' (or 'constraints'). defining the characteristics of the optimal application for a distributed hypermedia system, like the World Wide Web.
 
-### Architectural Constraints
+#### Architectural Constraints
 
 REST defines 6 architectural constraints which make any web service – a truly RESTful API.
 
@@ -307,7 +307,7 @@ REST defines 6 architectural constraints which make any web service – a trul
 4. [Cacheable](https://restfulapi.net/rest-architectural-constraints/#cacheable)
 5. [Layered system](https://restfulapi.net/rest-architectural-constraints/#layered-system)
 
-#### Uniform Interface (Standards)
+##### Uniform Interface (Standards)
 
 **Identification of resources** - The REST style is centred around resources. This is unlike SOAP and other RPC styles that are modelled around procedures (or methods) and a resource is basically anything that can be named or resources are usually the entities from the business domain.
 
@@ -317,11 +317,11 @@ REST defines 6 architectural constraints which make any web service – a trul
 
 **HATEOAS** - Hypermedia as the Engine of Application State (HATEOAS) sounds a bit overwhelming, but in reality, it’s a simple concept. A web page is an instance of application state, hypermedia is text with hyperlinks. The hypermedia drives the application state. In other words, we click on links to move to new pages (i.e. application states). So when you are surfing the web, you are using hypermedia as the engine of application state! This means that HATEOAS should guide a user through the interface by offering control alongside the data.
 
-### Client-server
+#### Client-server
 
 This essentially means that client application and server application must be able to evolve separately without any dependency on each other and I mean it should follow separation of concerns.
 
-### Stateless
+#### Stateless
 
 Roy fielding got inspiration from HTTP, so it reflects in this constraint. Make all client-server interaction stateless. The server will not store anything about latest HTTP request client made. It will treat each and every request as new and it should not depend on any previous information shared between the two. No session, no history.
 
@@ -329,17 +329,17 @@ If client application needs to be a stateful application for the end user, where
 
 No client context shall be stored on the server between requests. The client is responsible for managing the state of the application.
 
-### Cacheable
+#### Cacheable
 
 In REST, each response can be labelled as cacheable or non-cacheable. The cached response can be used for the response of the request rather than asking the server so we can eliminate the communication between the server and client up to some degree.
 
-### Layered System
+#### Layered System
 
 Components can’t see beyond immediate layer. REST allows you to use a layered system architecture where you deploy the APIs on server A, and store data on server B and authenticate requests in Server C. These servers might provide a security layer, a caching layer, a load-balancing layer, or other functionality. Those layers should not affect the request or the response.
 
-## Real-time communication protocols
+### Real-time communication protocols
 
-### Websockets
+#### Websockets
 
 WebSocket is a **duplex protocol** used mainly in the **client-server communication** channel. It’s bidirectional in nature which means communication happens to and fro between client-server. WebSocket uses a unified TCP connection and needs one party to terminate the connection.
 
@@ -360,7 +360,7 @@ Websockets are typically used in the following use cases:
 - **Gaming application**
 	- In online gaming the server is unremittingly receiving the data, without asking for UI refresh
 
-### XMPP
+#### XMPP
 
 Short for **Extensible Messaging and Presence Protocol**, XMPP is an open standard that supports near-real-time chat and instant messaging by governing the exchange of XML data over a network.
 
@@ -385,7 +385,7 @@ Some of the key highlights of XMPP:
 
 > XMPP can use HTTP or Websockets for transport. Using XMPP with WebSockets presents limitations, however, as XMPP is not optimized for transport speed like WebSockets. XMPP also doesn't support binary data transmission - only textual data in an XML format.
 
-### WebRTC
+#### WebRTC
 
 [Web Real-Time Communication (WebRTC)](https://ably.com/blog/what-is-webrtc) is a framework that enables you to add real time communication (RTC) capabilities to your web and mobile applications. 
 
@@ -409,13 +409,13 @@ WebRTC is a good choice for the following use cases:
 - Broadcasting live events (such as sports events).
 - IoT devices (e.g., drones or baby monitors streaming live audio and video data).
 
-## RPC
+### RPC
 
 > RPC is a request–response **software communication protocol**. 
 
 An RPC is initiated by the _client_, which sends a request message to a known remote _server_ to execute a specified procedure with supplied parameters. The remote server sends a response to the client, and the application continues its process.
 
-### Sequence of events
+#### Sequence of events
 
 1. The client calls the client stub. The call is a local procedure call, with parameters pushed on to the stack in the normal way.
 2. The client stub packs the parameters into a message and makes a system call to send the message. Packing the parameters is called marshalling.
@@ -426,7 +426,7 @@ An RPC is initiated by the _client_, which sends a request message to a known r
 
 ![Image Missing](../assets/img/Pasted%20image%2020230719115841.png)
 
-### When to use RPC?
+#### When to use RPC?
 
 1. **Simplicity and Tight Coupling**: RPC is generally more straightforward and easier to implement when you have a relatively simple, well-defined API and tight coupling between the client and server. Ex: Internal service/component communication.
     
@@ -436,7 +436,7 @@ An RPC is initiated by the _client_, which sends a request message to a known r
     
 4. **Performance and Efficiency**: RPC can be more performant and efficient than REST in certain cases due to its lower overhead and direct method invocation.
 
-### When to use REST?
+#### When to use REST?
 
 1. **Scalability and Loose Coupling**: REST's stateless nature and loose coupling make it a better choice for distributed systems that require scalability and interoperability. RESTful APIs are independent of the underlying implementation, allowing clients and servers to evolve independently.
     
@@ -444,7 +444,7 @@ An RPC is initiated by the _client_, which sends a request message to a known r
     
 3. **Resource-Oriented Design**: If your application's data and functionalities are organised as resources, REST's resource-oriented design can be more intuitive and aligned with HTTP principles.
 
-### gRPC
+#### gRPC
 
 > gRPC is a modern open source high performance Remote Procedure Call (RPC) framework that can run in any environment. It can efficiently connect services in and across data centers with pluggable support for load balancing, tracing, health checking and authentication.
 
@@ -455,7 +455,7 @@ In gRPC, a client application can directly call a method on a server application
 
 By default, gRPC uses [Protocol Buffers](https://protobuf.dev/overview), Google’s mature open source mechanism for serializing structured data. 
 
-#### Why use gRPC?
+##### Why use gRPC?
 
 1. **Performance and Efficiency**: gRPC's use of Protocol Buffers (protobuf) for data serialization results in a compact and efficient binary representation of data. This reduces payload size, leading to faster data transmission and reduced network overhead, making it more performant compared to RESTful APIs using JSON.
     
@@ -465,17 +465,17 @@ By default, gRPC uses [Protocol Buffers](https://protobuf.dev/overview), Google
     
 4. **Scalability and Concurrency**: gRPC's bidirectional streaming, asynchronous nature, and efficient handling of multiple requests over a single connection contribute to improved scalability and performance, making it suitable for high-concurrency and large-scale distributed systems. 
 
-#### RPC in Google
+##### RPC in Google
 
 In general, Google tends to use REST for public APIs because of its simplicity, standardization, and compatibility with HTTP. RESTful APIs are well-suited for scenarios where interoperability with various programming languages and platforms is essential, as they rely on standard HTTP methods and can be accessed using standard HTTP clients.
 
 It's worth noting that while Google uses REST in public-facing APIs, they may also utilize gRPC and other communication protocols extensively within their internal infrastructure for efficient and high-performance communication between microservices and backend components.
 
-## GraphQL
+### GraphQL
 
 > GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data.
  
-### Core benefits of GraphQL
+#### Core benefits of GraphQL
 
 - Ask for what you need get exactly that
 - Get many resources in a single request
@@ -483,13 +483,13 @@ It's worth noting that while Google uses REST in public-facing APIs, they may al
 - Evolve your API without versions
 - Bring your own data and code
 
-### Architecture
+#### Architecture
 
 ![Image Missing](../assets/img/Pasted%20image%2020230719124306.png)
 ![Image Missing](../assets/img/Pasted%20image%2020230719124347.png)
 
 
-# Render the response from server
+## Render the response from server
 
 When a browser receives a response from the server, it follows a series of steps to render and display the content to the user. Here's a simplified overview of the process:
 

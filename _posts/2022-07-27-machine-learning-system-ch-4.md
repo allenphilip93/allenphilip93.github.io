@@ -11,11 +11,11 @@ image:
   alt: Designing Machine Learning Systems by Chip Huyen
 ---
 
-# Reference
+## Reference
 
 [Chapter 4 - Designing Machine Learning Systems by Chip Huyen](https://learning.oreilly.com/library/view/designing-machine-learning/9781098107956/ch04.html)
 
-# Introduction
+## Introduction
 
 > Data is messy, complex, unpredictable, and potentially treacherous. If not handled properly, it can easily sink your entire ML operation.
 
@@ -25,7 +25,7 @@ We use the term “training data” instead of “training dataset” because �
 
 > Like other steps in building ML systems, creating training data is an iterative process. As your model evolves through a project lifecycle, your training data will likely also evolve.
 
-# Sampling
+## Sampling
 
 In general, we sample training data in one of the two cases:
 - When we don't have access to all the possible real-world data
@@ -33,7 +33,7 @@ In general, we sample training data in one of the two cases:
 
 Understanding different sampling methods and how they are being used in our workflow can, first, help us avoid potential sampling biases, and second, help us choose the methods that improve the efficiency of the data we sample.
 
-## Nonprobability Sampling
+### Nonprobability Sampling
 
 Nonprobability sampling is when the selection of data isn’t based on any probability criteria. Here are some of the criteria for nonprobability sampling:
 
@@ -53,21 +53,21 @@ The samples selected by nonprobability criteria are not representative of the re
 
 > Nonprobability sampling can be a quick and easy way to gather your initial data to get your project off the ground. However, for reliable models, you might want to use probability-based sampling.
 
-## Simple Random Sampling
+### Simple Random Sampling
 
 In the simplest form of random sampling, you give all samples in the population equal probabilities of being selected. The advantage of this method is that it’s easy to implement. The drawback is that rare categories of data might not appear in your selection.
 
-## Stratified Sampling
+### Stratified Sampling
 
 To avoid the drawback of simple random sampling, you can first divide your population into the groups that you care about and sample from each group separately. For example, to sample 1% of data that has two classes, A and B, you can sample 1% of class A and 1% of class B. This way, no matter how rare class A or B is, you’ll ensure that samples from it will be included in the selection. Each group is called a stratum, and this method is called stratified sampling.
 
-## Weighted Sampling
+### Weighted Sampling
 
 In weighted sampling, each sample is given a weight, which determines the probability of it being selected. This method allows you to leverage domain expertise. For example, if you know that a certain subpopulation of data, such as more recent data, is more valuable to your model and want it to have a higher chance of being selected, you can give it a higher weight.
 
 This also helps with the case when the data you have comes from a different distribution compared to the true data. For example, if in your data, red samples account for 25% and blue samples account for 75%, but you know that in the real world, red and blue have equal probability to happen, you can give red samples weights three times higher than blue samples.
 
-## Reservoir Sampling
+### Reservoir Sampling
 
 Reservoir sampling is a fascinating algorithm that is especially useful when you have to deal with **streaming data**, which is usually what you have in production.
 
@@ -80,25 +80,25 @@ One solution for this problem is reservoir sampling. The algorithm involves a re
 
 This means that each incoming $nth$ element has $k \over n$  probability of being in the reservoir. 
 
-# Labeling
+## Labeling
 
 > Despite the promise of unsupervised ML, most ML models in production today are supervised, which means that they need labeled data to learn from. The performance of an ML model still depends heavily on the quality and quantity of the labeled data it’s trained on.
 
 Data labeling has gone from being an auxiliary task to being a core function of many ML teams in production.
 
-## Hand Labels
+### Hand Labels
 
 Hand-labeling data can be expensive, especially if subject matter expertise is required. To classify whether a comment is spam, you might be able to find 20 annotators on a crowdsourcing platform and train them in 15 minutes to label your data. However, if you want to label chest X-rays, you’d need to find board-certified radiologists, whose time is limited and expensive.
 
 Hand labeling poses a threat to data privacy. Hand labeling means that someone has to look at your data, which isn’t always possible if your data has strict privacy requirements. And lastly, hand labeling is very slow. Slow labeling leads to slow iteration speed and makes your model less adaptive to changing environments and requirements.
 
-### Label multiplicity
+#### Label multiplicity
 
 Often, to obtain enough labeled data, companies have to use data from multiple sources and rely on multiple annotators who have different levels of expertise. These different data sources and annotators also have different levels of accuracy. This leads to the problem of label ambiguity or label multiplicity: what to do when there are multiple conflicting labels for a data instance.
 
 To minimize the disagreement among annotators, it’s important to first have a clear problem definition.
 
-### Data Lineage
+#### Data Lineage
 
 > Indiscriminately using data from multiple sources, generated with different annotators, without examining their quality can cause your model to fail mysteriously. 
 
@@ -106,13 +106,13 @@ Consider a case when you’ve trained a moderately good model with 100K data sam
 
 It’s good practice to keep track of the origin of each of your data samples as well as its labels, a technique known as data lineage. Data lineage helps you both flag potential biases in your data and debug your models. 
 
-## Natural Labels
+### Natural Labels
 
 Tasks with natural labels are tasks where the model’s predictions can be automatically evaluated or partially evaluated by the system. Take the example of stock price forecasting for the next two mintues. After the model makes a prediction, we can collect the actual data after two mintues for the ground truth.
 
 Even if your task doesn’t inherently have natural labels, it might be possible to set up your system in a way that allows you to collect some feedback on your model. For example, if you have an anomaly detector system with no labelled data for anomalies, we can get feedback from the user when we flag datapoints as anomalies to mark as a false or true positive.
 
-### Feedback loop length
+#### Feedback loop length
 
 > For tasks with natural ground truth labels, the time it takes from when a prediction is served until when the feedback on it is provided is the feedback loop length.
 
@@ -120,7 +120,7 @@ Choosing the right window length requires thorough consideration, as it involves
 
 For tasks with long feedback loops, natural labels might not arrive for weeks or even months. Fraud detection is an example of a task with long feedback loops. For a certain period of time after a transaction, users can dispute whether that transaction is fraudulent or not. Labels with long feedback loops are helpful for reporting a model’s performance on quarterly or yearly business reports but not very helpful if you want to detect issues with your models as soon as possible.
 
-## Handling the Lack of Labels
+### Handling the Lack of Labels
 
 Because of the challenges in acquiring sufficient high-quality labels, many techniques have been developed to address the problems that result.
 
@@ -130,7 +130,7 @@ Because of the challenges in acquiring sufficient high-quality labels, many tech
 | Semi- supervision | Leverages structural assumptions to generate labels           | Yes, a small number of initial labels as seeds to generate more labels                                                                                                            |
 | Transfer learning | Leverages models pretrained on another task for your new task | No for zero-shot learning<br>Yes for fine-tuning, though the number of ground truths required is often much smaller than what would be needed if you train the model from scratch |
 | Active learning   | Labels data samples that are most useful to your model        | Yes                                                                                                                                                                               |
-### Weak Supervision
+#### Weak Supervision
 
 One approach that has gained popularity is weak supervision. One of the most popular open source tools for weak supervision is Snorkel, developed at the Stanford AI Lab. The insight behind weak supervision is that people rely on heuristics, which can be developed with subject matter expertise, to label data.
 
@@ -148,7 +148,7 @@ In theory, you don’t need any hand labels for weak supervision. However, to ge
 
 If heuristics work so well to label data, why do we need ML models? One reason is that LFs might not cover all data samples, so we can train ML models on data programmatically labeled with LFs and use this trained model to generate predictions for samples that aren’t covered by any LF.
 
-### Semi-Supervision
+#### Semi-Supervision
 
 If weak supervision leverages heuristics to obtain noisy labels, semi-supervision leverages structural assumptions to generate new labels based on a small set of initial labels. Unlike weak supervision, semi-supervision requires an initial set of labels.
 
@@ -162,7 +162,7 @@ In most cases, the similarity can only be discovered by more complex methods. Fo
  
 If you use a small amount, the best performing model on this small evaluation set might be the one that overfits the most to this set. On the other hand, if you use a large amount of data for evaluation, the performance boost gained by selecting the best model based on this evaluation set might be less than the boost gained by adding the evaluation set to the limited training set. Many companies overcome this trade-off by using a reasonably large evaluation set to select the best model, then continuing training the champion model on the evaluation set.
 
-### Transfer Learning
+#### Transfer Learning
 
 Transfer learning refers to the family of methods where a model developed for a task is reused as the starting point for a model on a second task. First, the base model is trained for a base task. The base task is usually a task that has cheap and abundant training data. Language modeling is a great candidate because it doesn’t require labeled data. The trained model can then be used for the task that you’re interested in—a downstream task—such as sentiment analysis, intent detection, or question answering.
 
@@ -170,7 +170,7 @@ Transfer learning refers to the family of methods where a model developed for a 
 
 A trend that has emerged in the last five years is that (usually) the larger the pretrained base model, the better its performance on downstream tasks. Large models are expensive to train. Based on the configuration of GPT-3, it’s estimated that the cost of training this model is in the tens of millions USD.
 
-### Active Learning
+#### Active Learning
 
 The hope here is that ML models can achieve greater accuracy with fewer training labels if they can choose which data samples to learn from. here are multiple variations to this idea but all of them have the stated theme.
 
@@ -187,13 +187,13 @@ The most straightforward metric is uncertainty measurement—label the examples 
 
 Another common heuristic is based on disagreement among multiple candidate models. This method is called query-by-committee, an example of an ensemble method. You need a committee of several candidate models, which are usually the same model trained with different sets of hyperparameters or the same model trained on different slices of data. Each model can make one vote for which samples to label next, and it might vote based on how uncertain it is about the prediction. You then label the samples that the committee disagrees on the most.
 
-# Class Imbalance
+## Class Imbalance
 
 Class imbalance typically refers to a problem in classification tasks where there is a substantial difference in the number of samples in each class of the training data. For example, in a training dataset for the task of detecting lung cancer from X-ray images, 99.99% of the X-rays might be of normal lungs, and only 0.01% might contain cancerous cells.
 
 Class imbalance can also happen with regression tasks where the labels are continuous. Consider the task of estimating health-care bills.25 Health-care bills are highly skewed—the median bill is low, but the 95th percentile bill is astronomical. When predicting hospital bills, it might be more important to predict accurately the bills at the 95th percentile than the median bills. 
 
-## Challenges of Class Imbalance
+### Challenges of Class Imbalance
 
 ML, especially deep learning, works well in situations when the data distribution is more balanced, and usually not so well when the classes are heavily imbalanced, as illustrated below.
 ![image](https://user-images.githubusercontent.com/20537002/181303351-3e95081f-0349-450b-9954-6f6eaca03544.png)
@@ -207,9 +207,9 @@ Class imbalance can make learning difficult for the following three reasons:
 
 The classical example of tasks with class imbalance is fraud detection. Most credit card transactions are not fraudulent. Outside the cases where class imbalance is inherent in the problem, class imbalance can also be caused by biases during the sampling process. Another cause for class imbalance, though less common, is due to labeling errors.
 
-## Handling Class Imbalance
+### Handling Class Imbalance
 
-### Using the right evaluation metrics
+#### Using the right evaluation metrics
 
 The most important thing to do when facing a task with class imbalance is to choose the appropriate evaluation metrics. Wrong metrics will give you the wrong ideas of how your models are doing and, subsequently, won’t be able to help you develop or choose models good enough for your task.
 
@@ -238,7 +238,7 @@ The area under the curve (AUC) measures the area under the ROC curve. Since the 
 
 Like F1 and recall, the ROC curve focuses only on the positive class and doesn’t show how well your model does on the negative class. Davis and Goadrich suggested that we should plot precision against recall instead, in what they termed the Precision-Recall Curve. They argued that this curve gives a more informative picture of an algorithm’s performance on tasks with heavy class imbalance.
 
-### Data-level methods: Resampling
+#### Data-level methods: Resampling
 
 Data-level methods modify the distribution of the training data to reduce the level of imbalance to make it easier for the model to learn. A common family of techniques is resampling.
 
@@ -250,23 +250,23 @@ One such technique is two-phase learning. You first train your model on the resa
 
 Another technique is dynamic sampling: oversample the low-performing classes and undersample the high-performing classes during the training process. This method aims to show the model less of what it has already learned and more of what it has not.
 
-### Algorithm-level methods
+#### Algorithm-level methods
 
 If data-level methods mitigate the challenge of class imbalance by altering the distribution of your training data, algorithm-level methods keep the training data distribution intact but alter the algorithm to make it more robust to class imbalance.
 
 Because the loss function (or the cost function) guides the learning process, many algorithm-level methods involve adjustment to the loss function. The key idea is that if there are two instances, x1 and x2, and the loss resulting from making the wrong prediction on x1 is higher than x2, the model will prioritize making the correct prediction on x1 over making the correct prediction on x2. By giving the training instances we care about higher weight, we can make the model focus more on learning these instances.
 
-#### Cost-sensitive learning
+##### Cost-sensitive learning
 
 Back in 2001, based on the insight that misclassification of different classes incurs different costs, Elkan proposed cost-sensitive learning in which the individual loss function is modified to take into account this varying cost.
 
-#### Class-balanced loss
+##### Class-balanced loss
 
 What might happen with a model trained on an imbalanced dataset is that it’ll bias toward majority classes and make wrong predictions on minority classes. What if we punish the model for making wrong predictions on minority classes to correct this bias?
 
 In its vanilla form, we can make the weight of each class inversely proportional to the number of samples in that class, so that the rarer classes have higher weights.
 
-#### Focal loss
+##### Focal loss
 
 In our data, some examples are easier to classify than others, and our model might learn to classify them quickly. We want to incentivize our model to focus on learning the samples it still has difficulty classifying. What if we adjust the loss so that if a sample has a lower probability of being right, it’ll have a higher weight? This is exactly what focal loss does.
 

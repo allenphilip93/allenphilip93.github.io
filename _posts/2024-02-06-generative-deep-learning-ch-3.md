@@ -11,21 +11,21 @@ image:
   alt: Variational Autoencoders
 ---
 
-# Reference
+## Reference
 
 [Generative Deep Learning - Chapter 3](https://learning.oreilly.com/library/view/generative-deep-learning/9781098134174/ch03.html)
 
-# Autoencoders
+## Autoencoders
 
 An _autoencoder_ is simply a neural network that is trained to perform the task of encoding and decoding an item, such that the output from this process is as close to the original item as possible. Crucially, it can be used as a generative model, because we can decode any point in the 2D space that we want.
 
-## Fashion-MNIST dataset
+### Fashion-MNIST dataset
 
 `Fashion-MNIST` is a dataset of [Zalando](https://jobs.zalando.com/tech/)'s article images—consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes. We intend `Fashion-MNIST` to serve as a direct **drop-in replacement** for the original [MNIST dataset](http://yann.lecun.com/exdb/mnist/) for benchmarking machine learning algorithms. It shares the same image size and structure of training and testing splits.
 
 Link: https://github.com/zalandoresearch/fashion-mnist
 
-## Architecture
+### Architecture
 
 An _autoencoder_ is a neural network made up of two parts:
 - An _encoder_ network that compresses high-dimensional input data such as an image into a lower-dimensional embedding vector
@@ -39,7 +39,7 @@ The embedding ($z$) is a compression of the original image into a lower-dimensio
 
 Let’s now see how to build the encoder and decoder.
 
-## Encoder
+### Encoder
 
 In an autoencoder, the encoder’s job is to take the input image and map it to an embedding vector in the latent space. To achieve this, we first create an `Input` layer for the image and pass this through three `Conv2D` layers in sequence, each capturing increasingly high-level features. The last convolutional layer is flattened and connected to a `Dense` layer of size 2, which represents our two-dimensional latent space.
 
@@ -47,7 +47,7 @@ In an autoencoder, the encoder’s job is to take the input image and map it to
 import torch
 import torch.nn as nn
 
-# Define the Encoder class
+## Define the Encoder class
 class Encoder(nn.Module):
     def __init__(self):
         super(Encoder, self).__init__()
@@ -65,16 +65,16 @@ class Encoder(nn.Module):
         x = self.fc(x)
         return x
 
-# Create an instance of the Encoder
+## Create an instance of the Encoder
 encoder = Encoder()
 
-# Print the model summary
+## Print the model summary
 print(encoder)
 ```
 
 This PyTorch code defines an encoder module with three convolutional layers followed by a flattening layer and a fully connected layer with 2 units. You can use this `Encoder` module as part of your autoencoder architecture.
 
-## Decoder
+### Decoder
 
 The decoder is a mirror image of the encoder—instead of convolutional layers, we use _convolutional transpose_ layers. 
 
@@ -87,7 +87,7 @@ In a convolutional transpose layer, the `strides` parameter determines the int
 import torch
 import torch.nn as nn
 
-# Define the Decoder class
+## Define the Decoder class
 class Decoder(nn.Module):
     def __init__(self, shape_before_flattening):
         super(Decoder, self).__init__()
@@ -108,13 +108,13 @@ class Decoder(nn.Module):
         x = self.sigmoid(self.conv4(x))
         return x
 
-# Define the shape_before_flattening variable
+## Define the shape_before_flattening variable
 shape_before_flattening = (4, 4, 128)  # Assuming shape_before_flattening is (4, 4, 128)
 
-# Create an instance of the Decoder
+## Create an instance of the Decoder
 decoder = Decoder(shape_before_flattening)
 
-# Print the model summary
+## Print the model summary
 print(decoder)
 ```
 

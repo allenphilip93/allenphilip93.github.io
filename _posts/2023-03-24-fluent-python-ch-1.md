@@ -11,11 +11,11 @@ image:
   alt: Fluent Python by Luciano Ramalho
 ---
 
-# Reference
+## Reference
 
 [Fluent Python - Chapter 1](https://learning.oreilly.com/library/view/fluent-python-2nd/9781492056348/ch01.html)
 
-# Introduction
+## Introduction
 
 Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation. Python’s elegant syntax and dynamic typing, together with its interpreted nature, make it an ideal language for scripting and rapid application development in many areas on most platforms.
 
@@ -33,7 +33,7 @@ Programs written in Python are typically much shorter than equivalent C, C++, or
 - Statement grouping is done by indentation instead of beginning and ending brackets;
 - No variable or argument declarations are necessary.
 
-# A Pythonic Card Deck
+## A Pythonic Card Deck
 
 Let's look at class that represents a deck of cards write in the most "pythonic" fashion.
 
@@ -114,7 +114,7 @@ Card(rank='2', suit='diamonds')
 
 Although FrenchDeck implicitly inherits from the object class, most of its functionality is not inherited, but comes from leveraging the data model and composition. By implementing the special methods `__len__` and `__getitem__`, our FrenchDeck behaves like a standard Python sequence, allowing it to benefit from core language features (e.g., iteration and slicing) and from the standard library, as shown by the examples using `random.choice`, `reversed`, and `sorted`. Thanks to composition, the `__len__` and `__getitem__` implementations can delegate all the work to a `list` object, `self._cards`.
 
-# How special methods are used
+## How special methods are used
 > The first thing to know about special methods is that they are meant to be called by the Python interpreter, and not by you. 
 
 When we write `len(obj)` and `obj` is a user-defined class, then Python calls the `__len__` method you implemented. But the interpreter takes a shortcut when dealing for built-in types like list, str, bytearray, or extensions like the NumPy arrays. If `obj` is one of the built-ins then `len(obj)` retrieves the value of `ob_size` from the `PyVarObject` class instance which is used to represent the built-in types in C internally.
@@ -124,7 +124,7 @@ More often than not, the special method call is implicit. For example, the state
 > You should be implementing special methods more often than invoking them explicitly
 If you need to invoke a special method, it is usually better to call the related built-in function (e.g., `len`, `iter`, `str`, etc.). These built-ins call the corresponding special method.
 
-## Emulation numeric types
+### Emulation numeric types
 Several special methods allow user objects to respond to operators such as `+`. To start with we will implement a class to represent two-dimensional vectors—that is, Euclidean vectors like those used in math and physics and perform operations like vector addition, scalar multiplication, absolute value of vector etc.
 
 Below is the `Vector` class implementation with the above operations and implements several built-in functions.
@@ -164,7 +164,7 @@ class Vector:
 Vector(4, 5)
 ```
 
-## String Representation
+### String Representation
 
 The `__repr__` special method is called by the `repr` built-in to get the string representation of the object for inspection. Without a custom `__repr__`, Python’s console would display a `Vector` instance `<Vector object at 0x10e100070>`.
 
@@ -172,7 +172,7 @@ The string returned by `__repr__` should be unambiguous and, if possible, match 
 
 The interactive console and debugger call `repr` on the results of the expressions evaluated, as does the `%r` placeholder in classic formatting with the `%` operator, and the `!r` conversion field in the f-strings.
 
-## Boolean value of a custom type
+### Boolean value of a custom type
 
 > Although Python has a bool type, it accepts any object in a Boolean context
 To determine whether a value x is _truthy_ or _falsy_, Python applies `bool(x)`, which returns either `True` or `False`.
@@ -181,7 +181,7 @@ By default, instances of user-defined classes are considered truthy, unless eith
 
 Our implementation of `__bool__` is conceptually simple: it returns `False` if the magnitude of the vector is zero, `True` otherwise.
 
-## Collection API
+### Collection API
 
 Collection classes implement 3 essential APIs:
 - Iterable to support for, unpacking, and other forms of iteration

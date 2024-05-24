@@ -11,11 +11,11 @@ image:
   alt: Fluent Python by Luciano Ramalho
 ---
 
-# Reference
+## Reference
 
 [Fluent Python Chapter-2](https://learning.oreilly.com/library/view/fluent-python-2nd/9781492056348/ch02.html)
 
-# Build-in Sequences
+## Build-in Sequences
 
 The Python standard library offers two build-in types to represent sequences:
 - **Container sequences** - Can hold different datatypes including nested sequences. Eg. `list`, `tuple`, `deque`
@@ -39,7 +39,7 @@ Another way of grouping lists is by mutability:
 The class diagram below shows how mutable sequences extend immutable functionalities.
 ![Image Missing](../assets/img/Pasted%20image%2020240521100256.png)
 
-# List Comprehension & Generator Expressions
+## List Comprehension & Generator Expressions
 
 List comprehension is a concise way to create lists in Python. It allows you to generate a new list by applying an expression to each item in an existing iterable (such as a list, tuple, or range) and, optionally, to filter items using a condition.
 
@@ -64,7 +64,7 @@ While the variables defined in listcomp have local scope in general, variables a
 >>> <Throws Exception>
 ```
 
-## Listcomps vs `map` & `filter`
+### Listcomps vs `map` & `filter`
 
 Listcomps are a far simpler alternative to the at times confusion `map` and `filter` commands.
 
@@ -77,7 +77,7 @@ Listcomps are a far simpler alternative to the at times confusion `map` and `fil
 
 Turns out that lictcomps are faster than using `map` and `filter` too - [Speed Test Script](https://github.com/fluentpython/example-code-2e/blob/master/02-array-seq/listcomp_speed.py)
 
-## Generator Expressions
+### Generator Expressions
 
 Listcomps are a one-trick pony: they build lists. To generate data for other sequence types, a genexp is the way to go. To initialize tuples, arrays, and other types of sequences, you could also start from a listcomp, but a genexp (generator expression) saves memory because it yields items one by one using the iterator protocol instead of building a whole list just to feed another constructor.
 
@@ -88,17 +88,17 @@ Listcomps are a one-trick pony: they build lists. To generate data for other seq
 >>> tuple(ord(s) for s in symbol)
 ```
 
-# Tuples
+## Tuples
 
 Tuples do double duty: they can be used as immutable lists and also as records with no field names.
 
-## Tuples as Records
+### Tuples as Records
 
 Tuples hold records: each item in the tuple holds the data for one field, and the position of the item gives its meaning.
 
 It's easy to think of tuples as just lists which are immutable but when using a tuple as a collection of fields, the number of fields is fixed and order is important. Sorting in such cases would destroy the information that is given by the position of the data values.
 
-## Tuple as Immutable Lists
+### Tuple as Immutable Lists
 
 The Python interpreter and standard library make extensive use of tuples as immutable lists, and so should you. This brings two key benefits:
 
@@ -146,7 +146,7 @@ This gives tuples a nice space advantage:
 200
 ```
 
-# Unpacking Sequences & Iterables
+## Unpacking Sequences & Iterables
 
 Unpacking is important because it avoids unnecessary and error-prone use of indexes to extract elements from sequences. Also, unpacking works with any iterable object as the data source even iterators (the only difference being that values are yielded one by one).
 
@@ -176,7 +176,7 @@ You can use `*` for unpacking in sequence literals as well.
 >>> [0, 1, 2, 0, 1, 2, 3]
 ```
 
-# Pattern Matching with Sequences
+## Pattern Matching with Sequences
 
 The most visible new feature in Python 3.10 is the pattern matching with `match/case` statement. This can seems similar to `switch..case` but it's much more. It can be used to unpack iterables (even nested or `*` for grabbing excess) and run a match exp for evaluation. This is called `destructuring` in Python, which is essentially a more advanced form of unpacking.
 
@@ -222,11 +222,11 @@ def evaluate(exp: Expression, env: Environment) -> Any:
             raise SyntaxError(lispstr(exp))
 ```
 
-# Slicing
+## Slicing
 
 A common feature of `list`, `tuple`, `str`, and all sequence types in Python is the support of slicing operations.
 
-## Why Slices & Ranges exclude the last item?
+### Why Slices & Ranges exclude the last item?
 
 The convention of excluding the last item works well with zero-based indexing using in Python.
 
@@ -234,7 +234,7 @@ The convention of excluding the last item works well with zero-based indexing us
 * It's easy to compute the length when both start and end indices are passed. Eg. `a[3:10]` has 7 elements (`end` - `start)
 * It's intuitive to split a sequence into two. Eg: `a[:3], a[3:]`
 
-## Slice Objects
+### Slice Objects
 
 This is no secret, but worth repeating just in case: `s[a:b:c]` can be used to specify a stride or step `c`, causing the resulting slice to skip items. The stride can also be negative, returning items in reverse. Three examples make this clear:
 
@@ -265,7 +265,7 @@ You can also assign values to a slice but it has to be an iterable with atleast 
 >>> [0, 2, 2, 3, 4, 5]
 ```
 
-# Using `+` & `*` with Sequences
+## Using `+` & `*` with Sequences
 
 Python programmers expect that sequences support `+` and `*`. Usually both operands of `+` must be of the same sequence type, and neither of them is modified, but a new sequence of that same type is created as result of the concatenation.
 
@@ -283,7 +283,7 @@ To concatenate multiple copies of the same sequence, multiply it by an integer. 
 > Beware of expressions like `a * n` when `a` is a sequence containing mutable items, because the result may surprise you. For example, trying to initialize a list of lists as `my_list = [[]] * 3` will result in a list with three references to the same inner list, which is probably not what you want.
 
 
-## Augmented Assignment with Sequences
+### Augmented Assignment with Sequences
 
 The augmented assignment operators `+=` and `*=` behave quite differently, depending on the first operand. To simplify the discussion, we will focus on augmented addition first (`+=`), but the concepts also apply to `*=` and to other augmented assignment operators.
 
@@ -293,7 +293,7 @@ In the case of mutable sequences (e.g., `list`, `bytearray`, `array.array`),�
 
 However in the case of immutable sequences, where `a` does not implement `__iadd__`, the expression `a += b` has the same effect as `a = a + b`: the expression `a + b` is evaluated first, producing a new object, which is then bound to `a`.
 
-# `list.sort` Versus `sorted` built-in
+## `list.sort` Versus `sorted` built-in
 
 The `list.sort` method sorts a list in place—that is, without making a copy. It returns `None` to remind us that it changes the receiver and does not create a new list. 
 
@@ -301,9 +301,9 @@ The `list.sort` method sorts a list in place—that is, without making a copy.
 
 In contrast, the built-in function `sorted` creates a new list and returns it. It accepts any iterable object as an argument, including immutable sequences and generators.
 
-# When a List is not the answer
+## When a List is not the answer
 
-## Arrays
+### Arrays
 
 If a list only contains numbers, an `array.array` is a more efficient replacement. Arrays support all mutable sequence operations (including `.pop`, `.insert`, and `.extend`), as well as additional methods for fast loading and saving, such as `.frombytes` and `.tofile` (the serialization/deserialization of arrays are very fast & consume less memory)
 
@@ -311,7 +311,7 @@ A Python array is as lean as a C array since they don't store references for ind
 
 > ***Note:*** As of Python 3.10, the `array` type does not have an in-place `sort` method like `list.sort()`. If you need to sort an array, use the built-in `sorted` function to rebuild the array:
 
-## MemoryViews
+### MemoryViews
 
 The built-in `memoryview` class is a shared-memory sequence type that lets you handle slices of arrays without copying bytes. It was inspired by the NumPy library! 
 
@@ -337,7 +337,7 @@ A memoryview is a built-in Python object that allows you to access the memory of
 array('B', [0, 1, 2, 33, 22, 5])
 ```
 
-## NumPy
+### NumPy
 
 For advanced array and matrix operations, NumPy is the reason why Python became mainstream in scientific computing applications. NumPy implements multi-dimensional, homogeneous arrays and matrix types that hold not only numbers but also user-defined records, and provides efficient element-wise operations.
 
@@ -345,7 +345,7 @@ SciPy is a library, written on top of NumPy, offering many scientific computing
 
 Most NumPy and SciPy functions are implemented in C or C++, and can leverage all CPU cores because they release Python’s GIL (Global Interpreter Lock).
 
-## Deques & Other Queues
+### Deques & Other Queues
 
 The `.append` and `.pop` methods make a `list` usable as a stack or a queue (if you use `.append` and `.pop(0)`, you get FIFO behavior). But inserting and removing from the head of a list (the 0-index end) is costly because the entire list must be shifted in memory.
 

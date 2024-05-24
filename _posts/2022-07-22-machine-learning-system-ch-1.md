@@ -11,11 +11,11 @@ image:
   alt: Designing Machine Learning Systems by Chip Huyen
 ---
 
-# Reference
+## Reference
 
 [Chapter 1 - Designing Machine Learning Systems by Chip Huyen](https://learning.oreilly.com/library/view/designing-machine-learning/9781098107956/ch01.html)
 
-# Motivation
+## Motivation
 
 > In November 2016, Google announced that it had incorporated its multilingual neural machine translation system into Google Translate, marking one of the first success stories of deep artificial neural networks in production at scale.1 According to Google, with this update, the quality of translation improved more in a single leap than they had seen in the previous 10 years combined.
 
@@ -23,7 +23,7 @@ In just five years, ML has found its way into almost every aspect of our lives: 
 
 Machine learning systems sit at the heart of all these solutions and has become so prevelant in the last few years. Hence it makes sense to understand and learn how to be build ML systems. 
 
-# When to use ML
+## When to use ML
 
 As tempting as it maybe to quickly using the state-of-the-art ML algorithms, we should exercise caution and ensure that machine learning is necessary and adds value in solving the business problem.
 
@@ -48,7 +48,7 @@ While keep the above reasons to use ML are important, it also useful to keep in 
 - Simpler solutions do the trick
 - It’s not cost-effective
 
-# Machine Learning Use Cases
+## Machine Learning Use Cases
 According to Algorithmia’s 2020 state of enterprise machine learning survey, ML applications in enterprises are diverse, serving both internal use cases (reducing costs, generating customer insights and intelligence, internal processing automation) and external use cases (improving customer experience, retaining customers, interacting with customers) as shown in the below figure.
 
 <img width="647" alt="image" src="https://user-images.githubusercontent.com/20537002/180387908-066e738f-5537-4602-8fbc-96f6114d4ce8.png">
@@ -57,9 +57,9 @@ Fraud detection is among the oldest applications of ML in the enterprise world. 
 
 Deciding how much to charge for your product or service is probably one of the hardest business decisions; why not let ML do it for you? Price optimization is the process of estimating a price at a certain time period to maximize a defined objective function, such as the company’s margin, revenue, or growth rate. ML-based pricing optimization is most suitable for cases with a large number of transactions where demand fluctuates and consumers are willing to pay a dynamic price—for example, internet ads, flight tickets, accommodation bookings, ride-sharing, and events.
 
-# Understanding Machine Learning Systems
+## Understanding Machine Learning Systems
 
-## Machine Learning in Research Versus in Production
+### Machine Learning in Research Versus in Production
 
 As with the more traditional software development, most people with ML expertise have gained it through academia: taking courses, doing research, reading academic papers. It might be a steep learning curve to understand the challenges of deploying ML systems in the wild and navigate an overwhelming set of solutions to these challenges. ML in production is very different from ML in research.
 
@@ -71,7 +71,7 @@ As with the more traditional software development, most people with ML expertise
 | Fairness               | Often not a focus                                                                                                | Must be considered |
 | Interpretability       | Often not a focus                                                                                                | Must be considered |
 
-## Different stakeholders and requirements
+### Different stakeholders and requirements
 
 There are many stakeholders involved in bringing an ML system into production. Each stakeholder has their own requirements. Having different, often conflicting, requirements can make it difficult to design, develop, and select an ML model that satisfies all the requirements.
 Consider a mobile app that recommends restaurants to users. The app makes money by charging restaurants a 10% service fee on each order. This means that expensive orders give the app more money than cheap orders. The project involves ML engineers, salespeople, product managers, infrastructure engineers, and a manager:
@@ -102,7 +102,7 @@ When developing an ML project, it’s important for ML engineers to understand r
 
 Production having different requirements from research is one of the reasons why successful research projects might not always be used in production. For example, ensembling is a technique popular among the winners of many ML competitions, including the famed $1 million Netflix Prize, and yet it’s not widely used in production. Ensembling combines “multiple learning algorithms to obtain better predictive performance than could be obtained from any of the constituent learning algorithms alone.” While it can give your ML system a small performance improvement, ensembling tends to make a system too complex to be useful in production, e.g., slower to make predictions or harder to interpret the results.
 
-## Hidden Technical Debt in ML Systems
+### Hidden Technical Debt in ML Systems
 
 Often at times, it easy to overlook the technical effort that is required to support a ML solution. [Hidden Technical Debt in ML Systems](https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf) paper highlights this beautifully and is worth a read.
 

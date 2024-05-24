@@ -11,11 +11,11 @@ image:
   alt: Fluent Python by Luciano Ramalho
 ---
 
-# Reference
+## Reference
 
 [Fluent Python Chapter-3](https://learning.oreilly.com/library/view/fluent-python-2nd/9781492056348/ch03.html)
 
-# Modern `dict` syntax
+## Modern `dict` syntax
 
 An example of `dict` **Comprehensions**:
 
@@ -54,7 +54,7 @@ We can also merge mapping with the `|` operator as shown below.
 >>> d1 |= d2 # Inplace update of d1
 ```
 
-# Pattern Matching with Mappings
+## Pattern Matching with Mappings
 
 The `match/case` statement supports subjects that are mapping objects. Patterns for mappings look like `dict` literals, but they can match instances of any actual or virtual subclass of `collections.abc.Mapping`
 
@@ -73,7 +73,7 @@ def get_creators(record: dict) -> list:
             raise ValueError(f'Invalid record: {record!r}')
 ```
 
-# Standard API of Mapping Types
+## Standard API of Mapping Types
 
 The `collections.abc` module provides the `Mapping` and `MutableMapping` ABCs describing the interfaces of `dict` and similar types.
 ```python
@@ -112,9 +112,9 @@ An interesting information around `dict` APIs is the way `d.update(m)` handles
 - Otherwise, `update()` falls back to iterating over `m`, assuming its items are `(key, value)` pairs. 
 - The constructor for most Python mappings uses the logic of `update()` internally, which means they can be initialized from other mappings or from any iterable object producing `(key, value)` pairs.
 
-# Automatic Handling of Missing Keys
+## Automatic Handling of Missing Keys
 
-## Using `<dict>.setdefault`
+### Using `<dict>.setdefault`
  
  There is a better way to read a key & **set a default** if its missing to the `dict`
 ```python
@@ -126,7 +126,7 @@ An interesting information around `dict` APIs is the way `d.update(m)` handles
 	my_dict[key].append(new_value)
 ```
 
-## Using `collections.defaultdict`
+### Using `collections.defaultdict`
 
 Another option which handles this without explicit intervention is `defaultdict`. A `collections.defaultdict` instance creates items with a default value on demand whenever a missing key is searched using `d[k]` syntax.
 
@@ -150,7 +150,7 @@ with open(sys.argv[1], encoding='utf-8') as fp:
             location = (line_no, column_no)
             index[word].append(location)  
 
-# display in alphabetical order
+## display in alphabetical order
 for word in sorted(index, key=str.upper):
     print(word, index[word])
 
@@ -162,7 +162,7 @@ The above examples:
 
 The mechanism that makes `defaultdict` work by calling `default_factory` is the `__missing__` special method, a feature that we discuss next.
 
-## Using `__missing__` method
+### Using `__missing__` method
 
 This method is not defined in the base `dict` class, but `dict` is aware of it: if you subclass `dict` and provide a `__missing__` method, the standard `dict.__getitem__` will call it whenever a key is not found, instead of raising `KeyError`.
 
@@ -193,7 +193,7 @@ In the above example:
 
 If your subclass implements `__getitem__`, `get`, and `__contains__`, then you can make those methods use `__missing__` or not, depending on your needs. You must be careful when subclassing standard library mappings to use `__missing__`, because the base classes support different behaviors by default.
 
-# Variations of `dict`
+## Variations of `dict`
 
 * `collections.OrderedDict`
 	* As of python `3.6`, the built-in `dict` keeps the keys ordered so the most common reason to user `OrderedDict` would be for backward compatibility.
@@ -244,7 +244,7 @@ Counter({'a': 10, 'z': 3, 'b': 2, 'r': 2, 'c': 1, 'd': 1})
 	* The `shelve` module in the standard library provides persistent storage for a mapping of string keys to Python objects serialized in the `pickle` binary format. 
 	* The curious name of `shelve` makes sense when you realize that pickle jars are stored on shelves.
 
-# Subclassing `UserDict` instead of `dict`
+## Subclassing `UserDict` instead of `dict`
 
 The main reason why it’s better to subclass `UserDict` rather than `dict` is that the built-in has some implementation shortcuts that end up forcing us to override methods that we can just inherit from `UserDict` with no problems.
 
@@ -267,7 +267,7 @@ class StrKeyDict(collections.UserDict):
         self.data[str(key)] = item 
 ```
 
-# Immutable Mappings
+## Immutable Mappings
 
 The mapping types provided by the standard library are all mutable, but you may need to prevent users from changing a mapping by accident. 
 
@@ -293,13 +293,13 @@ mappingproxy({1: 'A', 2: 'B'})
 >>>
 ```
 
-# Dictionary Views
+## Dictionary Views
 
 The `dict` instance methods `.keys()`, `.values()`, and `.items()` return instances of classes called `dict_keys`, `dict_values`, and `dict_items`, respectively. These dictionary views are read-only projections of the internal data structures used in the `dict` implementation. They avoid the memory overhead of the equivalent Python 2 methods that returned lists duplicating data already in the target `dict`, and they also replace the old methods that returned iterators.
 
 A view object is a dynamic proxy. If the source `dict` is updated, you can immediately see the changes through an existing view. 
 
-# Sets
+## Sets
 
 The syntax of `set` literals—`{1}`, `{1, 2}`, etc.—looks exactly like the math notation, with one important exception: there’s no literal notation for the empty `set`, so we must remember to write `set()`.
 

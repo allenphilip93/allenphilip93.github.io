@@ -11,7 +11,7 @@ image:
   alt: Authentication Fundamentals
 ---
 
-# Introduction
+## Introduction
 
 Authentication in software engineering refers to the process of verifying the identity of a user, system, or entity to **ensure that they are who they claim to be**. It is a crucial aspect of security and is used to protect sensitive information, resources, and functionalities within a software system.
 
@@ -19,9 +19,9 @@ Given that majority of the systems are available to the public on the internet i
 
 There are number of common techniques used for authentication and they've evolve over the years along with the internet. We'll attempt to cover each of them in detail to better understand the fundamental concepts of authentication.
 
-# Password-based Authentication
+## Password-based Authentication
 
-## 1961: Passwords
+### 1961: Passwords
 
 By the early 1960s, some universities had a computer that was shared among all students for the use of performing calculations and research. Here is where the first form of digital authentication truly began.
 
@@ -31,23 +31,23 @@ In 1961, Corbató implemented a rudimentary password program for the CTSS. And b
 
 Passwords were a step in the right direction, but a user could easily find where the passwords were stored and access them. In fact, that’s [exactly what happened](https://www.wired.com/2012/01/computer-password/) when a PhD researcher named Allan Scherr wanted more than his allotted four-hour block on the MIT computer. His greed may have made him the first hacker.
 
-## Late 1960s: Password Encryption
+### Late 1960s: Password Encryption
 
 By the late 1960s, programmers knew that storing passwords in plaintext wasn’t going to cut it. While working at Bell Labs, Morris made foundational contributions to Unix, including a password encryption scheme (based on work by [Roger Needham](https://en.wikipedia.org/wiki/Roger_Needham)) that determined hashes of passwords for user authentication. Essentially, the scheme used a [key derivation function](https://en.wikipedia.org/wiki/Key_derivation_function), which calculates a secret value that is easy to compute in one direction but extremely difficult to crack in the opposite direction.
 
-## Early 1970s: Asymmetric Cryptography
+### Early 1970s: Asymmetric Cryptography
 
 The next step in the journey to robust user authentication was [asymmetric cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography) (also known as public-key cryptography). There are two keys — a public key and a private key. The public key is openly shared and acts as an identifier for the user. The private key is combined with the public key to create a digital signature, which authenticates the user.
 
 The technology was kept strictly classified by the UK government until 1997 (well, strictly classified to the UK plus the NSA in the U.S.).
 
-## Mid-1980s: Dynamic Passwords
+### Mid-1980s: Dynamic Passwords
 
 As technology quickly advanced, the fallibility of passwords became more and more obvious. Users would choose easily guessable passwords or reuse the same passwords in multiple places.
 
 These passwords change based on variables, like location, time, or a physical password update (like a FOB). They remove any risk of [replay attacks](https://en.wikipedia.org/wiki/Replay_attack) and solve the problem caused when users have the same password in many places. Security Dynamics Technologies, Inc. was the first company to create FOB hardware with a one-time password (OTP) for authentication.
 
-## Late 1990s: Public Key Infrastructure
+### Late 1990s: Public Key Infrastructure
 
 Remember how we said that asymmetric cryptography was developed in the ‘70s but kept secret until 1997? Well, when the knowledge did finally go public, it was a game-changer.
 
@@ -55,11 +55,11 @@ By the 1990s, the Internet was no longer a tool hoarded by universities and gove
 
 In 1986, a handful of U.S. government agencies (including the NSA) and [12 companies with an interest in computers](http://www.circleid.com/posts/20190124_creating_tls_the_pioneering_role_of_ruth_nelson/) developed specs for secure network communications. It was originally named the SP4 protocol and eventually renamed the Transport Layer Security protocol ([TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security#History_and_development)). In the late ’90s, [Taher Elgamal](https://en.wikipedia.org/wiki/Taher_Elgamal) — an engineer at Netscape — developed the original Secure Sockets Layer (SSL) protocol, which included keys and server authentication.
 
-# Session-based & Cookie-based Authentication
+## Session-based & Cookie-based Authentication
 
 ![Image Missing](../assets/img/Pasted%20image%2020230725101331.png)
 
-## History 
+### History 
 
 The origin of session-based authentication can be traced back to the early days of the World Wide Web in the mid-1990s.
 
@@ -75,11 +75,11 @@ The initial approach to session-based authentication was based on the concept of
     
 5. **Widespread Adoption**: Following the standardization of HTTP cookies, major web browsers and web servers quickly adopted the new mechanism. This widespread acceptance allowed developers to rely on cookies for session-based authentication and user state management.
 
-## Risks
+### Risks
 
 While session-based authentication served its purpose effectively, it also presented security challenges, such as session hijacking and cross-site scripting (XSS) attacks. However, cookies and session-based authentication continue to be used extensively in web development, especially for applications that require stateful interactions.
 
-## Differentiation
+### Differentiation
 
 1. **Storage Location:**
     
@@ -106,11 +106,11 @@ While session-based authentication served its purpose effectively, it also prese
     - *Cookie-Based Authentication*: Cookies can have a specified expiration time, which means they can persist even after the user closes the browser and revisit the site later.
     - *Session-Based Authentication*: Sessions are typically short-lived and can expire after a certain period of inactivity or based on a predetermined time limit set by the server. Once the session expires, the user needs to re-authenticate.
 
-# Token-based Authentication
+## Token-based Authentication
 
 ![Image Missing](../assets/img/Pasted%20image%2020230725101307.png)
 
-## History
+### History
 
 Token-based authentication emerged as an evolution of session-based authentication and became more prominent in the late 2000s and early 2010s. The concept of using tokens for authentication and authorization has its roots in various authentication protocols and security practices. Here's a timeline of its development:
 
@@ -126,7 +126,7 @@ Token-based authentication emerged as an evolution of session-based authenticati
 4. **JSON Web Tokens (JWT)**: 
    JWT, defined in RFC 7519, was introduced in May 2015 as a more lightweight and efficient alternative to traditional session-based authentication and OAuth 1.0. JWT is a compact and self-contained way of representing information between two parties as a JSON object. It can be digitally signed and optionally encrypted for security.
 
-## Differentiation
+### Differentiation
 
 Key differentiation of token authentication and session based authentication is the following:
 
@@ -140,7 +140,7 @@ JWTs, for example, can be digitally signed and encrypted to protect the data int
 
 > Token-based authentication is inherently stateless, as the server does not need to keep track of user sessions. Each request from the client contains all the necessary information for authentication and authorization.
 
-## OAuth Authentication
+### OAuth Authentication
 
 The OAuth authentication process typically involves the following entities:
 
@@ -154,7 +154,7 @@ The OAuth authentication process typically involves the following entities:
     
 5. **Access Token:** The access token is a credential that represents the authorization granted to the client by the resource owner. The client uses the access token to access the resource server and retrieve the protected resources.
 
-### OAuth 1.0
+#### OAuth 1.0
 
 ![Image Missing](../assets/img/Pasted%20image%2020230725105357.png)
 
@@ -191,7 +191,7 @@ Here's a step-by-step overview of the OAuth 1.0a flow:
     
 8. **Accessing Protected Resources:** The client can now use the access token to sign requests and access protected resources on behalf of the user.
 
-### OAuth 2.0
+#### OAuth 2.0
 
 ![Image Missing](../assets/img/Pasted%20image%2020230725101712.png)
 
@@ -222,7 +222,7 @@ Here's a step-by-step overview of the Authorization Code Grant flow:
     
 7. **Accessing Protected Resources:** The client can now use the access token to make requests to the resource server's protected endpoints on behalf of the user and retrieve the authorized resources.
 
-### OAuth 1.0 vs OAuth 2.0
+#### OAuth 1.0 vs OAuth 2.0
 
 Here are the key differences between OAuth 1.0 and OAuth 2.0:
 
@@ -256,17 +256,17 @@ Here are the key differences between OAuth 1.0 and OAuth 2.0:
     - *OAuth 1.0*: OAuth 1.0 does not work well with mobile and native apps because of the complexity of the token flow and the need for cryptographic signatures.
     - *OAuth 2.0*: OAuth 2.0 introduces specific grant types (such as the Authorization Code with PKCE) that are more suitable for mobile and native apps, addressing the limitations of OAuth 1.0.
 
-# Claims-based Authentication
+## Claims-based Authentication
 
 Claims-based authentication is a method of authentication where identity information is represented as claims in a token or assertion. Each claim is a statement about a user's identity or attributes, such as user ID, name, email address, role, group membership, and other relevant information.
 
-### OAuth 2.0
+#### OAuth 2.0
 
 OAuth is a **token-based framework** that focuses on granting access to resources, while the format of the tokens (access tokens, refresh tokens, or any other type of token) and whether they are claims-based depends on the **specific implementation** or token type chosen for the OAuth flow. 
 
 JWTs, a popular choice for access tokens in OAuth 2.0, are an example of claims-based tokens, but other token formats are also used in practice.
 
-## JSON Web Tokens (JWT)
+### JSON Web Tokens (JWT)
 
 > JWT is a token format used for securely representing claims
 
@@ -282,7 +282,7 @@ The key features of JWT that contributed to its popularity are:
 
 JWT quickly gained popularity in the development community due to its simplicity, ease of implementation, and security features. It became widely used in modern web applications and RESTful APIs, contributing to the shift towards token-based authentication as a preferred method for managing user sessions and secure access to resources.
 
-## OpenID Connect (OIDC) Authentication
+### OpenID Connect (OIDC) Authentication
 
 ![Image Missing](../assets/img/Pasted%20image%2020230725112402.png)
 
@@ -315,7 +315,7 @@ OpenID Connect is an authentication layer built on top of the OAuth 2.0 framewor
     
 7. **User Access to the Client:** The client grants access to the user based on the verified identity information in the ID token.
 
-### OIDC vs OAuth
+#### OIDC vs OAuth
 
 > The main difference between OAuth2 and OpenID Connect is that OAuth2 is only concerned with authorization, while OpenID Connect is also concerned with authentication.
 
@@ -323,7 +323,7 @@ Authorization means granting access to resources, while authentication means ver
 
 OAuth2 does not provide a standard way to obtain user information, while OpenID Connect does. OAuth2 relies on access tokens, which are opaque strings that can only be validated by the resource server, while OpenID Connect relies on ID tokens, which are self-contained and can be validated by the client. 
 
-## Single-Sign On (SSO)
+### Single-Sign On (SSO)
 
 Single Sign-On (SSO) is a mechanism that allows users to access multiple applications or services with a single set of login credentials, eliminating the need for users to remember multiple usernames and passwords for different systems. The SSO flow involves the following steps:
 
@@ -341,7 +341,7 @@ Single Sign-On (SSO) is a mechanism that allows users to access multiple applica
 
 SSO can be implemented using various protocols and technologies, such as SAML (Security Assertion Markup Language), OAuth 2.0, OpenID Connect, and CAS (Central Authentication Service). Each protocol has its features and use cases, but they all aim to achieve the goal of providing a seamless and secure user experience across multiple applications through a single authentication event.
 
-### SAML Authentication
+#### SAML Authentication
 
 ![Image Missing](../assets/img/Pasted%20image%2020230725111853.png)
 
@@ -380,15 +380,15 @@ The Security Assertion Markup Language (SAML) is an XML-based standard used for 
     - If the user is recognized and authorized, the SP grants access to the requested resource or application, and the user is logged in.
 
 
-# Biometric Authentication
+## Biometric Authentication
 
 With the proliferation of mobile devices, biometric authentication methods like fingerprint and facial recognition have been integrated into session-based authentication, adding an extra layer of security and convenience for users.
 
-# Passwordless Authentication
+## Passwordless Authentication
 
 In an effort to reduce the reliance on passwords (which can be weak and susceptible to breaches), passwordless authentication methods have gained popularity. These methods include using one-time codes, biometrics, or hardware-based security keys for authentication.
 
-# Reference
+## Reference
 - https://workos.com/blog/a-developers-history-of-authentication
 - https://lumochift.org/blog/understanding-auth
 - https://chat.openai.com/

@@ -11,11 +11,11 @@ image:
   alt: Fluent Python by Luciano Ramalho
 ---
 
-# Reference
+## Reference
 
 [Fluent Python Chapter-5](https://learning.oreilly.com/library/view/fluent-python-2nd/9781492056348/ch05.html)
 
-# Overview
+## Overview
 
 Python offers a few ways to build a simple class that is just a collection of fields, with little or no extra functionality. That pattern is known as a “data class”—and `dataclasses` is one of the packages that supports this pattern. This chapter covers three different class builders that you may use as shortcuts to write data classes:
 
@@ -100,7 +100,7 @@ Each option has it's own merits and limitations. For example, a key difference i
 
 Also if you need to build data classes on the fly, at runtime, you can use the default function call syntax of `collections.namedtuple`, which is likewise supported by `typing.NamedTuple`. The `dataclasses` module provides a `make_dataclass` function for the same purpose.
 
-# Type Hints 101
+## Type Hints 101
 
 Type hints—a.k.a. type annotations—are ways to declare the expected type of function arguments, return values, variables, and attributes. This adds the typing to a duck types language like Python to "kind of" have some ordinance of strong typing.
 
@@ -162,7 +162,7 @@ class DemoNTClass(typing.NamedTuple):
 'spam'
 ```
 
-# More about `@dataclass`
+## More about `@dataclass`
 
 We’ve only seen simple examples of `@dataclass` use so far. The decorator accepts several keyword arguments.
 ```python
@@ -170,7 +170,7 @@ We’ve only seen simple examples of `@dataclass` use so far. The decorator a
               unsafe_hash=False, frozen=False)
 ```
 
-## Field Options
+### Field Options
 
 We’ve already seen the most basic field option: providing (or not) a default value with the type hint. Python does not allow parameters without defaults after parameters with defaults, therefore after you declare a field with a default value, all remaining fields must also have default values.
 
@@ -202,7 +202,7 @@ class ClubMember:
 
 The `default_factory` parameter lets you provide a function, class, or any other callable, which will be invoked with zero arguments to build a default value each time an instance of the data class is created. This way, each instance of `ClubMember` will have its own `list`—instead of all instances sharing the same `list` from the class, which is rarely what we want and is often a bug.
 
-## Post-init Processing
+### Post-init Processing
 
 Sometimes you may need to do more than that to initialize the instance. If that’s the case, you can provide a `__post_init__` method. When that method exists, `@dataclass` will add code to the generated `__init__` to call `__post_init__` as the last step.
 
@@ -220,7 +220,7 @@ class HackerClubMember(ClubMember):
         pass
 ```
 
-## Typed Class Attributes
+### Typed Class Attributes
 
 Now consider the class below which I'll be running with `mypy`
 
@@ -260,7 +260,7 @@ class Coordinate:
     regions: ClassVar[Set[str]] = set()
 ```
 
-## Initialisation Variables
+### Initialisation Variables
 
 Sometimes you may need to pass arguments to `__init__` that are not instance fields. Such arguments are called _init-only variables_. To declare an argument like that, the `dataclasses` module provides the pseudotype `InitVar`, which uses the same syntax of `typing.ClassVar`. 
 
@@ -280,7 +280,7 @@ class C:
 c = C(10, database=my_database)
 ```
 
-# Data Class as a Code Smell
+## Data Class as a Code Smell
 
 Whether you implement a data class by writing all the code yourself or leveraging one of the class builders, be aware that it may signal a problem in your design.
 
@@ -291,11 +291,11 @@ The main idea of object-oriented programming is to place behavior and data toget
 
 Taking that into account, there are a couple of common scenarios where it makes sense to have a data class with little or no behavior.
 
-## Data Class as Scaffolding
+### Data Class as Scaffolding
 
 In this scenario, the data class is an initial, simplistic implementation of a class to jump-start a new project or module. With time, the class should get its own methods, instead of relying on methods of other classes to operate on its instances. Scaffolding is temporary; eventually your custom class may become fully independent from the builder you used to start it.
 
-## Data Class as Intermediate Representation
+### Data Class as Intermediate Representation
 
 A data class can be useful to build records about to be exported to JSON or some other interchange format, or to hold data that was just imported, crossing some system boundary. Python’s data class builders all provide a method or function to convert an instance to a plain `dict`, and you can always invoke the constructor with a `dict` used as keyword arguments expanded with `**`. Such a `dict` is very close to a JSON record.
 

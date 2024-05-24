@@ -11,17 +11,17 @@ image:
   alt: Designing Machine Learning Systems by Chip Huyen
 ---
 
-# Reference
+## Reference
 
 [Chapter 2 - Designing Machine Learning Systems by Chip Huyen](https://learning.oreilly.com/library/view/designing-machine-learning/9781098107956/ch02.html)
 
-# Introduction
+## Introduction
 
 ML systems design takes a system approach to MLOps, which means that we’ll consider an ML system holistically to ensure that all the components—the business requirements, the data stack, infrastructure, deployment, monitoring, etc.—and their stakeholders can work together to satisfy the specified objectives and requirements.
 
 If this system is built for a business, it must be driven by business objectives, which will need to be translated into ML objectives to guide the development of ML models.
 
-# Business & ML Objectives
+## Business & ML Objectives
 
 When working on an ML project, data scientists tend to care about the ML objectives: the metrics they can measure about the performance of their ML models such as accuracy, F1 score, inference latency, etc. They get excited about improving their model’s accuracy from 94% to 94.2% and might spend a ton of resources—data, compute, and engineering time—to achieve that.
 
@@ -36,7 +36,7 @@ One of the reasons why predicting ad click-through rates and fraud detection are
 
 At times even rigorous experiments might not be sufficient to understand the relationship between an ML model’s outputs and business metrics. Imagine you work for a cybersecurity company that detects and stops security threats, and ML is just a component in their complex process. An ML model is used to detect anomalies in the traffic pattern. These anomalies then go through a logic set (e.g., a series of if-else statements) that categorizes whether they constitute potential threats. These potential threats are then reviewed by security experts to determine whether they are actual threats. Actual threats will then go through another, different process aimed at stopping them. When this process fails to stop a threat, it might be impossible to figure out whether the ML component has anything to do with it.
 
-## Realistic Expectations
+### Realistic Expectations
 
 When evaluating ML solutions through the business lens, it’s important to be realistic about the expected returns. Due to all the hype surrounding ML, generated both by the media and by practitioners with a vested interest in ML adoption, some companies might have the notion that ML can magically transform their businesses overnight.
 
@@ -48,15 +48,15 @@ Returns on investment in ML depend a lot on the maturity stage of adoption. The 
 
 ![image](https://user-images.githubusercontent.com/20537002/180976940-ab0a6ce5-3daa-4eeb-8c25-88ca314f4185.png)
 
-# Requirements for ML Systems
+## Requirements for ML Systems
 
-## Reliability
+### Reliability
 
 The system should continue to perform the correct function at the desired level of performance even in the face of adversity (hardware or software faults, and even human error).
 
 Unlike traditional software systems, ML systems differ don't have to crash or have a system error in order to be labelled not reliable. What if the model's predictions have degraded? So it's important to note that ML systems can fail quietly!
 
-## Scalability
+### Scalability
 
 There are multiple ways a ML system can grow in complexity:
 - It can grow in complexity of the model
@@ -65,17 +65,17 @@ There are multiple ways a ML system can grow in complexity:
 
 An indispensable feature in many cloud services is autoscaling: automatically scaling up and down the number of machines depending on usage. However, handling growth isn’t just resource scaling, but also **artifact management**. With one model, you can, perhaps, manually monitor this model’s performance and manually update the model with new data. Since there’s only one model, you can just have a file that helps you reproduce this model whenever needed. However, with one hundred models, both the monitoring and retraining aspect will need to be automated. You’ll need a way to manage the code generation so that you can adequately reproduce a model when you need to.
 
-## Maintainability
+### Maintainability
 
 Code should be documented. Code, data, and artifacts should be versioned. Models should be sufficiently reproducible so that even when the original authors are not around, other contributors can have sufficient contexts to build on their work. When a problem occurs, different contributors should be able to work together to identify the problem and implement a solution without finger-pointing.
 
-## Adaptability
+### Adaptability
 
 To adapt to shifting data distributions and business requirements, the system should have some capacity for both discovering aspects for performance improvement and allowing updates without service interruption.
 
 > Because ML systems are part code, part data, and data can change quickly, ML systems need to be able to evolve quickly. This is tightly linked to maintainability.
 
-# Iterative Process
+## Iterative Process
 
 Developing an ML system is an iterative and, in most cases, never-ending process.10 Once a system is put into production, it’ll need to be continually monitored and updated.
 
@@ -97,7 +97,7 @@ For example, here is one workflow that you might encounter when building an ML m
 The figure below shows that the process of developing a ML system looks more like a cycle with back and forth steps than a simple straight set of steps.
 ![image](https://user-images.githubusercontent.com/20537002/180980458-9c6b24b0-16e7-4a94-8def-3fa9e72d6872.png)
 
-# Framing ML Problems
+## Framing ML Problems
 
 Before setting out to build our ML system, we need a business objective to work towards. Once we have that we need to see if ML can be used to address the problem and then tie our business objectives to our ML metrics. 
 
@@ -105,7 +105,7 @@ Framing the ML problems ties closes to the following:
 - ML model's output
 - ML model's objective function
 
-## Model's output
+### Model's output
 
 We need to ask the following questions before deciding on what is the ML problem that we want to solve:
 - Is this a problem of regression or classification?
@@ -113,7 +113,7 @@ We need to ask the following questions before deciding on what is the ML problem
 - Do we need multiclass or multilabel classification?
 - Can we reframe the problem between one of the above types to better solve the problem?
 
-## Model's objective function
+### Model's objective function
 
 To learn, an ML model needs an objective function to guide the learning process. An objective function is also called a loss function, because the objective of the learning process is usually to minimize (or optimize) the loss caused by wrong predictions. For supervised ML, this loss can be computed by comparing the model’s outputs with the ground truth labels using a measurement like root mean squared error (RMSE) or cross entropy.
 
@@ -153,7 +153,7 @@ $$ \alpha * quality\_score + \beta * engagement\_score $$
 
 Now you can tweak $\alpha$ and $\beta$ without retraining your models!
 
-# Mind vs Data
+## Mind vs Data
 
 One of the most popular debates in ML is which will improve the ML objectives: Data or Model. In other words, if we compare a simple model with lot of data & a complex model with minimal data, which will perform better?
 
