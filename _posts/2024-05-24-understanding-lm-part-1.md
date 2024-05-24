@@ -6,7 +6,7 @@ tags: [Notes, ML, GenAI]
 math: false
 pin: false
 image:
-  path: https://files.realpython.com/media/An-Introduction-to-Generative-Adversarial-Networks-GANs_Watermarked.6b71bfd66fda.jpg
+  path: https://www.cohesity.com/wp-content/new_media/2023/05/blog-RAG_Hero-925x440-1.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt: Understanding LMs - Overview
 ---
