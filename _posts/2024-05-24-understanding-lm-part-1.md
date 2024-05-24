@@ -1,6 +1,6 @@
 ---
 title: Understanding LMs - Overview
-date: 2024-01-22 11:22:00 +0530
+date: 2024-05-24 11:22:00 +0530
 categories: [Learning, Large Models]
 tags: [Notes, ML, GenAI]
 math: false
