@@ -6,7 +6,7 @@ tags: [Notes, ML, GenAI]
 math: false
 pin: false
 image:
-  path: https://www.cohesity.com/wp-content/new_media/2023/05/blog-RAG_Hero-925x440-1.png
+  path: https://t4.ftcdn.net/jpg/05/93/49/75/360_F_593497567_MsgviWs1hyPY0hvZDD29CV0ZswcQpyWn.jpg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt: LMs Series - Part 0 - Overview
 ---
