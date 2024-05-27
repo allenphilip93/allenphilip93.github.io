@@ -1,5 +1,5 @@
 ---
-title: Understanding LMs - Overview
+title: LMs Series - Part 0 - Overview
 date: 2024-05-24 11:22:00 +0530
 categories: [Learning, Large Models]
 tags: [Notes, ML, GenAI]
@@ -8,7 +8,7 @@ pin: false
 image:
   path: https://www.cohesity.com/wp-content/new_media/2023/05/blog-RAG_Hero-925x440-1.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: Understanding LMs - Overview
+  alt: LMs Series - Part 0 - Overview
 ---
 
 ## What's in this LM Series?
@@ -29,9 +29,21 @@ There are plenty of resources out there that does all of these sections very wel
 
 Most of the high-level understanding & building intuition on the LLM concepts should be accessible to all. Parts of the LLM Series works on the assumption that you have a working understanding of ML Fundamentals esp neural networks & at an intermediate level in Python & PyTorch. If you feel you're good on these fronts please skip ahead to the next section, if you can use this section to serve as a starter/refresher on these concepts.
 
+### Python
+Python is almost synonymous with ML these days. It's the most popular language for using ML models, LLM, writing the pipelines for such workflows in production so it's quite essential to have a decent hands-on experience with Python. Again it's not required if you just need a high-level understanding but atleast personally I tend to understand things better when I get my hands dirty so to that end having Python knowledge helps!
+
+You can use some of the references below to get started with Python:
+- [Official Python Tutorial](https://docs.python.org/3/tutorial/index.html)
+	- Where better to start than the official python tutorial.
+	- It's a bit extensive so it may take awhile to go through.
+- [LearnPython.org](https://www.learnpython.org/)
+	- Super hand-on way to get started with Python.
+- [Machine Learning Basics - Github](https://github.com/SamBelkacem/Machine-Learning-Basics/tree/main)
+	- This repo all has the resources to get you started on your ML journey with Python.
+
 ### ML Fundamentals
 
-But it certainly (though not mandatory) helps to have an understanding of Machine Learning Fundamentals, so if you want to get up to speed on the ML basic you can use these references:
+It certainly (though not mandatory) helps to have an understanding of Machine Learning Fundamentals, so if you want to get up to speed on the ML basic you can use these references:
 - [Coursera - ML Specialization by Andrew NG](https://www.coursera.org/specializations/machine-learning-introduction)
 	- One of the most popular courses to get started with ML and personally it helped me a lot
 	- The course may seem to be a bit theoretical but if you persist you'll get a strong intuitive understanding of ML concepts
@@ -46,17 +58,6 @@ Also to get really behind on the Math behind the ML models, having a quick refre
 - [Essense of Linear Algebra](https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&ab_channel=3Blue1Brown)
 	- Excellent way to visualize and understand fundamental Linear Algebra concepts. Do check out!
 
-### Python
-Python is almost synonymous with ML these days. It's the most popular language for using ML models, LLM, writing the pipelines for such workflows in production so it's quite essential to have a decent hands-on experience with Python. Again it's not required if you just need a high-level understanding but atleast personally I tend to understand things better when I get my hands dirty so to that end having Python knowledge helps!
-
-You can use some of the references below to get started with Python:
-- [Official Python Tutorial](https://docs.python.org/3/tutorial/index.html)
-	- Where better to start than the official python tutorial.
-	- It's a bit extensive so it may take awhile to go through.
-- [LearnPython.org](https://www.learnpython.org/)
-	- Super hand-on way to get started with Python.
-- [Machine Learning Basics - Github](https://github.com/SamBelkacem/Machine-Learning-Basics/tree/main)
-	- This repo all has the resources to get you started on your ML journey with Python.
 
 ### PyTorch
 
