@@ -1,6 +1,6 @@
 ---
 title: LMs Series - Part 1 - Word Embeddings
-date: 2024-05-25 11:22:00 +0530
+date: 2024-05-27 11:22:00 +0530
 categories: [Learning, Large Models]
 tags: [Notes, ML, GenAI]
 math: false
