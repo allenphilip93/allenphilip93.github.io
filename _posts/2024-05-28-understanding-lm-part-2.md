@@ -13,7 +13,11 @@ image:
 
 ## Overview
 
-This article aims to answer how the real world textual data is fed to a LLM for training. Since the model understands only number we need a way to convert human readable text to machine interpretable format.
+In the previous part, we covered how to tokenize the data for training a language model for next word prediction. Tokenization was the first step, now let's look into word embeddings.
+
+![Image Missing](../assets/img/Pasted%20image%2020240527130656.png)
+
+This article aims to answer how the LLM learns word semantics and grammar from the tokenized data fed to it.
 
 ## Early methods (pre-2010s)
 
