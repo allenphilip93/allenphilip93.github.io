@@ -61,7 +61,7 @@ Finally, we need a custom token to represent words that are not in our vocabular
 
 One way to reduce the amount of unknown tokens is to go one level deeper, using a _character-based_ tokenizer.
 
-## Character Tokenization
+### Character Tokenization
 
 Character-based tokenizers split the text into characters, rather than words. This has two primary benefits:
 
@@ -71,6 +71,141 @@ Character-based tokenizers split the text into characters, rather than words. Th
 This approach isn’t perfect either. Since the representation is now based on characters rather than words, one could argue that, intuitively, it’s less meaningful: each character doesn’t mean a lot on its own, whereas that is the case with words. However, this again differs according to the language; in Chinese, for example, each character carries more information than a character in a Latin language.
 
 Another thing to consider is that we’ll end up with a very large amount of tokens to be processed by our model: whereas a word would only be a single token with a word-based tokenizer, it can easily turn into 10 or more tokens when converted into characters.
+
+### Tokenization with libraries
+
+#### `nltk`
+
+Tokenizers divide strings into lists of substrings. For example, tokenizers can be used to find the words and punctuation in a string:
+
+```python
+>>> from nltk.tokenize import word_tokenize
+>>> s = '''Good muffins cost $3.88\nin New York.  Please buy me
+... two of them.\n\nThanks.'''
+>>> word_tokenize(s) 
+['Good', 'muffins', 'cost', '$', '3.88', 'in', 'New', 'York', '.',
+'Please', 'buy', 'me', 'two', 'of', 'them', '.', 'Thanks', '.']
+```
+
+This particular tokenizer requires the Punkt sentence tokenization models to be installed. NLTK also provides a simpler, regular-expression based tokenizer, which splits text on whitespace and punctuation:
+
+```python
+>>> from nltk.tokenize import wordpunct_tokenize
+>>> wordpunct_tokenize(s) 
+['Good', 'muffins', 'cost', '$', '3', '.', '88', 'in', 'New', 'York', '.',
+'Please', 'buy', 'me', 'two', 'of', 'them', '.', 'Thanks', '.']
+```
+
+We can also operate at the level of sentences, using the sentence tokenizer directly as follows:
+
+```python
+>>> from nltk.tokenize import sent_tokenize, word_tokenize
+>>> sent_tokenize(s)
+['Good muffins cost $3.88\nin New York.', 'Please buy me\ntwo of them.', 'Thanks.']
+>>> [word_tokenize(t) for t in sent_tokenize(s)] 
+[['Good', 'muffins', 'cost', '$', '3.88', 'in', 'New', 'York', '.'],
+['Please', 'buy', 'me', 'two', 'of', 'them', '.'], ['Thanks', '.']]
+```
+
+> **Caution**: when tokenizing a Unicode string, make sure you are not using an encoded version of the string (it may be necessary to decode it first, e.g. with `s.decode("utf8")`.
+
+NLTK tokenizers can produce token-spans, represented as tuples of integers having the same semantics as string slices, to support efficient comparison of tokenizers. (These methods are implemented as generators.)
+
+```python
+>>> from nltk.tokenize import WhitespaceTokenizer
+>>> list(WhitespaceTokenizer().span_tokenize(s)) 
+[(0, 4), (5, 12), (13, 17), (18, 23), (24, 26), (27, 30), (31, 36), (38, 44),
+(45, 48), (49, 51), (52, 55), (56, 58), (59, 64), (66, 73)]
+```
+
+#### `SpaCy`
+
+> **Note:** spaCy’s tokenization is **non-destructive**, which means that you’ll always be able to reconstruct the original input from the tokenized output. Whitespace information is preserved in the tokens and no information is added or removed during tokenization. This is kind of a core principle of spaCy’s `Doc` object: `doc.text == input_text` should always hold true.
+
+During processing, spaCy first **tokenizes** the text, i.e. segments it into words, punctuation and so on. This is done by applying rules specific to each language. For example, punctuation at the end of a sentence should be split off – whereas “U.K.” should remain one token. Each `Doc` consists of individual tokens, and we can iterate over them:
+
+```python
+import spacy
+
+nlp = spacy.load("en_core_web_sm")
+doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
+for token in doc:
+    print(token.text)
+```
+
+| 0     | 1   | 2       | 3   | 4      | 5    | 6       | 7   | 8   | 9   | 10      |
+| ----- | --- | ------- | --- | ------ | ---- | ------- | --- | --- | --- | ------- |
+| Apple | is  | looking | at  | buying | U.K. | startup | for | $   | 1   | billion |
+
+First, the raw text is split on whitespace characters, similar to `text.split(' ')`. Then, the tokenizer processes the text from left to right. On each substring, it performs two checks:
+
+1.  **Does the substring match a tokenizer exception rule?** 
+2.  **Can a prefix, suffix or infix be split off?** 
+
+![Image Missing](../assets/img/Pasted%20image%2020240528102401.png)
+
+We can also add special case tokenization rules using `SpaCy` as shown in the code below:
+
+```python
+import spacy
+from spacy.symbols import ORTH
+
+nlp = spacy.load("en_core_web_sm")
+doc = nlp("gimme that")  # phrase to tokenize
+print([w.text for w in doc])  # ['gimme', 'that']
+
+# Add special case rule
+special_case = [{ORTH: "gim"}, {ORTH: "me"}]
+nlp.tokenizer.add_special_case("gimme", special_case)
+
+# Check new tokenization
+print([w.text for w in nlp("gimme that")])  # ['gim', 'me', 'that']
+```
+
+#### `gensim`
+
+We can use the _gensim.utils_ class to import the _tokenize_ method for performing word tokenization.
+
+```python
+from gensim.utils import tokenize                                                                                       
+text = """
+	Founded in 2002, SpaceX’s mission is to enable humans to become a spacefaring civilization and a multi-planet 
+	species by building a self-sustaining city on Mars. In 2008, SpaceX’s Falcon 1 became the first privately developed     
+	liquid-fuel launch vehicle to orbit the Earth."""                                                                       
+
+list(tokenize(text))                                                                                                    
+
+Output : ['Founded', 'in', 'SpaceX', 's', 'mission', 'is', 'to', 'enable', 'humans', 'to', 
+          'become', 'a', 'spacefaring', 'civilization', 'and', 'a', 'multi', 'planet', 
+          'species', 'by', 'building', 'a', 'self', 'sustaining', 'city', 'on', 'Mars', 
+          'In', 'SpaceX', 's', 'Falcon', 'became', 'the', 'first', 'privately', 
+          'developed', 'liquid', 'fuel', 'launch', 'vehicle', 'to', 'orbit', 'the', 
+          'Earth']
+```
+
+To perform sentence tokenization, we use the _split_sentences_ method from the _gensim.summerization.texttcleaner_ class:
+
+```python
+from gensim.summarization.textcleaner import split_sentences
+
+text = """
+	Founded in 2002, SpaceX’s mission is to enable humans to become a spacefaring civilization and a multi-planet 
+	species by building a self-sustaining city on Mars. In 2008, SpaceX’s Falcon 1 became the first privately developed 
+	liquid-fuel launch vehicle to orbit the Earth.
+	"""
+
+result = split_sentences(text)
+result
+
+Output : ['Founded in 2002, SpaceX’s mission is to enable humans to become a spacefaring 
+           civilization and a multi-planet ', 
+          'species by building a self-sustaining city on Mars.', 
+          'In 2008, SpaceX’s Falcon 1 became the first privately developed ', 
+          'liquid-fuel launch vehicle to orbit the Earth.']
+```
+
+You might have noticed that `gensim` is quite strict with punctuation. It splits whenever a punctuation is encountered. In sentence splitting as well, `gensim` tokenized the text on encountering `\n` while other libraries ignored it.
+
 
 ## Subword Tokenization
 
@@ -258,141 +393,6 @@ tokens = sp.encode_as_pieces(text)
 
 print("Tokens:", tokens)
 ```
-
-## Tokenization with libraries
-
-### `nltk`
-
-Tokenizers divide strings into lists of substrings. For example, tokenizers can be used to find the words and punctuation in a string:
-
-```python
->>> from nltk.tokenize import word_tokenize
->>> s = '''Good muffins cost $3.88\nin New York.  Please buy me
-... two of them.\n\nThanks.'''
->>> word_tokenize(s) 
-['Good', 'muffins', 'cost', '$', '3.88', 'in', 'New', 'York', '.',
-'Please', 'buy', 'me', 'two', 'of', 'them', '.', 'Thanks', '.']
-```
-
-This particular tokenizer requires the Punkt sentence tokenization models to be installed. NLTK also provides a simpler, regular-expression based tokenizer, which splits text on whitespace and punctuation:
-
-```python
->>> from nltk.tokenize import wordpunct_tokenize
->>> wordpunct_tokenize(s) 
-['Good', 'muffins', 'cost', '$', '3', '.', '88', 'in', 'New', 'York', '.',
-'Please', 'buy', 'me', 'two', 'of', 'them', '.', 'Thanks', '.']
-```
-
-We can also operate at the level of sentences, using the sentence tokenizer directly as follows:
-
-```python
->>> from nltk.tokenize import sent_tokenize, word_tokenize
->>> sent_tokenize(s)
-['Good muffins cost $3.88\nin New York.', 'Please buy me\ntwo of them.', 'Thanks.']
->>> [word_tokenize(t) for t in sent_tokenize(s)] 
-[['Good', 'muffins', 'cost', '$', '3.88', 'in', 'New', 'York', '.'],
-['Please', 'buy', 'me', 'two', 'of', 'them', '.'], ['Thanks', '.']]
-```
-
-> **Caution**: when tokenizing a Unicode string, make sure you are not using an encoded version of the string (it may be necessary to decode it first, e.g. with `s.decode("utf8")`.
-
-NLTK tokenizers can produce token-spans, represented as tuples of integers having the same semantics as string slices, to support efficient comparison of tokenizers. (These methods are implemented as generators.)
-
-```python
->>> from nltk.tokenize import WhitespaceTokenizer
->>> list(WhitespaceTokenizer().span_tokenize(s)) 
-[(0, 4), (5, 12), (13, 17), (18, 23), (24, 26), (27, 30), (31, 36), (38, 44),
-(45, 48), (49, 51), (52, 55), (56, 58), (59, 64), (66, 73)]
-```
-
-### `SpaCy`
-
-> **Note:** spaCy’s tokenization is **non-destructive**, which means that you’ll always be able to reconstruct the original input from the tokenized output. Whitespace information is preserved in the tokens and no information is added or removed during tokenization. This is kind of a core principle of spaCy’s `Doc` object: `doc.text == input_text` should always hold true.
-
-During processing, spaCy first **tokenizes** the text, i.e. segments it into words, punctuation and so on. This is done by applying rules specific to each language. For example, punctuation at the end of a sentence should be split off – whereas “U.K.” should remain one token. Each `Doc` consists of individual tokens, and we can iterate over them:
-
-```python
-import spacy
-
-nlp = spacy.load("en_core_web_sm")
-doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
-for token in doc:
-    print(token.text)
-```
-
-| 0     | 1   | 2       | 3   | 4      | 5    | 6       | 7   | 8   | 9   | 10      |
-| ----- | --- | ------- | --- | ------ | ---- | ------- | --- | --- | --- | ------- |
-| Apple | is  | looking | at  | buying | U.K. | startup | for | $   | 1   | billion |
-
-First, the raw text is split on whitespace characters, similar to `text.split(' ')`. Then, the tokenizer processes the text from left to right. On each substring, it performs two checks:
-
-1.  **Does the substring match a tokenizer exception rule?** 
-2.  **Can a prefix, suffix or infix be split off?** 
-
-![Image Missing](../assets/img/Pasted%20image%2020240528102401.png)
-
-We can also add special case tokenization rules using `SpaCy` as shown in the code below:
-
-```python
-import spacy
-from spacy.symbols import ORTH
-
-nlp = spacy.load("en_core_web_sm")
-doc = nlp("gimme that")  # phrase to tokenize
-print([w.text for w in doc])  # ['gimme', 'that']
-
-# Add special case rule
-special_case = [{ORTH: "gim"}, {ORTH: "me"}]
-nlp.tokenizer.add_special_case("gimme", special_case)
-
-# Check new tokenization
-print([w.text for w in nlp("gimme that")])  # ['gim', 'me', 'that']
-```
-
-
-### `gensim`
-
-We can use the _gensim.utils_ class to import the _tokenize_ method for performing word tokenization.
-
-```python
-from gensim.utils import tokenize                                                                                       
-text = """
-	Founded in 2002, SpaceX’s mission is to enable humans to become a spacefaring civilization and a multi-planet 
-	species by building a self-sustaining city on Mars. In 2008, SpaceX’s Falcon 1 became the first privately developed     
-	liquid-fuel launch vehicle to orbit the Earth."""                                                                       
-
-list(tokenize(text))                                                                                                    
-
-Output : ['Founded', 'in', 'SpaceX', 's', 'mission', 'is', 'to', 'enable', 'humans', 'to', 
-          'become', 'a', 'spacefaring', 'civilization', 'and', 'a', 'multi', 'planet', 
-          'species', 'by', 'building', 'a', 'self', 'sustaining', 'city', 'on', 'Mars', 
-          'In', 'SpaceX', 's', 'Falcon', 'became', 'the', 'first', 'privately', 
-          'developed', 'liquid', 'fuel', 'launch', 'vehicle', 'to', 'orbit', 'the', 
-          'Earth']
-```
-
-To perform sentence tokenization, we use the _split_sentences_ method from the _gensim.summerization.texttcleaner_ class:
-
-```python
-from gensim.summarization.textcleaner import split_sentences
-
-text = """
-	Founded in 2002, SpaceX’s mission is to enable humans to become a spacefaring civilization and a multi-planet 
-	species by building a self-sustaining city on Mars. In 2008, SpaceX’s Falcon 1 became the first privately developed 
-	liquid-fuel launch vehicle to orbit the Earth.
-	"""
-
-result = split_sentences(text)
-result
-
-Output : ['Founded in 2002, SpaceX’s mission is to enable humans to become a spacefaring 
-           civilization and a multi-planet ', 
-          'species by building a self-sustaining city on Mars.', 
-          'In 2008, SpaceX’s Falcon 1 became the first privately developed ', 
-          'liquid-fuel launch vehicle to orbit the Earth.']
-```
-
-You might have noticed that `gensim` is quite strict with punctuation. It splits whenever a punctuation is encountered. In sentence splitting as well, `gensim` tokenized the text on encountering `\n` while other libraries ignored it.
 
 ## Summary
 
