@@ -6,7 +6,7 @@ tags: [Notes, ML, GenAI]
 math: false
 pin: false
 image:
-  path: https://miro.medium.com/v2/resize:fit:1400/1*Ismhi-muID5ooWf3ZIQFFg.png
+  path: https://media.geeksforgeeks.org/wp-content/uploads/20231204125839/What-is-Recurrent-Neural-Network-660.webp
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt: LMs Series - Part 3 - RNNs
 ---
