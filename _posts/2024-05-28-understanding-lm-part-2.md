@@ -285,7 +285,7 @@ Instead of updating the weights for the entire vocabulary, the model only update
 
 Typically, 5 to 20 negative samples are used. More samples improve learning but increase computational cost.
 
-# Reference
+## Reference
 
 - https://jalammar.github.io/illustrated-word2vec/
 - https://github.com/piskvorky/gensim/blob/develop/gensim/models/word2vec.py

@@ -412,4 +412,6 @@ Each tokenization technique has its own strengths and is suitable for different 
 - https://huggingface.co/learn/nlp-course/chapter2/4?fw=pt
 - https://github.com/google/sentencepiece
 - https://medium.com/codex/sentencepiece-a-simple-and-language-independent-subword-tokenizer-and-detokenizer-for-neural-text-ffda431e704e
+- https://www.youtube.com/watch?v=zduSFxRajkE&ab_channel=AndrejKarpathy
+- https://platform.openai.com/tokenizer
 - ChatGPT
