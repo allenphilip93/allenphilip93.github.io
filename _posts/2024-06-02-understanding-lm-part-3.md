@@ -1,6 +1,6 @@
 ---
 title: LMs Series - Part 3 - RNNs
-date: 2024-06-03 11:22:00 +0530
+date: 2024-06-02 11:22:00 +0530
 categories: [Learning, Large Models]
 tags: [Notes, ML, GenAI]
 math: false
@@ -249,14 +249,21 @@ The outputs of the two RNNs are usually concatenated at each time step, though t
 - For simpler tasks where only the past or future context matters (e.g., speech recognition, music generation), LSTMs might be sufficient.
 - BRNNs can also be computationally expensive due to the double processing. If resources are limited, LSTMs might be a better choice.
 
-## Reference
+## Further Readings
 
-- https://en.wikipedia.org/wiki/Statistical_machine_translation
-- https://www.youtube.com/watch?v=AsNTP8Kwu80&ab_channel=StatQuestwithJoshStarmer
-- https://www.ibm.com/topics/recurrent-neural-networks#:~:text=While%20feedforward%20networks%20have%20different,descent%20to%20facilitate%20reinforcement%20learning.
-- https://karpathy.github.io/2015/05/21/rnn-effectiveness/
-- https://aws.amazon.com/what-is/recurrent-neural-network/
-- https://d2l.ai/chapter_recurrent-neural-networks/rnn.html#recurrent-neural-networks-with-hidden-states
-- https://ml-lectures.org/docs/unsupervised_learning/ml_unsupervised-2.html
-- https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+- [https://en.wikipedia.org/wiki/Statistical_machine_translation](https://en.wikipedia.org/wiki/Statistical_machine_translation)
+- [https://www.youtube.com/watch?v=AsNTP8Kwu80&ab_channel=StatQuestwithJoshStarmer](https://www.youtube.com/watch?v=AsNTP8Kwu80&ab_channel=StatQuestwithJoshStarmer)
+- [https://www.ibm.com/topics/recurrent-neural-networks#:~:text=While%20feedforward%20networks%20have%20different,descent%20to%20facilitate%20reinforcement%20learning.](https://www.ibm.com/topics/recurrent-neural-networks#:~:text=While%20feedforward%20networks%20have%20different,descent%20to%20facilitate%20reinforcement%20learning.)
+- [https://karpathy.github.io/2015/05/21/rnn-effectiveness/](https://karpathy.github.io/2015/05/21/rnn-effectiveness/)
+- [https://aws.amazon.com/what-is/recurrent-neural-network/](https://aws.amazon.com/what-is/recurrent-neural-network/)
+- [https://d2l.ai/chapter_recurrent-neural-networks/rnn.html#recurrent-neural-networks-with-hidden-states](https://d2l.ai/chapter_recurrent-neural-networks/rnn.html#recurrent-neural-networks-with-hidden-states)
+- [https://ml-lectures.org/docs/unsupervised_learning/ml_unsupervised-2.html](https://ml-lectures.org/docs/unsupervised_learning/ml_unsupervised-2.html)
+- [https://colah.github.io/posts/2015-08-Understanding-LSTMs/](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)
+- [https://www.youtube.com/watch?v=8HyCNIVRbSU&ab_channel=TheAIHacker](https://www.youtube.com/watch?v=8HyCNIVRbSU&ab_channel=TheAIHacker)
+- [https://d2l.ai/chapter_recurrent-modern/lstm.html ](https://d2l.ai/chapter_recurrent-modern/lstm.html )
+- [https://d2l.ai/chapter_recurrent-modern/gru.html](https://d2l.ai/chapter_recurrent-modern/gru.html)
+- [https://d2l.ai/chapter_recurrent-modern/bi-rnn.html](https://d2l.ai/chapter_recurrent-modern/bi-rnn.html)
+- [https://weberna.github.io/blog/2017/11/15/LSTM-Vanishing-Gradients.html](https://weberna.github.io/blog/2017/11/15/LSTM-Vanishing-Gradients.html)
+- [https://data-science-blog.com/blog/2020/09/07/back-propagation-of-lstm/](https://data-science-blog.com/blog/2020/09/07/back-propagation-of-lstm/)
+- [https://web.stanford.edu/~jurafsky/slp3/9.pdf](https://web.stanford.edu/~jurafsky/slp3/9.pdf)
 - ChatGPT

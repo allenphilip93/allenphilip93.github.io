@@ -403,15 +403,16 @@ print("Tokens:", tokens)
 
 Each tokenization technique has its own strengths and is suitable for different types of NLP tasks. Modern subword techniques like BPE, WordPiece, and SentencePiece are particularly important for training and deploying state-of-the-art language models like BERT, GPT, and their variants.
 
-## Reference
-- https://docs.mistral.ai/guides/tokenization/
-- https://www.youtube.com/watch?v=zduSFxRajkE&ab_channel=AndrejKarpathy
-- https://spacy.io/usage/linguistic-features#tokenization
-- https://tedboy.github.io/nlps/generated/generated/gensim.utils.tokenize.html
-- https://www.analyticsvidhya.com/blog/2019/07/how-get-started-nlp-6-unique-ways-perform-tokenization/
-- https://huggingface.co/learn/nlp-course/chapter2/4?fw=pt
-- https://github.com/google/sentencepiece
-- https://medium.com/codex/sentencepiece-a-simple-and-language-independent-subword-tokenizer-and-detokenizer-for-neural-text-ffda431e704e
-- https://www.youtube.com/watch?v=zduSFxRajkE&ab_channel=AndrejKarpathy
-- https://platform.openai.com/tokenizer
+## Further Readings
+
+- [https://docs.mistral.ai/guides/tokenization/](https://docs.mistral.ai/guides/tokenization/)
+- [https://www.youtube.com/watch?v=zduSFxRajkE&ab_channel=AndrejKarpathy](https://www.youtube.com/watch?v=zduSFxRajkE&ab_channel=AndrejKarpathy)
+- [https://spacy.io/usage/linguistic-features#tokenization](https://spacy.io/usage/linguistic-features#tokenization)
+- [https://tedboy.github.io/nlps/generated/generated/gensim.utils.tokenize.html](https://tedboy.github.io/nlps/generated/generated/gensim.utils.tokenize.html)
+- [https://www.analyticsvidhya.com/blog/2019/07/how-get-started-nlp-6-unique-ways-perform-tokenization/](https://www.analyticsvidhya.com/blog/2019/07/how-get-started-nlp-6-unique-ways-perform-tokenization/)
+- [https://huggingface.co/learn/nlp-course/chapter2/4?fw=pt](https://huggingface.co/learn/nlp-course/chapter2/4?fw=pt)
+- [https://github.com/google/sentencepiece](https://github.com/google/sentencepiece)
+- [https://medium.com/codex/sentencepiece-a-simple-and-language-independent-subword-tokenizer-and-detokenizer-for-neural-text-ffda431e704e](https://medium.com/codex/sentencepiece-a-simple-and-language-independent-subword-tokenizer-and-detokenizer-for-neural-text-ffda431e704e)
+- [https://www.youtube.com/watch?v=zduSFxRajkE&ab_channel=AndrejKarpathy](https://www.youtube.com/watch?v=zduSFxRajkE&ab_channel=AndrejKarpathy)
+- [https://platform.openai.com/tokenizer](https://platform.openai.com/tokenizer)
 - ChatGPT

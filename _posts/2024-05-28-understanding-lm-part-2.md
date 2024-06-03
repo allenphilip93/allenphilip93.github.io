@@ -285,9 +285,9 @@ Instead of updating the weights for the entire vocabulary, the model only update
 
 Typically, 5 to 20 negative samples are used. More samples improve learning but increase computational cost.
 
-## Reference
+## Further Readings
 
-- https://jalammar.github.io/illustrated-word2vec/
-- https://github.com/piskvorky/gensim/blob/develop/gensim/models/word2vec.py
-- https://p.migdal.pl/blog/2017/01/king-man-woman-queen-why
+- [https://jalammar.github.io/illustrated-word2vec/](https://jalammar.github.io/illustrated-word2vec/)
+- [https://github.com/piskvorky/gensim/blob/develop/gensim/models/word2vec.py](https://github.com/piskvorky/gensim/blob/develop/gensim/models/word2vec.py)
+- [https://p.migdal.pl/blog/2017/01/king-man-woman-queen-why](https://p.migdal.pl/blog/2017/01/king-man-woman-queen-why)
 - ChatGPT
