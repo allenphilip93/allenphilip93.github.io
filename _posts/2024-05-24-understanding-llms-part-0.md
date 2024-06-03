@@ -25,67 +25,6 @@ This will be a summarization of various blogs, videos, lectures, papers & my int
 
 There are plenty of resources out there that does all of these sections very well, so I'll attempt to collate the information in way I can understand the same and hopefully it'll be useful for others as well.
 
-## Pre-requisites
-
-Most of the high-level understanding & building intuition on the LLM concepts should be accessible to all. Parts of the LLM Series works on the assumption that you have a working understanding of ML Fundamentals esp neural networks & at an intermediate level in Python & PyTorch. If you feel you're good on these fronts please skip ahead to the next section, if you can use this section to serve as a starter/refresher on these concepts.
-
-### Python
-Python is almost synonymous with ML these days. It's the most popular language for using ML models, LLM, writing the pipelines for such workflows in production so it's quite essential to have a decent hands-on experience with Python. Again it's not required if you just need a high-level understanding but atleast personally I tend to understand things better when I get my hands dirty so to that end having Python knowledge helps!
-
-You can use some of the references below to get started with Python:
-- [Official Python Tutorial](https://docs.python.org/3/tutorial/index.html)
-	- Where better to start than the official python tutorial.
-	- It's a bit extensive so it may take awhile to go through.
-- [LearnPython.org](https://www.learnpython.org/)
-	- Super hand-on way to get started with Python.
-- [Machine Learning Basics - Github](https://github.com/SamBelkacem/Machine-Learning-Basics/tree/main)
-	- This repo all has the resources to get you started on your ML journey with Python.
-
-### ML Fundamentals
-
-It certainly (though not mandatory) helps to have an understanding of Machine Learning Fundamentals, so if you want to get up to speed on the ML basic you can use these references:
-- [Coursera - ML Specialization by Andrew NG](https://www.coursera.org/specializations/machine-learning-introduction)
-	- One of the most popular courses to get started with ML and personally it helped me a lot
-	- The course may seem to be a bit theoretical but if you persist you'll get a strong intuitive understanding of ML concepts
-- [ML Crash Course from Google](https://developers.google.com/machine-learning/crash-course/ml-intro)
-	- This should give a quick (but not thorough) introduction to the world of ML with a lot of hand-on examples with TensorFlow
-	- Good options if you're short on time and want to quickly get started
-- [Hand-On Machine Learning - Book](https://learning.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
-	- I'm a few chapters and so far I've really like it. Like the book says it super hand-on and I found myself finding nice ways to use Pandas, NumPy and Scikit-Learn
-	- Book is fairly comprehensive as well going upto RL & Generative Modelling but don't expect too much detail beyond the CNN section but it can give a good overview of the concepts
-
-Also to get really behind on the Math behind the ML models, having a quick refresher on Linear Algebra, Matrix manipulations, Probabilities etc helps. One favourite reference of mine if the playlist from `3Blue1Brown` 
-- [Essense of Linear Algebra](https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&ab_channel=3Blue1Brown)
-	- Excellent way to visualize and understand fundamental Linear Algebra concepts. Do check out!
-
-
-### PyTorch
-
-PyTorch and TensorFlow are two of the most prominent deep learning frameworks used in developing and training large language models (LLMs). PyTorch is renowned for its intuitive and pythonic interface, which makes it easier for researchers and developers to write and understand code. This is particularly important in the context of LLMs, where experimentation and iteration are frequent.
-
-You can get started with PyTorch with the resources here:
-1. **[PyTorch Official Documentation](https://pytorch.org/tutorials/beginner/basics/intro.html)**: The official documentation is comprehensive and includes tutorials, examples, and API references. It's a great place to start and refer back to as you progress.
-    
-2. **PyTorch Tutorials**: These tutorials cover a wide range of topics from basic concepts to advanced topics such as distributed training and deploying models. They include:
-    - **[Deep Learning with PyTorch: A 60 Minute Blitz](https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html)**: An in-depth, hands-on tutorial.
-    
-3. **[PyTorch Lightning](https://lightning.ai/docs/pytorch/stable/starter/introduction.html)**: A high-level interface for PyTorch that helps to structure code and manage training loops. The tutorials here help you learn how to use Lightning to streamline the training process.
-
-
-### Neural Networks
-
-Neural networks are the backbone of LLMs, providing the structures and mechanisms necessary for these models to process and understand human language. By leveraging the strengths of neural networks in learning complex patterns, handling large-scale data, and adapting through transfer learning, LLMs achieve their impressive capabilities in language understanding and generation. Understanding neural networks is thus essential for grasping how LLMs function and excel in various language-related tasks.
-
-You can get started with neural networks with some of the resources found below:
-- [Neural Networks - 3Blue1Brown](https://www.youtube.com/watch?v=aircAruvnKk&ab_channel=3Blue1Brown)
-- [Neural Networks - Josh Starmer](https://www.youtube.com/watch?v=CqOfi41LfDw&ab_channel=StatQuestwithJoshStarmer)
-- [Visual Guide to NN - Jay Alammar](https://jalammar.github.io/visual-interactive-guide-basics-neural-networks/)
-
-There is also a super cool tool to visualize what happens while training a neural network. You can check this out once you got the basics coverted:
-- [NN Playground TF](https://playground.tensorflow.org/)
-
-As an additional reading, do read up on Encoder-Decoder architectures in neural networks which is a concept which reverberates through most of LMs.
-
 ## LM Basics
 
 A **large model (LM)** in the context of machine learning and artificial intelligence refers to a deep learning model that is characterized by a substantial number of parameters and is typically trained on large datasets. These models leverage the extensive computational power and large-scale data to achieve high performance on complex tasks, often surpassing smaller models in terms of accuracy and generalization.
@@ -162,12 +101,13 @@ We will start our journey will LLMs and work our way to LVMs & LAMs since the co
 
 In simple terms, the breakdown is as follows:
 - First, we attempt to understand how the textual data which is human understandable is passed to a ML model which only knows numbers
-	- [Tokenizers]()
-	- [Word Embeddings]()
+	- [Tokenizers](https://allenphilip93.github.io/posts/understanding-llms-part-1/)
+	- [Word Embeddings](https://allenphilip93.github.io/posts/understanding-llms-part-2/)
 
 - Now that the input data is pre-processed and passed to the model, how does it learn? What are the challenges with conventional ML algorithms and how do LLMs do it differently?
-  - [RNNs]()
-  - [LSTM with Attention]()
+  - [RNNs](https://allenphilip93.github.io/posts/understanding-llms-part-3/)
+  - [seq2seq](https://allenphilip93.github.io/posts/understanding-llms-part-4/)
+  - [Attention](https://allenphilip93.github.io/posts/understanding-llms-part-5/)
 	- [Transformers]()
 
 - Next we want to categorize and understand the architecture of some of the most popular LLMs out there:
@@ -179,14 +119,75 @@ In simple terms, the breakdown is as follows:
 	- [LLaMA 3]()
 
 - We know that training LLMs is expensive, so next is to look at how we can fine-tune existing open-source models
-	- [Transfer Learning]
-	- [LoRA]
-	- [MoE]
-	- [RAG]
-	- [DPO]
-	- [RLHF]
+	- [Transfer Learning]()
+	- [LoRA]()
+	- [MoE]()
+	- [RAG]()
+	- [DPO]()
+	- [RLHF]()
 
 This should largely conclude out journey on LLMs!
+
+## Pre-requisites
+
+Most of the high-level understanding & building intuition on the LLM concepts should be accessible to all. Parts of the LLM Series works on the assumption that you have a working understanding of ML Fundamentals esp neural networks & at an intermediate level in Python & PyTorch. If you feel you're good on these fronts please skip ahead to the next section, if you can use this section to serve as a starter/refresher on these concepts.
+
+### Python
+Python is almost synonymous with ML these days. It's the most popular language for using ML models, LLM, writing the pipelines for such workflows in production so it's quite essential to have a decent hands-on experience with Python. Again it's not required if you just need a high-level understanding but atleast personally I tend to understand things better when I get my hands dirty so to that end having Python knowledge helps!
+
+You can use some of the references below to get started with Python:
+- [Official Python Tutorial](https://docs.python.org/3/tutorial/index.html)
+	- Where better to start than the official python tutorial.
+	- It's a bit extensive so it may take awhile to go through.
+- [LearnPython.org](https://www.learnpython.org/)
+	- Super hand-on way to get started with Python.
+- [Machine Learning Basics - Github](https://github.com/SamBelkacem/Machine-Learning-Basics/tree/main)
+	- This repo all has the resources to get you started on your ML journey with Python.
+
+### ML Fundamentals
+
+It certainly (though not mandatory) helps to have an understanding of Machine Learning Fundamentals, so if you want to get up to speed on the ML basic you can use these references:
+- [Coursera - ML Specialization by Andrew NG](https://www.coursera.org/specializations/machine-learning-introduction)
+	- One of the most popular courses to get started with ML and personally it helped me a lot
+	- The course may seem to be a bit theoretical but if you persist you'll get a strong intuitive understanding of ML concepts
+- [ML Crash Course from Google](https://developers.google.com/machine-learning/crash-course/ml-intro)
+	- This should give a quick (but not thorough) introduction to the world of ML with a lot of hand-on examples with TensorFlow
+	- Good options if you're short on time and want to quickly get started
+- [Hand-On Machine Learning - Book](https://learning.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
+	- I'm a few chapters and so far I've really like it. Like the book says it super hand-on and I found myself finding nice ways to use Pandas, NumPy and Scikit-Learn
+	- Book is fairly comprehensive as well going upto RL & Generative Modelling but don't expect too much detail beyond the CNN section but it can give a good overview of the concepts
+
+Also to get really behind on the Math behind the ML models, having a quick refresher on Linear Algebra, Matrix manipulations, Probabilities etc helps. One favourite reference of mine if the playlist from `3Blue1Brown` 
+- [Essense of Linear Algebra](https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&ab_channel=3Blue1Brown)
+	- Excellent way to visualize and understand fundamental Linear Algebra concepts. Do check out!
+
+
+### PyTorch
+
+PyTorch and TensorFlow are two of the most prominent deep learning frameworks used in developing and training large language models (LLMs). PyTorch is renowned for its intuitive and pythonic interface, which makes it easier for researchers and developers to write and understand code. This is particularly important in the context of LLMs, where experimentation and iteration are frequent.
+
+You can get started with PyTorch with the resources here:
+1. **[PyTorch Official Documentation](https://pytorch.org/tutorials/beginner/basics/intro.html)**: The official documentation is comprehensive and includes tutorials, examples, and API references. It's a great place to start and refer back to as you progress.
+    
+2. **PyTorch Tutorials**: These tutorials cover a wide range of topics from basic concepts to advanced topics such as distributed training and deploying models. They include:
+    - **[Deep Learning with PyTorch: A 60 Minute Blitz](https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html)**: An in-depth, hands-on tutorial.
+    
+3. **[PyTorch Lightning](https://lightning.ai/docs/pytorch/stable/starter/introduction.html)**: A high-level interface for PyTorch that helps to structure code and manage training loops. The tutorials here help you learn how to use Lightning to streamline the training process.
+
+
+### Neural Networks
+
+Neural networks are the backbone of LLMs, providing the structures and mechanisms necessary for these models to process and understand human language. By leveraging the strengths of neural networks in learning complex patterns, handling large-scale data, and adapting through transfer learning, LLMs achieve their impressive capabilities in language understanding and generation. Understanding neural networks is thus essential for grasping how LLMs function and excel in various language-related tasks.
+
+You can get started with neural networks with some of the resources found below:
+- [Neural Networks - 3Blue1Brown](https://www.youtube.com/watch?v=aircAruvnKk&ab_channel=3Blue1Brown)
+- [Neural Networks - Josh Starmer](https://www.youtube.com/watch?v=CqOfi41LfDw&ab_channel=StatQuestwithJoshStarmer)
+- [Visual Guide to NN - Jay Alammar](https://jalammar.github.io/visual-interactive-guide-basics-neural-networks/)
+
+There is also a super cool tool to visualize what happens while training a neural network. You can check this out once you got the basics coverted:
+- [NN Playground TF](https://playground.tensorflow.org/)
+
+As an additional reading, do read up on Encoder-Decoder architectures in neural networks which is a concept which reverberates through most of LMs.
 
 ## What's next?
 
