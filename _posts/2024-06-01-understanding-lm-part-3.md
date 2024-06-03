@@ -1,6 +1,6 @@
 ---
 title: LMs Series - Part 3 - RNNs
-date: 2024-06-02 11:22:00 +0530
+date: 2024-06-01 11:22:00 +0530
 categories: [Learning, Large Models]
 tags: [Notes, ML, GenAI]
 math: false
