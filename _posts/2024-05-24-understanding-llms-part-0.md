@@ -1,5 +1,5 @@
 ---
-title: LMs Series - Part 0 - Overview
+title: LLMs Series - Part 0 - Overview
 date: 2024-05-24 11:22:00 +0530
 categories: [Learning, Large Models]
 tags: [Notes, ML, GenAI]
@@ -8,13 +8,13 @@ pin: false
 image:
   path: https://www.unite.ai/wp-content/uploads/2023/06/llm.jpg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: LMs Series - Part 0 - Overview
+  alt: LLMs Series - Part 0 - Overview
 ---
 
-## What's in this LM Series?
+## What's in this LLM Series?
 
 The purpose of this series if two-fold:
-- Serve as a template for people who are on the LLM/LVM/LAM learning journey
+- Serve as a template for people who are on the LLM learning journey
 - Capture my learnings and serve as notes for me to go back in the future
 
 This will be a summarization of various blogs, videos, lectures, papers & my interpretations of them. To this end, I attempt to break down each section into the follow:
@@ -162,37 +162,43 @@ We will start our journey will LLMs and work our way to LVMs & LAMs since the co
 
 In simple terms, the breakdown is as follows:
 - First, we attempt to understand how the textual data which is human understandable is passed to a ML model which only knows numbers
-	- word2vec
-	- Context vectors
-	- Word Embeddings 
+	- [Tokenizers]()
+	- [Word Embeddings]()
 
 - Now that the input data is pre-processed and passed to the model, how does it learn? What are the challenges with conventional ML algorithms and how do LLMs do it differently?
-	- Transformers
-	- Attention Mechanism
+  - [RNNs]()
+  - [LSTM with Attention]()
+	- [Transformers]()
 
 - Next we want to categorize and understand the architecture of some of the most popular LLMs out there:
-	- Categories of LLMs
-	- BERT
-	- GPT-2
-	- GPT-3
-	- LLaMA 2
-	- LLaMA 3
+	- [Categories of LLMs]()
+	- [BERT]()
+	- [GPT-2]()
+	- [GPT-3]()
+	- [LLaMA 2]()
+	- [LLaMA 3]()
 
 - We know that training LLMs is expensive, so next is to look at how we can fine-tune existing open-source models
-	- Transfer Learning
-	- RAG
-	- DPO
-	- RLHF
+	- [Transfer Learning]
+	- [LoRA]
+	- [MoE]
+	- [RAG]
+	- [DPO]
+	- [RLHF]
 
-This should largely conclude out journey on LLMs so next it will be LVMs!
+This should largely conclude out journey on LLMs!
+
+## What's next?
+
+After LLMs, we will dive in the world of LVLM (Large Vision-Langugage Models)
 
 - We start the same way, understanding how image are passed to LMs
 	- Image Encodings
 	- Image Embeddings
 
 - Now that the input data is pre-processed and passed to the model, how does it learn? What are the challenges with conventional ML algorithms and how do LLMs do it differently?
-	- VAE
-	- GANs
+	- [VAE]()
+	- [GANs]()
 	- Diffusion Models
 	- Vision Transformer
 
@@ -210,4 +216,5 @@ This should largely conclude out journey on LLMs so next it will be LVMs!
 	- SoRA
 
 - Fine-tuning opensource vision models for custom use cases
-	- <>
+	- LLaVa
+	- PaliGemma

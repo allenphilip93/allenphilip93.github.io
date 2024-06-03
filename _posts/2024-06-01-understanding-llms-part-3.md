@@ -1,14 +1,14 @@
 ---
-title: LMs Series - Part 3 - RNNs
+title: LLMs Series - Part 3 - RNNs
 date: 2024-06-01 11:22:00 +0530
 categories: [Learning, Large Models]
 tags: [Notes, ML, GenAI]
-math: false
+math: true
 pin: false
 image:
   path: https://media.geeksforgeeks.org/wp-content/uploads/20231204125839/What-is-Recurrent-Neural-Network-660.webp
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: LMs Series - Part 3 - RNNs
+  alt: LLMs Series - Part 3 - RNNs
 ---
 
 ## Overview
