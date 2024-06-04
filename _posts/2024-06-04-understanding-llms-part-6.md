@@ -6,7 +6,7 @@ tags: [Notes, ML, GenAI]
 math: true
 pin: false
 image:
-  path: https://i.kym-cdn.com/entries/icons/original/000/036/585/Attention_is_all_you_need.jpg
+  path: https://miro.medium.com/v2/resize:fit:626/1*Rq9xx0O8o82cW6tesM7Vpw.jpeg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt: LLMs Series - Part 6 - Transformers
 ---
@@ -268,4 +268,5 @@ The transformer architecture is very powerful and has inspired many more popular
 - [https://nlp.seas.harvard.edu/annotated-transformer/](https://nlp.seas.harvard.edu/annotated-transformer/)
 - [https://d2l.ai/chapter_attention-mechanisms-and-transformers/index.html](https://d2l.ai/chapter_attention-mechanisms-and-transformers/index.html)
 - [Paper - Attention is all you need](https://arxiv.org/abs/1706.03762)
+- [https://www.youtube.com/watch?v=eMlx5fFNoYc&ab_channel=3Blue1Brown](https://www.youtube.com/watch?v=eMlx5fFNoYc&ab_channel=3Blue1Brown)
 - ChatGPT
