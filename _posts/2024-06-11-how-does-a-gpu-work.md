@@ -1,7 +1,7 @@
 ---
 title: How does a GPU work?
 date: 2024-06-11 11:22:00 +0530
-categories: [Learning, Large Models]
+categories: [Learning, Optimization]
 tags: [Notes, ML, GPU]
 math: true
 pin: false
