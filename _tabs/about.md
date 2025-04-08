@@ -15,7 +15,7 @@ order: 4
 
 I'm a B.Tech graduate in Electrical Engineering 🎓 from IIT Madras 🏛. I'm a passionate learner who's always willing to learn and work across technologies and domains 💡. I love to explore new technologies and leverage them to solve real-life problems ✨.
 
-[!["Resume"](https://img.shields.io/badge/Check--My--Resume-%23F7931E.svg?style=for-the-badge&logo=readthedocs&logoColor=white)](https://github.com/allenphilip93/allenphilip93.github.io/blob/main/AllenPhilipCV_ver10.pdf)
+[!["Resume"](https://img.shields.io/badge/Check--My--Resume-%23F7931E.svg?style=for-the-badge&logo=readthedocs&logoColor=white)](https://github.com/allenphilip93/allenphilip93.github.io/blob/main/AllenPhilipCV_MLE_ver5.pdf)
 
 ### Talking about Personal Stuffs:
 
