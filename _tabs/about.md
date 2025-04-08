@@ -70,13 +70,13 @@ I'm a B.Tech graduate in Electrical Engineering 🎓 from IIT Madras 🏛. I'm a
   <summary><b>⚡ Github Stats</b></summary>
 
   <br />
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=allenphilip93&show_icons=true&hide_border=true&&count_private=true&include_all_commits=true" />
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=allenphilip93&exclude_repo=KNN-Image-Classification&show_icons=true&hide_border=true&layout=compact&langs_count=8"/>
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=allenphilip93&show_icons=true&hide_border=true&&count_private=true&include_all_commits=true" alt="stats icon"/>
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=allenphilip93&exclude_repo=KNN-Image-Classification&show_icons=true&hide_border=true&layout=compact&langs_count=8" alt="count"/>
 </details>
 
 <details>	
   <summary><b>☄️ Github Streaks</b></summary>
 
   <br />
-  <img height="180em" src="https://github-readme-streak-stats.herokuapp.com/?user=allenphilip93&hide_border=true" />
+  <img height="180em" src="https://github-readme-streak-stats.herokuapp.com/?user=allenphilip93&hide_border=true" alt="streak" />
 </details>

@@ -108,23 +108,23 @@ In simple terms, the breakdown is as follows:
   - [RNNs](https://allenphilip93.github.io/posts/understanding-llms-part-3/)
   - [seq2seq](https://allenphilip93.github.io/posts/understanding-llms-part-4/)
   - [Attention](https://allenphilip93.github.io/posts/understanding-llms-part-5/)
-	- [Transformers]()
+	- Transformers
 
 - Next we want to categorize and understand the architecture of some of the most popular LLMs out there:
-	- [Categories of LLMs]()
-	- [BERT]()
-	- [GPT-2]()
-	- [GPT-3]()
-	- [LLaMA 2]()
-	- [LLaMA 3]()
+	- Categories of LLMs
+	- BERT
+	- GPT-2
+	- GPT-3
+	- LLaMA 2
+	- LLaMA 3
 
 - We know that training LLMs is expensive, so next is to look at how we can fine-tune existing open-source models
-	- [Transfer Learning]()
-	- [LoRA]()
-	- [MoE]()
-	- [RAG]()
-	- [DPO]()
-	- [RLHF]()
+	- Transfer Learning
+	- LoRA
+	- MoE
+	- RAG
+	- DPO
+	- RLHF
 
 This should largely conclude out journey on LLMs!
 
@@ -198,8 +198,8 @@ After LLMs, we will dive in the world of LVLM (Large Vision-Langugage Models)
 	- Image Embeddings
 
 - Now that the input data is pre-processed and passed to the model, how does it learn? What are the challenges with conventional ML algorithms and how do LLMs do it differently?
-	- [VAE]()
-	- [GANs]()
+	- VAE
+	- GANs
 	- Diffusion Models
 	- Vision Transformer
 

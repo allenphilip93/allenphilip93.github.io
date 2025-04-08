@@ -71,7 +71,9 @@ But there were a few glaring issues with this technique:
 
 The limitations of previous word tokenization techniques paved the way for one of the most popular technique called Word Embeddings which rose to fame with the `word2vec` and `GloVe`. These techniques represented words as dense vectors in a continuous vector space which solved the problem of higher dimensionality prevalent in the one-hot encoding techniques.
 
-This is quite incredible because imagine with word embeddings the machine can do arithmetics on words like [king - man + woman = queen](- These techniques represented words as dense vectors in a continuous vector space.) !!! Curious to try it out yourself, you can use the snipped below:
+This is quite incredible because imagine with word embeddings the machine can do arithmetics on words like `king - man + woman = queen` (These techniques represented words as dense vectors in a continuous vector space).
+
+Curious to try it out yourself, you can use the snipped below:
 
 ```python
 from gensim.models import Word2Vec
@@ -239,7 +241,7 @@ To address this, we need to introduce _negative samples_ to our dataset – sa
 
 ![Image Missing](../assets/img/Pasted%20image%2020240527115436.png)
 
-This idea is inspired by [Noise-contrastive estimation](http://proceedings.mlr.press/v9/gutmann10a/gutmann10a.pdf) [pdf]. We are contrasting the actual signal (positive examples of neighboring words) with noise (randomly selected words that are not neighbors). This leads to a great tradeoff of computational and statistical efficiency.
+This idea is inspired by [Noise-contrastive estimation](https://proceedings.mlr.press/v9/gutmann10a/gutmann10a.pdf) [pdf]. We are contrasting the actual signal (positive examples of neighboring words) with noise (randomly selected words that are not neighbors). This leads to a great tradeoff of computational and statistical efficiency.
 
 ### `word2vec` Training Process
 

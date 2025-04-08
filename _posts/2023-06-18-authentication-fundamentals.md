@@ -53,7 +53,7 @@ Remember how we said that asymmetric cryptography was developed in the ‘70s bu
 
 By the 1990s, the Internet was no longer a tool hoarded by universities and governments. With so much sensitive data online, beefing up authentication to know exactly who was accessing what was a must.
 
-In 1986, a handful of U.S. government agencies (including the NSA) and [12 companies with an interest in computers](http://www.circleid.com/posts/20190124_creating_tls_the_pioneering_role_of_ruth_nelson/) developed specs for secure network communications. It was originally named the SP4 protocol and eventually renamed the Transport Layer Security protocol ([TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security#History_and_development)). In the late ’90s, [Taher Elgamal](https://en.wikipedia.org/wiki/Taher_Elgamal) — an engineer at Netscape — developed the original Secure Sockets Layer (SSL) protocol, which included keys and server authentication.
+In 1986, a handful of U.S. government agencies (including the NSA) and [12 companies with an interest in computers](https://www.circleid.com/posts/20190124_creating_tls_the_pioneering_role_of_ruth_nelson/) developed specs for secure network communications. It was originally named the SP4 protocol and eventually renamed the Transport Layer Security protocol ([TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security#History_and_development)). In the late ’90s, [Taher Elgamal](https://en.wikipedia.org/wiki/Taher_Elgamal) — an engineer at Netscape — developed the original Secure Sockets Layer (SSL) protocol, which included keys and server authentication.
 
 ## Session-based & Cookie-based Authentication
 
