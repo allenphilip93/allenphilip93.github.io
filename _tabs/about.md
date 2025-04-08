@@ -4,6 +4,7 @@ icon: fas fa-info-circle
 order: 4
 ---
 
+<<<<<<< HEAD
 ## Hey 👋, I'm [Allen Philip!](https://www.linkedin.com/in/allen-philip-j-b9147524/)
 
 [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-0e76a8?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/allen-philip-j-b9147524/)
@@ -80,3 +81,7 @@ I'm a B.Tech graduate in Electrical Engineering 🎓 from IIT Madras 🏛. I'm a
   <br />
   <img height="180em" src="https://github-readme-streak-stats.herokuapp.com/?user=allenphilip93&hide_border=true" />
 </details>
+=======
+> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
+{: .prompt-tip }
+>>>>>>> v7.2.4
