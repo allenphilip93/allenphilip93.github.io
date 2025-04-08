@@ -41,12 +41,12 @@ social:
     - https://twitter.com/allenphilip93 # change to your Twitter homepage
     - https://github.com/allenphilip93 # change to your GitHub homepage
     # Uncomment below to add more social links
-    # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.facebook.com/allenphilip93
+    - https://www.linkedin.com/in/allen-philip-j-b9147524/
 
 # Site Verification Settings
 webmaster_verifications:
-  google: # fill in your Google verification code
+  google: ldHUh1OZG9_-qa2-0xwjLUfM78o8i1xc2CC8m6PBv14 # fill in your Google verification code
   bing: # fill in your Bing verification code
   alexa: # fill in your Alexa verification code
   yandex: # fill in your Yandex verification code
