@@ -16,7 +16,7 @@ timezone:
 
 title: Allen Philip # the main title
 
-tagline: Learning out loud in machine learning and beyond.
+tagline: Deep dives into inference, performance, and the messy bits of ML.
 
 description: >- # used by seo meta and the atom feed
   Writing what I learn while building and breaking things in ML. Covers attention mechanisms, performance optimization, model inference, and whatever else I’m debugging this week.
