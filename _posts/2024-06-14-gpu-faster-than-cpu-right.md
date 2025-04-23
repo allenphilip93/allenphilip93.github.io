@@ -1,19 +1,19 @@
 ---
-title: GPU is faster than CPU, right?!
+title: GPU Performance: Parallel Processing vs Overhead
 date: 2024-06-14 11:22:00 +0530
 categories: [Learning, Optimization]
 tags: [Original, ML, GPU]
 math: true
-pin: false
+pin: true
 image:
   path: https://media.licdn.com/dms/image/C4D12AQGxK1FATKpxYg/article-cover_image-shrink_600_2000/0/1561361469214?e=2147483647&v=beta&t=3jX_euQK6lj2W6qz1sFKtAtt_-wcRFbtUbbky6EhNNg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: GPU is faster than CPU, right?!
+  alt: GPU Performance: Parallel Processing vs Overhead
 ---
 
 ## Overview
 
-This post is a brief experimentation on trying compare the performance of similar code on CPU & GPU. I ran my experiments keeping in the context of ML on a Nvidia A100 GPU using PyTorch.
+This post presents a detailed performance analysis comparing CPU and GPU execution for common machine learning operations. Using PyTorch on an NVIDIA A100 GPU, we'll explore when GPUs provide actual performance benefits and when they might not be the optimal choice.
 
 ## `matmul` operation
 
