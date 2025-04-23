@@ -1,7 +1,7 @@
 ---
-title: LLMs Series - Part 4 - seq2seq
+title: LLMs Explained - Part 4 - seq2seq
 date: 2024-06-02 11:22:00 +0530
-categories: [Learning, Large Models]
+categories: [Learning, LLMs]
 tags: [Notes, ML, GenAI]
 math: true
 pin: false

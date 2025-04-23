@@ -1,7 +1,7 @@
 ---
-title: LLMs Series - Part 6 - Transformers
+title: LLMs Explained - Part 6 - Transformers
 date: 2024-06-04 11:22:00 +0530
-categories: [Learning, Large Models]
+categories: [Learning, LLMs]
 tags: [Notes, ML, GenAI]
 math: true
 pin: false

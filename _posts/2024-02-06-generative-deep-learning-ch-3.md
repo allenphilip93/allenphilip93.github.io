@@ -2,7 +2,7 @@
 title: Variational Autoencoders
 date: 2024-02-06 11:22:00 +0530
 categories: [Book Summary, Generative Deep Learning]
-tags: [Notes, ML, GenAI]
+tags: [Notes, ML, GenAI, LVMs]
 math: false
 pin: false
 image:

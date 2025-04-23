@@ -1,7 +1,7 @@
 ---
-title: LLMs Series - Part 1 - Tokenizers
+title: LLMs Explained - Part 1 - Tokenizers
 date: 2024-05-27 11:22:00 +0530
-categories: [Learning, Large Models]
+categories: [Learning, LLMs]
 tags: [Notes, ML, GenAI]
 math: false
 pin: false

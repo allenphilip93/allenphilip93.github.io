@@ -1,7 +1,7 @@
 ---
-title: LLMs Series - Part 2 - Word Embeddings
+title: LLMs Explained - Part 2 - Word Embeddings
 date: 2024-05-28 11:22:00 +0530
-categories: [Learning, Large Models]
+categories: [Learning, LLMs]
 tags: [Notes, ML, GenAI]
 math: true
 pin: false

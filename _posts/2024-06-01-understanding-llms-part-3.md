@@ -1,7 +1,7 @@
 ---
-title: LLMs Series - Part 3 - RNNs
+title: LLMs Explained - Part 3 - RNNs
 date: 2024-06-01 11:22:00 +0530
-categories: [Learning, Large Models]
+categories: [Learning, LLMs]
 tags: [Notes, ML, GenAI]
 math: true
 pin: false

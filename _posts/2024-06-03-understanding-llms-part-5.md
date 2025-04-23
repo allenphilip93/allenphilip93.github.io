@@ -1,7 +1,7 @@
 ---
-title: LLMs Series - Part 5 - Attention!
+title: LLMs Explained - Part 5 - Attention!
 date: 2024-06-03 20:52:00 +0530
-categories: [Learning, Large Models]
+categories: [Learning, LLMs]
 tags: [Notes, ML, GenAI]
 math: true
 pin: false
