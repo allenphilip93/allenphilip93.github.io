@@ -90,11 +90,11 @@ This keeps the memory usage **linear** in sequence length and significantly **re
 
 Let's take at look at how attention computation would've happened without flash attention. For the sake of simiplicity let's look at just inference.
 
-Consider a QKV shape of $(B, S, H, D) = (1, 4000, 32, 128)$ in `bfloat16` on an `A100` GPU.  Each element would need about `2 bytes` and our A100 has a total HBM of `40 GB` and SRAM of `100 KB`.
+Consider a QKV shape of $$ (B, S, H, D) = (1, 4000, 32, 128) $$ in `bfloat16` on an `A100` GPU.  Each element would need about `2 bytes` and our A100 has a total HBM of `40 GB` and SRAM of `100 KB`.
 
-Step 1: **Matrix Multiply (\$$QK^T$$)**
+Step 1: **Matrix Multiply ($$ QK^T $$)**
 
-- The operation \$$S = QK^T$$ is triggered.
+- The operation \$$ S = QK^T $$ is triggered.
 - Since \$$Q$$ and \$$K$$ are both huge, they **reside in HBM**.
 - The GPU launches **matrix-multiply kernels**:
     - These kernels **stream small chunks** (tiles) of Q and K **into registers** or **L1/shared memory (SRAM)** _temporarily_ per thread block.
@@ -248,7 +248,10 @@ out = flash_attn_func(q, k, v, dropout_p=0.0, causal=False, softmax_scale=None)
 **📘 Reference:**  
 [FlashAttention-2 GitHub](https://github.com/Dao-AILab/flash-attention)
 
-#### **FlashAttention-3 (FA3)** – CUTLASS-based, Hopper GPUs only
+#### **FlashAttention-3 (FA3)** 
+
+> CUTLASS-based, Hopper GPUs only
+{: .prompt-info}
 
 **⚠️ FA3 is low-level, not yet in PyPI or HuggingFace. You’ll need:**
 
