@@ -147,9 +147,9 @@ Let's say the $QKV$ shape is $(batch\_size, seqlen, nheads, headdim)$ or $(BSHD)
 What would the runtime and memory complexity look like as function of these variables?
 - There are two matrix multiplications of note $Q.K^T$ and $attn\_weights.V$
 	- For \$$Q.K^T$$, we are multiplying two matrices of size \$$S * D$$ and \$$D * S$$ over \$$B * H$$ so the runtime comes about \$$O(BHS^2D)$$
-	- For the latter, we multiply \$$S*S$$ and \$$S*D$$ over \$$B*H$$, the runtime still remains comes to \$$O(BHS^2D)$$
+	- For the latter, we multiply \$$ S * S $$ and \$$ S * D $$ over \$$ B * H $$, the runtime still remains comes to \$$ O(BHS^2D) $$
 
-> Key takeaway is that the both runtime and mrmory scales quadratically with respect to the $sequence\_length$
+> Key takeaway is that the both runtime and mrmory scales quadratically with respect to the \$$sequence\_length$$
 {: .prompt-info}
 
 If you're thinking why is this bad and why should we be worried, I'll try to explain why. Let's compute the GPU requirement for a few examples:

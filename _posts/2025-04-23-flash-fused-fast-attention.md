@@ -1,5 +1,5 @@
 ---
-title: Flash, Fused and Fast - Optimizing Attention
+title: Flash, Fused and Fast Attention
 date: 2025-04-23 13:05:00 +0530
 categories: [Optimization]
 tags: [ML, GPU]
@@ -73,7 +73,7 @@ Approximate attention methods reduce FLOPs but **don’t actually run faster** i
 
 #### Compute Speed vs. Memory Bandwidth
 
-- **Arithmetic throughput** of A100: ~$19.5$ TFLOPs (FP32) & $624$ TFLOPs (FP16/BF16)
+- **Arithmetic throughput** of A100: ~\$$19.5$$ TFLOPs (FP32) & \$$624$$ TFLOPs (FP16/BF16)
 - This creates a bottleneck: if your model keeps accessing HBM for intermediate values (like the full attention matrix), you end up **waiting on memory**, not computation.
 
 > Many Transformer operations—like softmax, dropout, etc.—are **memory-bound**, meaning they spend most time waiting on data to move, not computing on it.
@@ -90,12 +90,12 @@ This keeps the memory usage **linear** in sequence length and significantly **re
 
 Let's take at look at how attention computation would've happened without flash attention. For the sake of simiplicity let's look at just inference.
 
-Consider a $QKV$ shape of $(B, S, H, D) = (1, 4000, 32, 128)$ in `bfloat16` on an `A100` GPU.  Each element would need about `2 bytes` and our A100 has a total HBM of `40 GB` and SRAM of `100 KB`.
+Consider a \$$QKV$$ shape of \$$(B, S, H, D) = (1, 4000, 32, 128)$$ in `bfloat16` on an `A100` GPU.  Each element would need about `2 bytes` and our A100 has a total HBM of `40 GB` and SRAM of `100 KB`.
 
-Step 1: **Matrix Multiply ($QKᵀ$)**
+Step 1: **Matrix Multiply (\$$QK^T$$)**
 
 - The operation \$$S = QK^T$$ is triggered.
-- Since $Q$ and $K$ are both huge, they **reside in HBM**.
+- Since \$$Q$$ and \$$K$$ are both huge, they **reside in HBM**.
 - The GPU launches **matrix-multiply kernels**:
     - These kernels **stream small chunks** (tiles) of Q and K **into registers** or **L1/shared memory (SRAM)** _temporarily_ per thread block.
     - The GPU **never loads the entire Q or K into SRAM at once** — it can’t.
@@ -104,7 +104,7 @@ Step 1: **Matrix Multiply ($QKᵀ$)**
 
 #### Step 2: **Softmax**
 
-- \$$S$$ is now fully written to HBM.
+- \$$ S $$ is now fully written to HBM.
 - Softmax needs **each row** of \$$S$$ to compute the normalized probabilities.
 - The softmax kernel:
     - Reads a row of \$$S$$ from HBM into registers/SRAM.
@@ -114,7 +114,7 @@ Step 1: **Matrix Multiply ($QKᵀ$)**
 
 #### Step 3: **Multiply P × V**
 
-- Now \$$P$$ (from softmax) and \$$V$$ are both in HBM.
+- Now \$$ P $$ (from softmax) and \$$V$$ are both in HBM.
 - The GPU again launches matrix multiply kernels:
     - Streams tiles of \$$P$$ and \$$V$$ into fast memory,
     - Computes output,
