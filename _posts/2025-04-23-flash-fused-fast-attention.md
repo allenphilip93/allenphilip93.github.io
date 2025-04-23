@@ -94,8 +94,8 @@ Consider a QKV shape of $$ (B, S, H, D) = (1, 4000, 32, 128) $$ in `bfloat16` on
 
 Step 1: **Matrix Multiply ($$ QK^T $$)**
 
-- The operation \$$ S = QK^T $$ is triggered.
-- Since \$$Q$$ and \$$K$$ are both huge, they **reside in HBM**.
+- The operation $$ S = QK^T $$ is triggered.
+- Since \$$ Q $$ and \$$ K $$ are both huge, they **reside in HBM**.
 - The GPU launches **matrix-multiply kernels**:
     - These kernels **stream small chunks** (tiles) of Q and K **into registers** or **L1/shared memory (SRAM)** _temporarily_ per thread block.
     - The GPU **never loads the entire Q or K into SRAM at once** — it can’t.
