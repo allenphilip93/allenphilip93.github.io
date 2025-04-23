@@ -37,7 +37,11 @@ A higher value means stronger attention—more focus. For example, in the matrix
 ### Scaled Dot-Product Attention (SDPA) - Intuition
 
 One of the common ways to compute the attention output is via SDPA. As a menacing as it sounds, it's quite simpler once we break it down. Let's first try to understand what Q, K and V represent.
-$$ SelfAttention(Q,K,V) = softmax(\frac{QK^T}{\sqrt{d_k}}).V $$
+
+$$
+SelfAttention(Q,K,V) = softmax(\frac{QK^T}{\sqrt{d_k}}).V
+$$
+
 ### QKV values
 
 > Embeddings encode _meanings_, not _roles_
@@ -64,14 +68,14 @@ And very imporantly, this gives us:
 
 ### Attention Scores
 
-Now for every input embedding we have projected them to get the query, key and value vectors. Next step is to compute how each token relates to the rest. A quick and easy way is to calculate the scaled dot product (\$$QK^T$$). Breaking this down:
-1. Basically for we take \$$q_0$$ vector and multiply that with \$$k_0, k_1, k_2, ... k_n$$ where \$$n$$ is the number of tokens
-2. Similarly we repeat this process for \$$q_1, q_2, ... q_n$$ vectors
-3. The previous 2 steps basically describe a matrix multiplication of \$$QK^T$$
+Now for every input embedding we have projected them to get the query, key and value vectors. Next step is to compute how each token relates to the rest. A quick and easy way is to calculate the scaled dot product ($$ QK^T $$). Breaking this down:
+1. Basically for we take $$ q_0 $$ vector and multiply that with $$ k_0, k_1, k_2, ... k_n $$ where $$ n $$ is the number of tokens
+2. Similarly we repeat this process for $$ q_1, q_2, ... q_n $$ vectors
+3. The previous 2 steps basically describe a matrix multiplication of $$ QK^T $$
 
 $$attention\_scores=QK^T$$
 
-What we end up with is called **attention scores** where the value at $[i,j]$ represents how much does $i_{th}$ word care about $j_{th}$ word. These are raw numbers and based purely on vector similarity. These values are typically unnormalized, could be big, small, or even negative.
+What we end up with is called **attention scores** where the value at $[i,j]$ represents how much does $$ i_{th} $$ word care about $$ j_{th} $$ word. These are raw numbers and based purely on vector similarity. These values are typically unnormalized, could be big, small, or even negative.
 
 ### Attention Weights
 
@@ -80,13 +84,21 @@ The term "weights" here is closely related to the idea of a weighted sum — whe
 You can think of it as a way to "zero in" on the most relevant tokens: given a set of attention scores (which reflect raw similarity), how do we turn them into a meaningful focus?
 
 Mathematically, we normalize these scores using the **softmax** function, which transforms them into a probability distribution. This is a technique borrowed from traditional classifiers, where softmax helps pick the most likely class. In attention, it lets each token decide how much to attend to every other token — effectively letting it "focus" where it matters most.
-$$ attention\_weights = softmax(\frac{QK^T}{\sqrt{d_k}}) $$
+
+$$
+attention\_weights = softmax(\frac{QK^T}{\sqrt{d_k}})
+$$
+
 ### Attention Ouptuts
 
 Now that we know which tokens we need pay attention to, what is the final value we pass on? This is why we multiple the attention weights with value vector $V$ and pass it on. 
 
 One might ask, why not pass just the weights or multiply it with the input embeddings and pass on? Because you don’t want just a re-weighted average of static embeddings. You want the model to **learn what information to contribute** during attention, **separate from** what it uses to _decide_ relevance.
- $$SelfAttention(Q,K,V) = softmax(\frac{QK^T}{\sqrt{d_k}}).V $$
+
+$$
+SelfAttention(Q,K,V) = softmax(\frac{QK^T}{\sqrt{d_k}}).V
+$$
+
 A python implementation of the same would look something like this:
 
 ```python
@@ -107,7 +119,9 @@ But what happens when you want one sequence to attend to another? That's where *
 
 Mathematically, it's largely the same with a small twist. We take the query vectors from the target langauge (decoder) and use the key & value vectors from the source language (encoder).
 
-$$CrossAttention(Q_{dec},K_{env},V_{env})=softmax(\frac{QK^T}{\sqrt{d_k}}).V $$
+$$
+CrossAttention(Q_{dec},K_{env},V_{env})=softmax(\frac{QK^T}{\sqrt{d_k}}).V
+$$
 
 ![Image Missing](../assets/img/Pasted%20image%2020250412192110.png)
 
@@ -146,21 +160,21 @@ Let's say the $QKV$ shape is $(batch\_size, seqlen, nheads, headdim)$ or $(BSHD)
 
 What would the runtime and memory complexity look like as function of these variables?
 - There are two matrix multiplications of note $Q.K^T$ and $attn\_weights.V$
-	- For \$$Q.K^T$$, we are multiplying two matrices of size \$$S * D$$ and \$$D * S$$ over \$$B * H$$ so the runtime comes about \$$O(BHS^2D)$$
-	- For the latter, we multiply \$$ S * S $$ and \$$ S * D $$ over \$$ B * H $$, the runtime still remains comes to \$$ O(BHS^2D) $$
+	- For $$ Q.K^T $$, we are multiplying two matrices of size $$ S * D $$ and $$D * S $$ over $$ B * H $$ so the runtime comes about $$ O(BHS^2D) $$
+	- For the latter, we multiply $$ S * S $$ and $$ S * D $$ over $$ B * H $$, the runtime still remains comes to $$ O(BHS^2D) $$
 
 > Key takeaway is that the both runtime and mrmory scales quadratically with respect to the \$$sequence\_length$$
 {: .prompt-info}
 
 If you're thinking why is this bad and why should we be worried, I'll try to explain why. Let's compute the GPU requirement for a few examples:
-- Say \$$shape(Q,K,V) = (1, 4000, 32, 128)$$ and \$$datatype$$ is bfloat16 which means each value takes 16 bits so 2 bytes
-- Each \$$QKV$$ tensor would take up about \$$4000 * 32 * 128 bytes$$ ~ \$$31.25 MB$$
-- And the attention scores of shape \$$(1, 32, 4000, 4000)$$ would take up ~ \$$976.56 MB$$
+- Say $$ shape(Q,K,V) = (1, 4000, 32, 128) $$ and $$ datatype $$ is bfloat16 which means each value takes 16 bits so 2 bytes
+- Each $$ QKV $$ tensor would take up about $$ 4000 * 32 * 128 bytes $$ ~ $$ 31.25 MB $$
+- And the attention scores of shape $$ (1, 32, 4000, 4000) $$ would take up ~ $$ 976.56 MB $$
 
 You might look at that and pfft say that doesn't look much. But take a looks at this:
-- `llama3-8B` had attention score of shape \$$(1, 32, 8096, 8096)$$ which needs ~ \$$3.9 GB$$
-- `llama3-70B` had attention score of shape \$$(1, 64, 8096, 8096)$$ which needs ~ \$$7.82 GB$$
-- For large vision and video models, this number can go easily up to \$$16,000$$ which needs ~ \$$159.47GB$$
+- `llama3-8B` had attention score of shape $$ (1, 32, 8096, 8096) $$ which needs ~ $$ 3.9 GB $$
+- `llama3-70B` had attention score of shape $$ (1, 64, 8096, 8096) $$ which needs ~ $$ 7.82 GB $$
+- For large vision and video models, this number can go easily up to $$ 16,000 $$ which needs ~ $$ 159.47GB $$
 
 > And keep in mind, these numbers are on top of the memory required for model weights and activations!
 
