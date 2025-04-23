@@ -1,6 +1,6 @@
 ---
 title: Building Custom TensorRT Plugins
-date: 2025-04-11 10:15:00 +0530
+date: 2025-04-13 12:45:00 +0530
 categories: [Optimization]
 tags: [ML, GPU]
 math: false
