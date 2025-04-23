@@ -1,7 +1,7 @@
 ---
 title: Create a website using NodeJS in 5 mins
 date: 2020-08-25 12:35:00 +0530
-categories: [Tutorial]
+categories: [Miscellaneous, Tutorial]
 tags: [Website, NodeJS]
 math: true
 pin: false

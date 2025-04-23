@@ -1,7 +1,7 @@
 ---
 title: Syntax highlighting & Mathematical markup in HTML
 date: 2020-08-27 16:45:00 +0530
-categories: [Tutorial]
+categories: [Miscellaneous, Tutorial]
 tags: [HTML]
 math: true
 pin: false

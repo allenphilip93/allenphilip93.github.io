@@ -1,7 +1,7 @@
 ---
 title: Create your own podcast on Spotify for free
 date: 2020-08-19 16:05:00 +0530
-categories: [Tutorial]
+categories: [Miscellaneous, Tutorial]
 tags: [Spotify, Podcast]
 math: true
 pin: false
