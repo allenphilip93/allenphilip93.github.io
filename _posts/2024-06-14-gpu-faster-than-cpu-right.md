@@ -8,7 +8,7 @@ math: true
 pin: false
 image:
   path: https://www.trgdatacenters.com/wp-content/uploads/2024/09/GPU-vs-CPU-for-AI-Which-Is-Best-for-Your-Business-1-1920x1080.jpg
-  alt: GPU vs CPU: Matmul, Sine Waves, and the Myth of Speed
+  alt: GPU vs CPU - Matmul, Sine Waves, and the Myth of Speed
 ---
 
 ## Overview

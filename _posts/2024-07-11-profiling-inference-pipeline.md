@@ -1,5 +1,5 @@
 ---
-title: Profiling an inference pipeline
+title: Breaking Down ML Inference Bottlenecks
 date: 2024-07-11 19:04:00 +0530
 categories: [Optimization, Benchmarking]
 tags: [ML, GPU]
@@ -7,7 +7,7 @@ math: true
 pin: false
 image:
   path: https://www.shutterstock.com/image-photo/estimate-approximate-symbol-businessman-turns-600nw-2187747311.jpg
-  alt: Profiling an inference pipeline
+  alt: Breaking Down ML Inference Bottlenecks
 ---
 
 ## Summary
