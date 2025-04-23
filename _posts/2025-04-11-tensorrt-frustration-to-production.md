@@ -148,7 +148,7 @@ Flash Attention and similar optimizations often cause ONNX export issues:
            return sdpa(q, k, v, is_causal=True)
    ```
 
-   > Keeping in mind the tensor shape for torch's sdpa is a bit different $(batch, nheads, seqlen, headdim)$ as compared to FA2/FA3 $(batch, seqlen, nheads, headdim)$
+   > Keeping in mind the tensor shape for torch's sdpa is a bit different \$$(batch, nheads, seqlen, headdim)$$ as compared to FA2/FA3 \$$(batch, seqlen, nheads, headdim)$$
    {: .prompt-info}
 
 3. **Export with Dynamic Shapes**

@@ -1,6 +1,6 @@
 ---
 title: Flash, Fused and Fast - Optimizing Attention
-date: 2025-04-23 13:15:00 +0530
+date: 2025-04-23 13:05:00 +0530
 categories: [Optimization]
 tags: [ML, GPU]
 math: true
@@ -94,7 +94,7 @@ Consider a $QKV$ shape of $(B, S, H, D) = (1, 4000, 32, 128)$ in `bfloat16` on a
 
 Step 1: **Matrix Multiply ($QKᵀ$)**
 
-- The operation $S = QKᵀ$ is triggered.
+- The operation \$$S = QK^T$$ is triggered.
 - Since $Q$ and $K$ are both huge, they **reside in HBM**.
 - The GPU launches **matrix-multiply kernels**:
     - These kernels **stream small chunks** (tiles) of Q and K **into registers** or **L1/shared memory (SRAM)** _temporarily_ per thread block.
@@ -104,21 +104,21 @@ Step 1: **Matrix Multiply ($QKᵀ$)**
 
 #### Step 2: **Softmax**
 
-- $S$ is now fully written to HBM.
-- Softmax needs **each row** of $S$ to compute the normalized probabilities.
+- \$$S$$ is now fully written to HBM.
+- Softmax needs **each row** of \$$S$$ to compute the normalized probabilities.
 - The softmax kernel:
-    - Reads a row of $S$ from HBM into registers/SRAM.
-    - Computes $softmax(S\_row)$, then
-    - Writes the result $P$ back to HBM.
+    - Reads a row of \$$S$$ from HBM into registers/SRAM.
+    - Computes \$$softmax(S\_row)$$, then
+    - Writes the result \$$P$$ back to HBM.
 - This repeats for every row → **many HBM reads/writes**.
 
 #### Step 3: **Multiply P × V**
 
-- Now $P$ (from softmax) and $V$ are both in HBM.
+- Now \$$P$$ (from softmax) and \$$V$$ are both in HBM.
 - The GPU again launches matrix multiply kernels:
-    - Streams tiles of $P$ and $V$ into fast memory,
+    - Streams tiles of \$$P$$ and \$$V$$ into fast memory,
     - Computes output,
-    - Writes **final output $O$** to HBM.
+    - Writes **final output \$$O$$** to HBM.
 
 #### Contrast with FlashAttention
 
@@ -164,18 +164,18 @@ Even within a thread block:
 	- Each **warp gets a slice of K/V**
 	- All warps **share the same Q block**
 	- Each warp:
-	    - Computes partial $S_{ij} = Q_i.K\_slice^T$
-	    - Does $\exp(S_{ij}) . V\_slice$`
+	    - Computes partial \$$S_{ij} = Q_i.K\_slice^T$$
+	    - Does \$$\exp(S_{ij}) . V\_slice$$
 	    - Writes **its piece of $O_i$** into shared memory
 	- Then, warps **synchronize and sum** partial results
-	- FlashAttention-2 splits **queries ($Q$)** instead → no need for warps to communicate.
+	- FlashAttention-2 splits **queries (\$$Q$$)** instead → no need for warps to communicate.
 
 > Result: **fewer syncs, fewer memory reads**, better performance.
 
 **Algorithm tweaks:**
 
-- Delay scaling $\tilde{O}$ until very end → fewer FLOPs    
-- Save only $logsumexp$ instead of both $max$ and $sum$
+- Delay scaling \$$\tilde{O}$$ until very end → fewer FLOPs    
+- Save only \$$logsumexp$$ instead of both \$$max$$ and \$$sum$$
 
 **Execution tweaks:**
 
@@ -206,10 +206,10 @@ FA3 bridges that gap by integrating **hardware-level features**:
 
 #### **GEMM–Softmax Overlap (2-Stage Pipelining)**
 
-- Matmul ($QK^T$) and softmax are **interdependent**, so normally they serialize.
+- Matmul (\$$QK^T$$) and softmax are **interdependent**, so normally they serialize.
 - FA3 breaks this up into **overlapping stages**:
-    - While warpgroup A does $exp/rowmax$ on $S_j$,
-    - Warpgroup B is already doing the next $QK^T$ for $S_{j+1}$.
+    - While warpgroup A does \$$exp/rowmax$$ on \$$S_j$$,
+    - Warpgroup B is already doing the next \$$QK^T$$ for \$$S_{j+1}$$.
 
 This gets you **better utilization** of:
 - Tensor Cores (GEMM)
@@ -274,7 +274,7 @@ from flash_attn.flash_attn_interface import flash_attn_func
 out = flash_attn_func(q, k, v, dropout_p=0.0, causal=False, softmax_scale=None, return_logsumexp=False)
 ```
 
-> Ensure your Q/K/V are $(batch, seqlen, nheads, headdim)$, `float16` or `fp8` format, and live on the **H100 GPU**.
+> Ensure your Q/K/V are \$$(batch, seqlen, nheads, headdim)$$, `float16` or `fp8` format, and live on the **H100 GPU**.
 
 **📘 Reference:**  
 [FlashAttention-3 GitHub (branch)](https://github.com/Dao-AILab/flash-attention/tree/flashattention-3)

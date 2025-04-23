@@ -64,10 +64,10 @@ And very imporantly, this gives us:
 
 ### Attention Scores
 
-Now for every input embedding we have projected them to get the query, key and value vectors. Next step is to compute how each token relates to the rest. A quick and easy way is to calculate the scaled dot product ($QK^T$). Breaking this down:
-1. Basically for we take $q_0$ vector and multiply that with $k_0, k_1, k_2, ... k_n$ where $n$ is the number of tokens
-2. Similarly we repeat this process for $q_1, q_2, ... q_n$ vectors
-3. The previous 2 steps basically describe a matrix multiplication of $QK^T$
+Now for every input embedding we have projected them to get the query, key and value vectors. Next step is to compute how each token relates to the rest. A quick and easy way is to calculate the scaled dot product (\$$QK^T$$). Breaking this down:
+1. Basically for we take \$$q_0$$ vector and multiply that with \$$k_0, k_1, k_2, ... k_n$$ where \$$n$$ is the number of tokens
+2. Similarly we repeat this process for \$$q_1, q_2, ... q_n$$ vectors
+3. The previous 2 steps basically describe a matrix multiplication of \$$QK^T$$
 
 $$attention\_scores=QK^T$$
 
@@ -121,7 +121,7 @@ This means **each token ends up with a richer, multi-faceted context-aware repre
 
 **Why MHA is a big win:**
 - **Multiple views of the same sequence:** Each head can learn to focus on different types of relationships—syntax, semantics, positional dependencies, etc.
-- **No redesign needed:** MHA is a clean extension of scaled dot-product attention. The extra heads are just an added dimension in the $QKV$ tensors.
+- **No redesign needed:** MHA is a clean extension of scaled dot-product attention. The extra heads are just an added dimension in the \$$QKV$$ tensors.
 - **Training-friendly:** Since the structure remains differentiable and parallelizable, it plays well with GPUs and gradients.
 - **Scales with model depth:** Deeper layers + more heads = more nuanced understanding, without needing more exotic architectures.
 
@@ -146,21 +146,21 @@ Let's say the $QKV$ shape is $(batch\_size, seqlen, nheads, headdim)$ or $(BSHD)
 
 What would the runtime and memory complexity look like as function of these variables?
 - There are two matrix multiplications of note $Q.K^T$ and $attn\_weights.V$
-	- For $Q.K^T$, we are multiplying two matrices of size $S * D$ and $D * S$ over $B * H$ so the runtime comes about $O(BHS^2D)$
-	- For the latter, we multiply $S*S$ and $S*D$ over $B*H$, the runtime still remains comes to $O(BHS^2D)$
+	- For \$$Q.K^T$$, we are multiplying two matrices of size \$$S * D$$ and \$$D * S$$ over \$$B * H$$ so the runtime comes about \$$O(BHS^2D)$$
+	- For the latter, we multiply \$$S*S$$ and \$$S*D$$ over \$$B*H$$, the runtime still remains comes to \$$O(BHS^2D)$$
 
 > Key takeaway is that the both runtime and mrmory scales quadratically with respect to the $sequence\_length$
 {: .prompt-info}
 
 If you're thinking why is this bad and why should we be worried, I'll try to explain why. Let's compute the GPU requirement for a few examples:
-- Say $shape(Q,K,V) = (1, 4000, 32, 128)$ and $datatype$ is bfloat16 which means each value takes 16 bits so 2 bytes
-- Each $QKV$ tensor would take up about $4000 * 32 * 128 bytes$ ~ $31.25 MB$
-- And the attention scores of shape $(1, 32, 4000, 4000)$ would take up ~ $976.56 MB$
+- Say \$$shape(Q,K,V) = (1, 4000, 32, 128)$$ and \$$datatype$$ is bfloat16 which means each value takes 16 bits so 2 bytes
+- Each \$$QKV$$ tensor would take up about \$$4000 * 32 * 128 bytes$$ ~ \$$31.25 MB$$
+- And the attention scores of shape \$$(1, 32, 4000, 4000)$$ would take up ~ \$$976.56 MB$$
 
 You might look at that and pfft say that doesn't look much. But take a looks at this:
-- `llama3-8B` had attention score of shape $(1, 32, 8096, 8096)$ which needs ~ $3.9 GB$ 
-- `llama3-70B` had attention score of shape $(1, 64, 8096, 8096)$ which needs ~ $7.82 GB$
-- For large vision and video models, this number can go easily up to $16,000$ which needs ~ $159.47GB$
+- `llama3-8B` had attention score of shape \$$(1, 32, 8096, 8096)$$ which needs ~ \$$3.9 GB$$
+- `llama3-70B` had attention score of shape \$$(1, 64, 8096, 8096)$$ which needs ~ \$$7.82 GB$$
+- For large vision and video models, this number can go easily up to \$$16,000$$ which needs ~ \$$159.47GB$$
 
 > And keep in mind, these numbers are on top of the memory required for model weights and activations!
 
