@@ -48,9 +48,9 @@ This is where **engineering took over**:
 
 ![Image Missing](../assets/img/Pasted%20image%2020250413171548.png)
 
-### Flash Attention 1 - CUDA power
+### Flash Attention 1
 
-> Paper - https://arxiv.org/pdf/2205.14135
+> Paper - [https://arxiv.org/pdf/2205.14135](https://arxiv.org/pdf/2205.14135)
 
 Standard attention in Transformers is **slow and memory-hungry** because it has **quadratic time and memory complexity** with sequence length. This becomes a bottleneck for scaling to longer sequences.
 
@@ -130,9 +130,9 @@ FlashAttention **avoids materializing S and P entirely**. Instead of writing the
 
 ![Image Missing](../assets/img/Pasted%20image%2020250413122111.png)
 
-### Flash Attention 2 - Cache it in
+### Flash Attention 2
 
-> Paper - https://arxiv.org/pdf/2307.08691
+> Paper - [https://arxiv.org/pdf/2307.08691](https://arxiv.org/pdf/2307.08691)
 
 FlashAttention was fast and memory-efficient, but still underused GPU compute—**only 30–50%** of peak FLOPs/s on A100. The culprit? **Suboptimal parallelism** and **too many non-matmul operations**.
 
@@ -166,7 +166,7 @@ Even within a thread block:
 	- Each warp:
 	    - Computes partial $$ S_{ij} = Q_iK_{slice}^T $$
 	    - Does $$ \exp(S_{ij}) * V_{slice} $$
-	    - Writes **its piece of $O_i$** into shared memory
+	    - Writes its piece of $$ O_i $$ into shared memory
 	- Then, warps **synchronize and sum** partial results
 	- FlashAttention-2 splits **queries (Q)** instead → no need for warps to communicate.
 
@@ -174,15 +174,15 @@ Even within a thread block:
 
 **Algorithm tweaks:**
 
-- Delay scaling $\tilde{O}$ until very end → fewer FLOPs    
-- Save only $logsumexp$ instead of both $max$ and $sum$
+- Delay scaling $$ \tilde{O} $$ until very end → fewer FLOPs    
+- Save only $$ logsumexp $$ instead of both $$ max $$ and $$ sum $$
 
 **Execution tweaks:**
 
 - **Parallelize over sequence blocks**, not just heads/batches
 - **Split Q across warps** instead of K/V
 
-### Flash Attention 3 - Bring on the H100s
+### Flash Attention 3
 
 > Paper -[https://arxiv.org/pdf/2407.08608](https://arxiv.org/pdf/2407.08608)
 
@@ -277,7 +277,7 @@ from flash_attn.flash_attn_interface import flash_attn_func
 out = flash_attn_func(q, k, v, dropout_p=0.0, causal=False, softmax_scale=None, return_logsumexp=False)
 ```
 
-> Ensure your Q/K/V are $(batch, seqlen, nheads, headdim)$, `float16` or `fp8` format, and live on the **H100 GPU**.
+> Ensure your Q/K/V are $$ (batch, seqlen, nheads, headdim) $$, `float16` or `fp8` format, and live on the **H100 GPU**.
 
 **📘 Reference:**  
 [FlashAttention-3 GitHub (branch)](https://github.com/Dao-AILab/flash-attention/tree/flashattention-3)
