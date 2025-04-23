@@ -6,7 +6,7 @@ tags: [ML, GPU]
 math: true
 pin: true
 image:
-  path: https://miro.medium.com/v2/resize:fit:624/1*11YhOSUwKKRdk5c81PP0yA.png
+  path: https://images.pexels.com/photos/2280165/pexels-photo-2280165.jpeg
   alt: Flash, Fused and Fast - Optimizing Attention
 ---
 
@@ -73,7 +73,7 @@ Approximate attention methods reduce FLOPs but **don’t actually run faster** i
 
 #### Compute Speed vs. Memory Bandwidth
 
-- **Arithmetic throughput** of A100: ~\$$19.5$$ TFLOPs (FP32) & \$$624$$ TFLOPs (FP16/BF16)
+- **Arithmetic throughput** of A100: ~19.5 TFLOPs (FP32) & 624 TFLOPs (FP16/BF16)
 - This creates a bottleneck: if your model keeps accessing HBM for intermediate values (like the full attention matrix), you end up **waiting on memory**, not computation.
 
 > Many Transformer operations—like softmax, dropout, etc.—are **memory-bound**, meaning they spend most time waiting on data to move, not computing on it.
@@ -90,7 +90,7 @@ This keeps the memory usage **linear** in sequence length and significantly **re
 
 Let's take at look at how attention computation would've happened without flash attention. For the sake of simiplicity let's look at just inference.
 
-Consider a \$$QKV$$ shape of \$$(B, S, H, D) = (1, 4000, 32, 128)$$ in `bfloat16` on an `A100` GPU.  Each element would need about `2 bytes` and our A100 has a total HBM of `40 GB` and SRAM of `100 KB`.
+Consider a QKV shape of $(B, S, H, D) = (1, 4000, 32, 128)$ in `bfloat16` on an `A100` GPU.  Each element would need about `2 bytes` and our A100 has a total HBM of `40 GB` and SRAM of `100 KB`.
 
 Step 1: **Matrix Multiply (\$$QK^T$$)**
 
