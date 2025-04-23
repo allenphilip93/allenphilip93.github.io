@@ -167,7 +167,7 @@ The torch trace confirms our suspicions as highlighted in the blue and red boxes
 	- Notice a lot of `aten::to_copy` and `memcpy`, these are basically the IO operations to move the input tensor to CPU & back
 - The actual kernel for `sine` is super small which reinforces our statement that its a simple operation that doesnt get a lot of optimization from GPU
 - The large `aten::rand` on CPU thread is the command we use to generate a random input tensor.
-	- This is expected to be large since its a float32 tensor (4 bytes) of size \$$2^{31}$$ which is about 8.5 GB!!
+	- This is expected to be large since its a float32 tensor (4 bytes) of size $$ 2^{31} $$ which is about 8.5 GB!!
 
 > **Note**: Operations like `matmul` are super common in ML so most of the GPUs are explicity optimized to handle it far more efficiently (Check out tensor cores).
 
@@ -190,7 +190,7 @@ Can we do better? Turns out we can employ a couple of techniques:
 
 ## Warmup for nested `sine`
 
-Let's look at the trace of our `nested_sin_gpu` for a smaller input tensor (\$$2^{10}$$ size) and just run the function twice and capture the trace.
+Let's look at the trace of our `nested_sin_gpu` for a smaller input tensor ($$ 2^{10} $$ size) and just run the function twice and capture the trace.
 
 ![Image Missing](../assets/img/Pasted%20image%2020240614201538.png)
 
