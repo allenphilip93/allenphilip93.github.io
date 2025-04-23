@@ -5,7 +5,7 @@ date: 2024-06-14 11:22:00 +0530
 categories: [Optimization]
 tags: [ML, GPU, Python]
 math: true
-pin: true
+pin: false
 image:
   path: https://www.trgdatacenters.com/wp-content/uploads/2024/09/GPU-vs-CPU-for-AI-Which-Is-Best-for-Your-Business-1-1920x1080.jpg
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
