@@ -11,7 +11,7 @@ image:
 ---
 
 
-# Runtime Optimization Framework
+## Overview
 
 Modern deep learning models require efficient execution to meet production demands. While the core logic of our code defines what we want to achieve, its execution depends on numerous lower-level components that translate our intentions into machine instructions. This translation layer, known as the runtime, is crucial for model inference performance.
 
@@ -23,11 +23,11 @@ Modern inference optimization frameworks consist of two key components:
 - Compiler: Transforms high-level model code into optimized low-level representations
 - Runtime: Manages the execution of compiled code with minimal overhead
 
-## Compiler Architecture
+### Compiler Architecture
 
 The compiler transforms high-level PyTorch model code into optimized low-level representations through a multi-stage process:
 
-### Graph Acquisition
+#### Graph Acquisition
 
 Inference can be viewed as executing a sequence of operations to transform input data into predictions. While inputs may vary, the operation sequence remains constant (and often, so do the input shapes).
 
@@ -40,7 +40,7 @@ Popular tools for graph acquisition include:
 - Torch Dynamo: Dynamic graph tracing for PyTorch
 - ONNX: Cross-platform graph representation format
 
-### Graph Lowering
+#### Graph Lowering
 
 Graph lowering transforms the high-level computational graph into a lower-level intermediate representation (IR) that better matches the target hardware's execution model. This transformation enables:
 
@@ -55,7 +55,7 @@ Common lowering implementations include:
 - ONNX Runtime: Cross-platform optimization passes
 - TensorRT: NVIDIA's specialized lowering passes
 
-### Graph Compilation
+#### Graph Compilation
 
 This takes the intermediate "lowered" execution graph representation and generates the actual "low-level" code. This typically refers to the Triton kernels and other C++ impl of operations.
 
@@ -73,7 +73,7 @@ Graph compilation is done via tools like TorchInductor or TensorRT or ONNX Runti
 > Inference optimization is highly hardware-dependent. When building an inference engine, ensure your runtime environment matches the exact specifications used during optimization, including - PyTorch/TensorRT version, GPU model (e.g., A100), CUDA version, other hardware-specific configurations
 {: .prompt-warning}
 
-# Compilation Strategies
+## Compilation Strategies
 
 Deep learning inference optimization employs two primary compilation approaches:
 
@@ -89,7 +89,7 @@ Deep learning inference optimization employs two primary compilation approaches:
    - Includes on-the-fly autotuning
    - Ideal for development and experimentation
 
-## Comparison of Compilation Approaches
+### Comparison of Compilation Approaches
 
 | Aspect | Static Compilation | Dynamic Compilation |
 |--------|-------------------|-------------------|
@@ -106,13 +106,13 @@ Deep learning inference optimization employs two primary compilation approaches:
 > **Note**: The choice between static and dynamic compilation depends on your specific requirements. Static compilation excels in production environments with predictable workloads, while dynamic compilation offers greater flexibility during development and for models with varying input patterns.
 {: .prompt-tip}
 
-# Static Compilation
+## Static Compilation
 
-## AOTInductor (AOTI)
+### AOTInductor (AOTI)
 
 AOTI is a model optimization and compiler framework for deployment by PyTorch. The "AOT" in AOTInductor refers to "ahead-of-time". This is a static compilation technique, where we optimize our inference runtime before deployment and use the optimized version for productionizing. Though AOTI is very much in the early phase, it's a really good sign since it's torch native and opensourced!
 
-###  Sample Code
+####  Sample Code
 
 > Quick disclaimer. This is definitely an over-simplification and in a more practical scenario, the ride's going to be super bumpy since it's still reaching maturity. But I feel this captures the overall stucture and flow.
 {: .prompt-info}
@@ -157,7 +157,7 @@ with torch.no_grad():
 ```
 
 
-## TensorRT Framework
+### TensorRT Framework
 
 TensorRT is an SDK by NVIDIA for high-performance deep learning inference, optimized specifically for NVIDIA GPUs. It's widely used in industry for production-grade deployments because of its speed and hardware-specific optimizations.
 
@@ -167,9 +167,7 @@ The core principle is the same as in any inference optimization framework just t
 
 TensorRT uses ONNX which is great since you can export your models from PyTorch or TensorFlow to ONNX which is a standardized representation. 
 
-### TensorRT Model Export and Compilation
-
-### Step 1: Export to ONNX Format
+#### Export to ONNX Format
 
 TensorRT requires models to be exported in ONNX format first. Here's how to export a PyTorch model:
 
@@ -195,7 +193,7 @@ with torch.no_grad():
 > **Tip**: For large models, export without weights to create a smaller, more manageable visualization file (typically in KBs).
 {: .prompt-tip}
 
-### Step 2: Generate TensorRT Engine
+#### Generate TensorRT Engine
 
 Once you have the ONNX model, use `trtexec` to create an optimized TensorRT engine:
 
@@ -215,7 +213,7 @@ Once you have the ONNX model, use `trtexec` to create an optimized TensorRT engi
     --profilingVerbosity=detailed | tee "$export_dir/v104/model.log"
 ```
 
-### Key Parameters Explained
+#### Key Parameters Explained
 
 1. **Shape Parameters**
    - `optShapes`: Optimal input shapes for performance
@@ -232,7 +230,7 @@ Once you have the ONNX model, use `trtexec` to create an optimized TensorRT engi
    - `profilingVerbosity`: Controls detail level of performance profiling
    - Various export options for analyzing engine behavior
 
-# Dynamic Compilation with `torch.compile`
+## Dynamic Compilation with `torch.compile`
 
 Unlike AOTI, `torch.compile` was designed for making your pytorch code faster with minimal changes. Also `torch.compile` is a form of dynamic runtime optimization. And as expected, this comes with a few tradeoffs. We sacrifice control and fine-grained control for the ease of use. `torch.compile` allows us to experiment & be more flexible and while AOTI makes sense for a more production ready usecase.
 
@@ -242,7 +240,7 @@ Few things to note though:
 
 - If you're trying to plug into the compilation stack with **custom compilers or transformations**, you'll want to use `aot_compile`.
 
-## Step-by-Step Process
+### Step-by-Step Process
 
 - **TorchDynamo Tracing**
     - Intercepts Python code by tracing through the Python bytecode.
@@ -264,7 +262,7 @@ Few things to note though:
 
 So under the hood, `torch.compile` actually builds this little pipeline each time it hits a new graph. That's where some overhead comes from initially, but later invocations are super fast.
 
-## Sample Code
+### Sample Code
 
 ```python
 model = torch.compile(model, mode="reduce-overhead")
@@ -292,7 +290,8 @@ Can be either "default", "reduce-overhead", "max-autotune" or "max-autotune-no-c
 | max-autotune-no-cudagraphs | High     | ❌ No        | Max tuning, safer for dynamic/complex models |
 
 
-# Reference
+## Further Readings
+
 - https://pytorch.org/docs/stable/torch.compiler_aot_inductor.html
 - https://pytorch.org/tutorials/recipes/torch_export_aoti_python.html
 - https://github.com/NVIDIA/TensorRT
