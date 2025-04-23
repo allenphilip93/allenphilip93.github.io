@@ -152,7 +152,7 @@ GPUs are optimized for **matmul (tensor core)** operations. FlashAttention-2:
 
 **Finer-Grained Parallelism**
 
-FlashAttention used one thread block per head. This works only when $batch\_size × heads$ is large.
+FlashAttention used one thread block per head. This works only when $$batchsize × heads$$ is large.
 FlashAttention-2 also **parallelizes over sequence length**:
 - Now **each block of rows** of the attention matrix gets its own thread block.
 - This massively improves **GPU occupancy** for long sequences + small batches (common in practice).
@@ -164,18 +164,18 @@ Even within a thread block:
 	- Each **warp gets a slice of K/V**
 	- All warps **share the same Q block**
 	- Each warp:
-	    - Computes partial \$$S_{ij} = Q_i.K\_slice^T$$
-	    - Does \$$\exp(S_{ij}) . V\_slice$$
+	    - Computes partial $S_{ij} = Q_iK_{slice}^T$
+	    - Does $\exp(S_{ij}) . V_{slice}$
 	    - Writes **its piece of $O_i$** into shared memory
 	- Then, warps **synchronize and sum** partial results
-	- FlashAttention-2 splits **queries (\$$Q$$)** instead → no need for warps to communicate.
+	- FlashAttention-2 splits **queries (Q)** instead → no need for warps to communicate.
 
 > Result: **fewer syncs, fewer memory reads**, better performance.
 
 **Algorithm tweaks:**
 
-- Delay scaling \$$\tilde{O}$$ until very end → fewer FLOPs    
-- Save only \$$logsumexp$$ instead of both \$$max$$ and \$$sum$$
+- Delay scaling $\tilde{O}$ until very end → fewer FLOPs    
+- Save only $logsumexp$ instead of both $max$ and $sum$
 
 **Execution tweaks:**
 
@@ -184,7 +184,7 @@ Even within a thread block:
 
 ### Flash Attention 3 - Bring on the H100s
 
-> Paper - https://arxiv.org/pdf/2407.08608
+> Paper -[https://arxiv.org/pdf/2407.08608](https://arxiv.org/pdf/2407.08608)
 
 FlashAttention-3 is all about **fully exploiting Hopper GPUs**. While FA2 achieved impressive speedups via IO-awareness and better parallelism, it **left performance on the table** by:
 
@@ -274,7 +274,7 @@ from flash_attn.flash_attn_interface import flash_attn_func
 out = flash_attn_func(q, k, v, dropout_p=0.0, causal=False, softmax_scale=None, return_logsumexp=False)
 ```
 
-> Ensure your Q/K/V are \$$(batch, seqlen, nheads, headdim)$$, `float16` or `fp8` format, and live on the **H100 GPU**.
+> Ensure your Q/K/V are $(batch, seqlen, nheads, headdim)$, `float16` or `fp8` format, and live on the **H100 GPU**.
 
 **📘 Reference:**  
 [FlashAttention-3 GitHub (branch)](https://github.com/Dao-AILab/flash-attention/tree/flashattention-3)
