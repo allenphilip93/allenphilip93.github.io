@@ -7,7 +7,7 @@ tags: [ML, GPU, Python]
 math: true
 pin: true
 image:
-  path: https://media.licdn.com/dms/image/C4D12AQGxK1FATKpxYg/article-cover_image-shrink_600_2000/0/1561361469214?e=2147483647&v=beta&t=3jX_euQK6lj2W6qz1sFKtAtt_-wcRFbtUbbky6EhNNg
+  path: https://www.trgdatacenters.com/wp-content/uploads/2024/09/GPU-vs-CPU-for-AI-Which-Is-Best-for-Your-Business-1-1920x1080.jpg
   alt: GPU Performance - Parallel Processing vs Overhead
 ---
 

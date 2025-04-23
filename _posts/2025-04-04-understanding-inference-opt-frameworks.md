@@ -6,7 +6,7 @@ tags: [ML, GPU, Python]
 math: false
 pin: false
 image:
-  path: https://www.trgdatacenters.com/wp-content/uploads/2024/09/GPU-vs-CPU-for-AI-Which-Is-Best-for-Your-Business-1-1920x1080.jpg
+  path: https://miro.medium.com/v2/resize:fit:624/1*11YhOSUwKKRdk5c81PP0yA.png
   alt: Understanding Inference Optimization Frameworks
 ---
 
