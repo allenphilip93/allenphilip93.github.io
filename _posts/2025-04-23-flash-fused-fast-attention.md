@@ -108,7 +108,7 @@ Step 1: **Matrix Multiply ($$ QK^T $$)**
 - Softmax needs **each row** of $$ S $$ to compute the normalized probabilities.
 - The softmax kernel:
     - Reads a row of $$ S $$ from HBM into registers/SRAM.
-    - Computes $$ softmax(S\_row) $$, then
+    - Computes $$ softmax(S_{row}) $$, then
     - Writes the result $$ P $$ back to HBM.
 - This repeats for every row → **many HBM reads/writes**.
 
@@ -164,8 +164,8 @@ Even within a thread block:
 	- Each **warp gets a slice of K/V**
 	- All warps **share the same Q block**
 	- Each warp:
-	    - Computes partial $S_{ij} = Q_iK_{slice}^T$
-	    - Does $\exp(S_{ij}) . V_{slice}$
+	    - Computes partial $$ S_{ij} = Q_iK_{slice}^T $$
+	    - Does $$ \exp(S_{ij}) * V_{slice} $$
 	    - Writes **its piece of $O_i$** into shared memory
 	- Then, warps **synchronize and sum** partial results
 	- FlashAttention-2 splits **queries (Q)** instead → no need for warps to communicate.
