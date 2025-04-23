@@ -1,7 +1,7 @@
 ---
 title: Understanding Inference Optimization Frameworks
 date: 2025-04-04 08:57:00 +0530
-categories: [Optimization]
+categories: [Optimization, Graph Compilation]
 tags: [ML, GPU]
 math: true
 pin: false
