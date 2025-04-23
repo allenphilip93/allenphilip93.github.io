@@ -1,11 +1,11 @@
 ---
-title: GPU Performance: Parallel Processing vs Overhead
+title: GPU Performance - Parallel Processing vs Overhead
 description: Understanding GPU Performance - When Parallel Processing Outweighs Overhead
 date: 2024-06-14 11:22:00 +0530
 categories: [Optimization]
 tags: [ML, GPU, Python]
 math: true
-pin: false
+pin: true
 image:
   path: https://www.trgdatacenters.com/wp-content/uploads/2024/09/GPU-vs-CPU-for-AI-Which-Is-Best-for-Your-Business-1-1920x1080.jpg
   alt: GPU Performance - Parallel Processing vs Overhead
