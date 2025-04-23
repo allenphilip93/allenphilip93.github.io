@@ -3,7 +3,7 @@ title: Building Custom TensorRT Plugins
 date: 2025-04-13 12:45:00 +0530
 categories: [Optimization]
 tags: [ML, GPU]
-math: false
+math: true
 pin: false
 image:
   path: https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2019/01/what-is-wordpress-plugin-1.webp

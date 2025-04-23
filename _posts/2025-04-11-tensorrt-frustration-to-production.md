@@ -3,7 +3,7 @@ title: TensorRT - From Frustration to Production
 date: 2025-04-11 10:15:00 +0530
 categories: [Optimization]
 tags: [ML, GPU]
-math: false
+math: true
 pin: false
 image:
   path: https://wallpapers.com/images/hd/manufacturing-2048-x-1120-wallpaper-dty69xwzaexx6kn7.jpg

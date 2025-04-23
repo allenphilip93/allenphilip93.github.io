@@ -3,7 +3,7 @@ title: Understanding Inference Optimization Frameworks
 date: 2025-04-04 08:57:00 +0530
 categories: [Optimization]
 tags: [ML, GPU]
-math: false
+math: true
 pin: false
 image:
   path: https://miro.medium.com/v2/resize:fit:1400/1*PiZ_bHavO0aWI-mPMyfASQ.png
