@@ -1,6 +1,6 @@
 ---
 title: TensorRT - From Frustration to Production
-date: 2025-04-27 21:55:00 +0530
+date: 2024-10-27 21:55:00 +0530
 categories: [Optimization, Graph Compilation]
 tags: [ML, GPU, FP8]
 math: true

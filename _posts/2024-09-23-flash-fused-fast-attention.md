@@ -1,6 +1,6 @@
 ---
 title: Flash, Fused and Fast Attention
-date: 2025-04-23 13:05:00 +0530
+date: 2024-09-23 13:05:00 +0530
 categories: [Optimization, Attention]
 tags: [ML, GPU]
 math: true

@@ -1,6 +1,6 @@
 ---
 title: Why attention deserves your attention?
-date: 2025-04-16 12:56:00 +0530
+date: 2024-08-16 12:56:00 +0530
 categories: [Optimization, Attention]
 tags: [ML, GPU]
 math: true

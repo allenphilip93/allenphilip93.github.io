@@ -1,6 +1,6 @@
 ---
 title: Understanding Attention Approximation
-date: 2025-05-01 19:04:00 +0530
+date: 2024-11-05 19:04:00 +0530
 categories: [Optimization, Attention]
 tags: [ML, GPU]
 math: true

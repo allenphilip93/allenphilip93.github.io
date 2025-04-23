@@ -1,6 +1,6 @@
 ---
 title: Attention Olympics - Fastest attention kernel?
-date: 2025-04-29 10:15:00 +0530
+date: 2025-01-29 10:15:00 +0530
 categories: [Optimization, Benchmarking]
 tags: [ML, GPU]
 math: true
