@@ -1,0 +1,23 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#f8f8f8"/>
+  <rect x="50" y="150" width="120" height="100" rx="8" fill="#e8e8e8" stroke="#ccc"/>
+  <text x="110" y="205" text-anchor="middle" font-family="system-ui" font-size="14" fill="#666">Query (Q)</text>
+  <rect x="220" y="150" width="120" height="100" rx="8" fill="#e8e8e8" stroke="#ccc"/>
+  <text x="280" y="205" text-anchor="middle" font-family="system-ui" font-size="14" fill="#666">Key (K)</text>
+  <rect x="390" y="150" width="120" height="100" rx="8" fill="#e8e8e8" stroke="#ccc"/>
+  <text x="450" y="205" text-anchor="middle" font-family="system-ui" font-size="14" fill="#666">Value (V)</text>
+  <circle cx="590" cy="200" r="40" fill="#1a1a1a"/>
+  <text x="590" y="205" text-anchor="middle" font-family="system-ui" font-size="12" fill="#fff">Attention</text>
+  <rect x="680" y="150" width="80" height="100" rx="8" fill="#1a1a1a"/>
+  <text x="720" y="205" text-anchor="middle" font-family="system-ui" font-size="14" fill="#fff">Output</text>
+  <line x1="170" y1="200" x2="210" y2="200" stroke="#999" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="340" y1="200" x2="380" y2="200" stroke="#999" stroke-width="2"/>
+  <line x1="510" y1="200" x2="540" y2="200" stroke="#999" stroke-width="2"/>
+  <line x1="630" y1="200" x2="670" y2="200" stroke="#999" stroke-width="2"/>
+  <text x="400" y="50" text-anchor="middle" font-family="system-ui" font-size="18" font-weight="600" fill="#1a1a1a">Attention Mechanism Overview</text>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#999"/>
+    </marker>
+  </defs>
+</svg>

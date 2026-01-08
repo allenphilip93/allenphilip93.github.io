@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
+
+  <!-- Open Graph / Social Sharing -->
+  {% assign og_title = page.title | default: site.title | url_encode %}
+  {% assign og_description = page.description | default: site.description | truncate: 100 | url_encode %}
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ page.title | default: site.title }}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:image" content="https://og.tailgraph.com/og?fontFamily=Inter&title={{ og_title }}&titleTailwind=font-bold%20text-6xl%20text-gray-900&text={{ og_description }}&textTailwind=text-2xl%20mt-4%20text-gray-700&logoTailwind=h-8&bgTailwind=bg-white&footer=allenphilip93.github.io&footerTailwind=text-gray-600">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@allenphilip93">
+  <meta name="twitter:title" content="{{ page.title | default: site.title }}">
+  <meta name="twitter:description" content="{{ page.description | default: site.description }}">
+  <meta name="twitter:image" content="https://og.tailgraph.com/og?fontFamily=Inter&title={{ og_title }}&titleTailwind=font-bold%20text-6xl%20text-gray-900&text={{ og_description }}&textTailwind=text-2xl%20mt-4%20text-gray-700&logoTailwind=h-8&bgTailwind=bg-white&footer=allenphilip93.github.io&footerTailwind=text-gray-600">
+  {% if page.date %}<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">{% endif %}
+
+  {% seo %}
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
+  {% if page.katex %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  {% endif %}
+</head>
+<body>
+  {% include header.html %}
+
+  <main class="main">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js"></script>
+  <script>
+    // Medium zoom for images
+    mediumZoom('.post-content img', { margin: 48, background: '#fff' });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      var prev = document.querySelector('link[rel="prev"]');
+      var next = document.querySelector('link[rel="next"]');
+      if (e.keyCode === 37 && prev) window.location.href = prev.href;
+      if (e.keyCode === 39 && next) window.location.href = next.href;
+    });
+  </script>
+  {% if page.katex %}
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script>
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "$", right: "$", display: false},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  </script>
+  {% endif %}
+
+  <!-- GoatCounter Analytics -->
+  <script data-goatcounter="https://allenphilip93.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

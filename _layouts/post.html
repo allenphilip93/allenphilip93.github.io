@@ -1,0 +1,240 @@
+---
+layout: default
+---
+
+<!-- Reading Progress Bar -->
+<div class="reading-progress" id="reading-progress"></div>
+
+{% if page.previous.url %}
+<link rel="prev" href="{{ page.previous.url | relative_url }}">
+{% endif %}
+{% if page.next.url %}
+<link rel="next" href="{{ page.next.url | relative_url }}">
+{% endif %}
+
+<article class="post">
+  <header class="post-header">
+    <div class="post-meta">
+      <span class="post-author">{{ page.author | default: site.author }}</span>
+      <span class="post-date">{{ page.date | date: "%b %-d, %Y" }}</span>
+      {% assign words = content | strip_html | number_of_words %}
+      {% assign minutes = words | divided_by: 200 %}
+      {% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+      <span class="post-reading-time">{{ minutes }} min read</span>
+    </div>
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.tags.size > 0 %}
+    <div class="post-tags">
+      {% for tag in page.tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </header>
+
+  <div class="post-layout">
+    <aside class="toc-sidebar">
+      <nav class="toc" id="toc">
+        <div class="toc-title">Contents</div>
+        <ul class="toc-list"></ul>
+      </nav>
+    </aside>
+
+    <div class="post-main">
+      <div class="post-content">
+        {{ content }}
+      </div>
+
+      <footer class="post-footer">
+        <nav class="pagination">
+          {% if page.next.url %}
+          <a href="{{ page.next.url | relative_url }}" class="pagination-prev">
+            <span class="pagination-arrow">&larr;</span>
+            <span class="pagination-text">{{ page.next.title }}</span>
+          </a>
+          {% endif %}
+          {% if page.previous.url %}
+          <a href="{{ page.previous.url | relative_url }}" class="pagination-next">
+            <span class="pagination-text">{{ page.previous.title }}</span>
+            <span class="pagination-arrow">&rarr;</span>
+          </a>
+          {% endif %}
+        </nav>
+        <p class="keyboard-hint">Use arrow keys to move between posts</p>
+      </footer>
+    </div>
+
+    <aside class="citations-sidebar" id="citations-sidebar">
+    </aside>
+  </div>
+</article>
+
+<script>
+(function() {
+  // Generate TOC
+  const content = document.querySelector('.post-content');
+  const tocList = document.querySelector('.toc-list');
+  const headings = content.querySelectorAll('h2, h3');
+
+  if (headings.length === 0) {
+    document.querySelector('.toc-sidebar').style.display = 'none';
+  } else {
+    headings.forEach((heading, index) => {
+      if (!heading.id) {
+        heading.id = 'heading-' + index;
+      }
+
+      const li = document.createElement('li');
+      li.className = 'toc-item' + (heading.tagName === 'H3' ? ' toc-item-sub' : '');
+
+      const a = document.createElement('a');
+      a.href = '#' + heading.id;
+      a.textContent = heading.textContent;
+      a.className = 'toc-link';
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+
+    const tocLinks = document.querySelectorAll('.toc-link');
+
+    function highlightToc() {
+      let current = '';
+      headings.forEach(heading => {
+        const rect = heading.getBoundingClientRect();
+        if (rect.top <= 100) {
+          current = heading.id;
+        }
+      });
+
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', highlightToc);
+    highlightToc();
+  }
+
+  // Move footnotes to sidenotes
+  const footnotes = document.querySelector('.footnotes');
+  const citationsSidebar = document.getElementById('citations-sidebar');
+
+  if (footnotes && citationsSidebar) {
+    const supLinks = content.querySelectorAll('sup a[href^="#fn"]');
+    const sidenotes = [];
+    let lastBottom = 0;
+
+    supLinks.forEach((supLink, index) => {
+      const fnId = supLink.getAttribute('href').substring(1);
+      const footnoteItem = document.getElementById(fnId);
+
+      if (footnoteItem) {
+        const sidenote = document.createElement('div');
+        sidenote.className = 'sidenote';
+
+        const sidenoteNum = document.createElement('span');
+        sidenoteNum.className = 'sidenote-num';
+        sidenoteNum.textContent = index + 1;
+
+        const sidenoteContent = document.createElement('span');
+        sidenoteContent.className = 'sidenote-content';
+        const clonedContent = footnoteItem.cloneNode(true);
+        const backref = clonedContent.querySelector('.reversefootnote');
+        if (backref) backref.remove();
+        sidenoteContent.innerHTML = clonedContent.innerHTML;
+
+        sidenote.appendChild(sidenoteNum);
+        sidenote.appendChild(sidenoteContent);
+        citationsSidebar.appendChild(sidenote);
+
+        sidenotes.push({ el: sidenote, ref: supLink });
+      }
+    });
+
+    function positionSidenotes() {
+      const sidebarRect = citationsSidebar.getBoundingClientRect();
+      const layoutRect = citationsSidebar.parentElement.getBoundingClientRect();
+      let lastBottom = 0;
+
+      sidenotes.forEach(({ el, ref }) => {
+        const refRect = ref.getBoundingClientRect();
+        let targetTop = refRect.top - layoutRect.top;
+
+        // Prevent overlap with previous sidenote
+        if (targetTop < lastBottom + 12) {
+          targetTop = lastBottom + 12;
+        }
+
+        el.style.top = targetTop + 'px';
+        lastBottom = targetTop + el.offsetHeight;
+      });
+    }
+
+    positionSidenotes();
+    window.addEventListener('resize', positionSidenotes);
+    window.addEventListener('load', positionSidenotes);
+
+    footnotes.style.display = 'none';
+  }
+
+  // Reading Progress Bar
+  const progressBar = document.getElementById('reading-progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    progressBar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress);
+  updateProgress();
+
+  // Code Copy Buttons
+  document.querySelectorAll('pre').forEach(pre => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'code-block-wrapper';
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(pre);
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = 'Copy';
+    btn.addEventListener('click', () => {
+      const code = pre.querySelector('code') || pre;
+      navigator.clipboard.writeText(code.textContent).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+    wrapper.appendChild(btn);
+  });
+
+  // Back to Top Button
+  const backToTop = document.createElement('button');
+  backToTop.className = 'back-to-top';
+  backToTop.innerHTML = '&uarr;';
+  backToTop.setAttribute('aria-label', 'Back to top');
+  document.body.appendChild(backToTop);
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  function toggleBackToTop() {
+    if (window.scrollY > 400) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', toggleBackToTop);
+  toggleBackToTop();
+})();
+</script>

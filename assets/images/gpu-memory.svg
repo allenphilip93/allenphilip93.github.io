@@ -1,0 +1,37 @@
+<svg width="700" height="350" xmlns="http://www.w3.org/2000/svg">
+  <rect width="700" height="350" fill="#f8f8f8"/>
+  <text x="350" y="40" text-anchor="middle" font-family="system-ui" font-size="18" font-weight="600" fill="#1a1a1a">GPU Memory Hierarchy</text>
+
+  <!-- HBM -->
+  <rect x="50" y="80" width="200" height="220" rx="8" fill="#e8e8e8" stroke="#999"/>
+  <text x="150" y="110" text-anchor="middle" font-family="system-ui" font-size="14" font-weight="600" fill="#1a1a1a">HBM (Global Memory)</text>
+  <text x="150" y="135" text-anchor="middle" font-family="system-ui" font-size="12" fill="#666">~80GB capacity</text>
+  <text x="150" y="155" text-anchor="middle" font-family="system-ui" font-size="12" fill="#666">~2 TB/s bandwidth</text>
+  <rect x="70" y="175" width="160" height="50" rx="4" fill="#fff" stroke="#ccc"/>
+  <text x="150" y="205" text-anchor="middle" font-family="system-ui" font-size="11" fill="#666">Q, K, V Matrices</text>
+  <rect x="70" y="235" width="160" height="50" rx="4" fill="#fff" stroke="#ccc"/>
+  <text x="150" y="265" text-anchor="middle" font-family="system-ui" font-size="11" fill="#666">Attention Output</text>
+
+  <!-- Arrow -->
+  <line x1="260" y1="190" x2="320" y2="190" stroke="#1a1a1a" stroke-width="2"/>
+  <polygon points="320,185 335,190 320,195" fill="#1a1a1a"/>
+  <text x="290" y="175" text-anchor="middle" font-family="system-ui" font-size="10" fill="#999">Load</text>
+
+  <!-- SRAM -->
+  <rect x="345" y="120" width="150" height="140" rx="8" fill="#1a1a1a"/>
+  <text x="420" y="150" text-anchor="middle" font-family="system-ui" font-size="14" font-weight="600" fill="#fff">SRAM (On-chip)</text>
+  <text x="420" y="175" text-anchor="middle" font-family="system-ui" font-size="12" fill="#ccc">~20MB capacity</text>
+  <text x="420" y="195" text-anchor="middle" font-family="system-ui" font-size="12" fill="#ccc">~19 TB/s bandwidth</text>
+  <rect x="365" y="210" width="110" height="35" rx="4" fill="#333"/>
+  <text x="420" y="233" text-anchor="middle" font-family="system-ui" font-size="10" fill="#fff">Block tiles</text>
+
+  <!-- Registers -->
+  <rect x="530" y="150" width="120" height="80" rx="8" fill="#666"/>
+  <text x="590" y="180" text-anchor="middle" font-family="system-ui" font-size="12" font-weight="600" fill="#fff">Registers</text>
+  <text x="590" y="200" text-anchor="middle" font-family="system-ui" font-size="10" fill="#ddd">Per-thread</text>
+  <text x="590" y="215" text-anchor="middle" font-family="system-ui" font-size="10" fill="#ddd">~256 KB/SM</text>
+
+  <!-- Arrow SRAM to Registers -->
+  <line x1="500" y1="190" x2="520" y2="190" stroke="#fff" stroke-width="2"/>
+  <polygon points="520,185 530,190 520,195" fill="#fff"/>
+</svg>

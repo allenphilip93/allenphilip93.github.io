@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<div class="blog-list-wrapper">
+  <div class="blog-list">
+    {% for post in site.posts %}
+    <article class="blog-item">
+      <div class="blog-item-date">{{ post.date | date: "%b %-d, %Y" }}</div>
+      <div class="blog-item-content">
+        <h2 class="blog-item-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h2>
+        {% if post.tags.size > 0 %}
+        <div class="blog-item-tags">
+          {% for tag in post.tags %}
+          <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>
