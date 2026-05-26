@@ -2,24 +2,30 @@
 ---
 
 // ============================================
-// Thinking Machines Style - Minimal Blog
+// Typography-first Blog Design
+// Inspired by paperswithcode.co
 // ============================================
 
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
 // Variables
-$font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
-$font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+$font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+$font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 
-$color-text: #1a1a1a;
-$color-text-light: #666;
-$color-text-muted: #999;
-$color-bg: #fff;
-$color-border: #eee;
-$color-link: #1a1a1a;
-$color-link-hover: #666;
-$color-code-bg: #f5f5f5;
+$color-text: #111;
+$color-text-secondary: #555;
+$color-text-muted: #888;
+$color-bg: #faf8f4;
+$color-border: #e8e4dd;
+$color-border-light: #f0ece6;
+$color-link: #111;
+$color-link-hover: #555;
+$color-code-bg: #f5f3ee;
+$color-surface: #f4f1eb;
 
-$content-width: 860px;
-$spacing: 1.5rem;
+$content-width: 720px;
+$wide-width: 1120px;
 
 // Reset
 *, *::before, *::after {
@@ -30,9 +36,10 @@ $spacing: 1.5rem;
 
 // Base
 html {
-  font-size: 17px;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -41,77 +48,146 @@ body {
   line-height: 1.7;
   color: $color-text;
   background: $color-bg;
-  animation: fadeIn 0.3s ease-in-out;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-// Layout
+// ============================================
+// Header / Navigation
+// ============================================
 .site-header {
-  padding: 0.875rem 3rem;
+  position: relative;
+  padding: 1.25rem 2rem;
   border-bottom: 1px solid $color-border;
+  z-index: 100;
 
   @media (max-width: 600px) {
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 1.25rem;
   }
 }
 
 .nav {
-  max-width: 100%;
-  margin: 0;
+  max-width: $wide-width;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 
 .nav-logo {
-  font-size: 1rem;
+  font-family: 'Chakra Petch', $font-sans;
+  font-size: 1.0625rem;
   font-weight: 500;
-  letter-spacing: 0.2em;
-  color: #4a4a4a;
+  color: $color-text;
   text-decoration: none;
-  transition: color 0.2s ease;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 1.7px;
+  padding: 0.375rem 0;
+  transition: opacity 0.2s ease;
 
   &:hover {
-    color: $color-text;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 0.9375rem;
+    letter-spacing: 1.5px;
+  }
+}
+
+// Hamburger toggle — hidden on desktop
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $color-text;
+  padding: 0.25rem;
+  -webkit-tap-highlight-color: transparent;
+
+  @media (max-width: 600px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 0.125rem;
 
   a {
-    font-size: 0.875rem;
-    color: $color-text-light;
+    font-family: $font-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: $color-text-secondary;
     text-decoration: none;
-    transition: color 0.2s ease;
+    padding: 0.375rem 0.625rem;
+    border-radius: 6px;
+    transition: color 0.15s ease, background-color 0.15s ease;
 
     &:hover {
       color: $color-text;
+      background: $color-surface;
+    }
+
+    &.active {
+      color: $color-text;
+      font-weight: 500;
+    }
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: $color-bg;
+    border-bottom: 1px solid $color-border;
+    padding: 0.5rem 1.25rem 1rem;
+    gap: 0;
+
+    &.open {
+      display: flex;
+    }
+
+    a {
+      font-size: 0.9375rem;
+      padding: 0.6rem 0.5rem;
+      border-radius: 0;
+      border-bottom: 1px solid $color-border-light;
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
   }
 }
 
+// ============================================
+// Layout
+// ============================================
 .main {
-  max-width: 1200px;
+  max-width: $wide-width;
   margin: 0 auto;
-  padding: 1.25rem 1.5rem;
+  padding: 2rem 2rem;
+
+  @media (max-width: 600px) {
+    padding: 1.5rem 1.25rem;
+  }
 }
 
+// ============================================
+// Footer
+// ============================================
 .site-footer {
-  max-width: $content-width;
+  max-width: $wide-width;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 2rem;
   border-top: 1px solid $color-border;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: $color-text-muted;
 
   .content {
@@ -120,6 +196,10 @@ body {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    padding: 1.5rem 1.25rem;
   }
 }
 
@@ -131,6 +211,7 @@ body {
   a {
     color: $color-text-muted;
     text-decoration: none;
+    transition: color 0.15s ease;
 
     &:hover {
       color: $color-text;
@@ -138,140 +219,127 @@ body {
   }
 }
 
-// Blog List Wrapper (aligns with post content)
+// ============================================
+// Blog List (Home Page)
+// ============================================
 .blog-list-wrapper {
   display: grid;
-  grid-template-columns: 180px 1fr 220px;
-  gap: 2.5rem;
+  grid-template-columns: 180px 1fr 180px;
+  gap: 2rem;
 
-  @media (max-width: 1200px) {
-    grid-template-columns: 180px 1fr;
-  }
-
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     grid-template-columns: 1fr;
+    gap: 0;
   }
 }
 
-// Blog List
 .blog-list {
   display: flex;
   flex-direction: column;
   max-width: $content-width;
   grid-column: 2;
+  gap: 0.25rem;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     grid-column: 1;
+    max-width: 100%;
   }
 }
 
 .blog-item {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 110px 1fr;
   gap: 1.5rem;
-  padding: 1rem 0.75rem;
+  padding: 0.875rem 0.75rem;
   margin: 0 -0.75rem;
-  border-radius: 6px;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: #fafafa;
-    transform: translateX(4px);
+    background-color: $color-surface;
   }
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
-    gap: 0.2rem;
+    gap: 0.25rem;
+    padding: 0.75rem 0;
+    margin: 0;
   }
 }
 
 .blog-item-date {
-  font-size: 0.95rem;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
   color: $color-text-muted;
-  padding-top: 0.2rem;
-}
-
-.blog-item-content {
-  // wrapper for title + author
+  padding-top: 0.3rem;
 }
 
 .blog-item-title {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-family: $font-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
   line-height: 1.4;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.3rem;
 
   a {
     color: $color-text;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color 0.15s ease;
 
     &:hover {
-      color: $color-text-light;
+      color: $color-text-secondary;
     }
   }
 }
 
-.blog-item-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.blog-item-author {
-  font-size: 0.9rem;
-  color: $color-text-muted;
-}
-
 .blog-item-tags {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.35rem;
   flex-wrap: wrap;
 }
 
 .tag {
   display: inline-block;
-  padding: 0.1rem 0.35rem;
-  font-size: 0.6rem;
+  padding: 0.125rem 0.4rem;
+  font-family: $font-sans;
+  font-size: 0.625rem;
+  font-weight: 500;
   color: $color-text-muted;
-  background: #f0f0f0;
-  border-radius: 2px;
+  background: $color-border-light;
+  border-radius: 3px;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  letter-spacing: 0.04em;
+  transition: background-color 0.15s ease, color 0.15s ease;
 
   &:hover {
-    background: #e5e5e5;
-    color: $color-text-light;
+    background: $color-border;
+    color: $color-text-secondary;
   }
 }
 
+// ============================================
 // Single Post
+// ============================================
 .post {
   padding-bottom: 2rem;
 }
 
 .post-header {
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   max-width: $content-width;
   margin-left: auto;
   margin-right: auto;
 
-  @media (min-width: 901px) {
-    margin-left: calc(180px + 2.5rem);
-    margin-right: calc(220px + 2.5rem);
-  }
-
-  @media (min-width: 901px) and (max-width: 1200px) {
-    margin-right: 0;
+  @media (min-width: 1101px) {
+    margin-left: calc(180px + 2rem);
   }
 }
 
 .post-meta {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: $color-text-muted;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+  font-variant-numeric: tabular-nums;
 
   .post-author {
     &::after {
@@ -281,31 +349,33 @@ body {
 }
 
 .post-title {
+  font-family: $font-serif;
   font-size: 2.5rem;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: $color-text;
 
   @media (max-width: 600px) {
-    font-size: 2rem;
+    font-size: 1.875rem;
   }
 }
 
 .post-tags {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.35rem;
   flex-wrap: wrap;
   margin-top: 1rem;
 }
 
-// Post Layout with TOC and Citations
+// Post Grid Layout (TOC | Content | Citations)
 .post-layout {
   display: grid;
-  grid-template-columns: 180px 1fr 220px;
-  gap: 2.5rem;
+  grid-template-columns: 180px 1fr 200px;
+  gap: 2rem;
   position: relative;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1100px) {
     grid-template-columns: 180px 1fr;
   }
 
@@ -320,48 +390,9 @@ body {
   min-width: 0;
 }
 
-// Citations Sidebar
-.citations-sidebar {
-  position: relative;
-
-  @media (max-width: 1200px) {
-    display: none;
-  }
-}
-
-.sidenote {
-  position: absolute;
-  width: 200px;
-  font-size: 0.75rem;
-  line-height: 1.5;
-  color: $color-text-muted;
-
-  a {
-    color: $color-text;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-
-    &:hover {
-      color: $color-text-light;
-    }
-  }
-}
-
-.sidenote-num {
-  font-size: 0.7rem;
-  color: $color-text-muted;
-  vertical-align: super;
-  margin-right: 0.25rem;
-}
-
-.sidenote-content {
-  p {
-    margin: 0;
-    display: inline;
-  }
-}
-
+// ============================================
 // TOC Sidebar
+// ============================================
 .toc-sidebar {
   @media (max-width: 900px) {
     display: none;
@@ -374,7 +405,8 @@ body {
 }
 
 .toc-title {
-  font-size: 0.75rem;
+  font-family: $font-sans;
+  font-size: 0.6875rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -389,23 +421,24 @@ body {
 }
 
 .toc-item {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.375rem;
 
   &.toc-item-sub {
     padding-left: 0.75rem;
 
     .toc-link {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
     }
   }
 }
 
 .toc-link {
-  font-size: 0.85rem;
+  font-family: $font-sans;
+  font-size: 0.8125rem;
   color: $color-text-muted;
   text-decoration: none;
   display: block;
-  padding: 0.25rem 0;
+  padding: 0.2rem 0;
   border-left: 2px solid transparent;
   padding-left: 0.75rem;
   margin-left: -0.75rem;
@@ -422,21 +455,74 @@ body {
   }
 }
 
-// Post Content
+// ============================================
+// Citations Sidebar
+// ============================================
+.citations-sidebar {
+  position: relative;
+
+  @media (max-width: 1100px) {
+    display: none;
+  }
+}
+
+.sidenote {
+  position: absolute;
+  width: 180px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: $color-text-muted;
+
+  a {
+    color: $color-text;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+      color: $color-text-secondary;
+    }
+  }
+}
+
+.sidenote-num {
+  font-size: 0.65rem;
+  color: $color-text-muted;
+  vertical-align: super;
+  margin-right: 0.2rem;
+}
+
+.sidenote-content {
+  p {
+    margin: 0;
+    display: inline;
+  }
+}
+
+// ============================================
+// Post Content (Prose)
+// ============================================
 .post-content {
+  font-family: $font-serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: $color-text;
+
   h2 {
+    font-family: $font-serif;
     font-size: 1.5rem;
     font-weight: 600;
     margin-top: 3rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     line-height: 1.3;
+    letter-spacing: -0.01em;
   }
 
   h3 {
+    font-family: $font-serif;
     font-size: 1.25rem;
     font-weight: 600;
     margin-top: 2rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     line-height: 1.4;
   }
 
@@ -446,16 +532,13 @@ body {
 
   a {
     color: $color-link;
-    text-decoration: none;
-    background-image: linear-gradient(currentColor, currentColor);
-    background-position: 0% 100%;
-    background-repeat: no-repeat;
-    background-size: 0% 1px;
-    transition: background-size 0.25s ease, color 0.2s ease;
+    text-decoration: underline;
+    text-decoration-color: $color-border;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease;
 
     &:hover {
-      color: $color-link-hover;
-      background-size: 100% 1px;
+      text-decoration-color: $color-text;
     }
   }
 
@@ -470,18 +553,24 @@ body {
 
   blockquote {
     margin: 2rem 0;
-    padding-left: 1.5rem;
+    padding: 1.25rem 1.5rem;
     border-left: 3px solid $color-border;
-    color: $color-text-light;
+    background: $color-surface;
+    border-radius: 0 6px 6px 0;
+    color: $color-text-secondary;
     font-style: italic;
 
     p {
       margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
 
     cite {
       display: block;
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
       font-style: normal;
       color: $color-text-muted;
       margin-top: 0.5rem;
@@ -489,16 +578,16 @@ body {
   }
 
   img {
-    max-width: calc(100% + 100px);
-    width: calc(100% + 100px);
-    margin-left: -50px;
+    max-width: calc(100% + 80px);
+    width: calc(100% + 80px);
+    margin-left: -40px;
     height: auto;
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     cursor: zoom-in;
     border-radius: 8px;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 900px) {
       max-width: 100%;
       width: 100%;
       margin-left: 0;
@@ -507,10 +596,10 @@ body {
 
   figure {
     margin: 2rem 0;
-    max-width: calc(100% + 100px);
-    margin-left: -50px;
+    max-width: calc(100% + 80px);
+    margin-left: -40px;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 900px) {
       max-width: 100%;
       margin-left: 0;
     }
@@ -524,17 +613,18 @@ body {
 
     figcaption {
       margin-top: 0.75rem;
-      font-size: 0.8rem;
+      font-family: $font-sans;
+      font-size: 0.75rem;
       color: $color-text-muted;
       text-align: left;
-      padding-left: 50px;
+      padding-left: 40px;
 
-      @media (max-width: 1000px) {
+      @media (max-width: 900px) {
         padding-left: 0;
       }
 
       strong, b {
-        color: $color-text-light;
+        color: $color-text-secondary;
       }
     }
   }
@@ -545,52 +635,52 @@ body {
     margin: 3rem 0;
   }
 
+  // Tables
   table {
     width: auto;
     border-collapse: collapse;
     margin: 1.5rem 0;
-    font-size: 0.8rem;
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
+    font-family: $font-sans;
+    font-size: 0.8125rem;
+    background: $color-bg;
+    border: 1px solid $color-border;
+    border-radius: 6px;
   }
 
   th, td {
-    padding: 0.4rem 0.75rem;
+    padding: 0.5rem 0.875rem;
     text-align: left;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $color-border-light;
   }
 
   th {
     font-weight: 600;
-    color: $color-text-muted;
-    font-size: 0.75rem;
-    background: #fafafa;
-    border-bottom: 1px solid #e5e5e5;
+    color: $color-text-secondary;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: $color-surface;
+    border-bottom: 1px solid $color-border;
   }
 
   tr:last-child td {
     border-bottom: none;
   }
 
-  // Highlighted cells
   td.highlight, th.highlight {
     background: #e8f5e9;
   }
 
-  // Underlined emphasis
   td u, td .underline {
     text-decoration: underline;
     text-decoration-color: currentColor;
     text-underline-offset: 2px;
   }
 
-  // Center aligned columns
   td.center, th.center {
     text-align: center;
   }
 
-  // Indicator dots/squares
   td .indicator {
     display: inline-block;
     width: 10px;
@@ -610,28 +700,27 @@ body {
   // Inline code
   code {
     font-family: $font-mono;
-    font-size: 0.875em;
+    font-size: 0.8em;
     background: $color-code-bg;
-    padding: 0.2em 0.4em;
-    border-radius: 3px;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    border: 1px solid $color-border-light;
   }
 
-  // Code blocks (light theme)
+  // Code blocks
   pre {
-    background: #f8f8f8;
-    color: #333;
+    background: $color-code-bg;
+    color: #24292e;
     padding: 1rem 1.25rem;
-    border-radius: 6px;
+    border-radius: 8px;
     overflow-x: auto;
     margin: 1.5rem 0;
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
     line-height: 1.6;
-    border: 1px solid #e8e8e8;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid $color-border;
 
     &:hover {
       border-color: #d0d0d0;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
     code {
@@ -639,6 +728,7 @@ body {
       padding: 0;
       font-size: inherit;
       color: inherit;
+      border: none;
     }
   }
 
@@ -647,8 +737,9 @@ body {
     margin-top: 3rem;
     padding-top: 1.5rem;
     border-top: 1px solid $color-border;
-    font-size: 0.875rem;
-    color: $color-text-light;
+    font-family: $font-sans;
+    font-size: 0.8125rem;
+    color: $color-text-secondary;
 
     ol {
       padding-left: 1.25rem;
@@ -660,7 +751,7 @@ body {
   }
 
   sup {
-    font-size: 0.75em;
+    font-size: 0.7em;
 
     a {
       text-decoration: none;
@@ -673,7 +764,9 @@ body {
   }
 }
 
+// ============================================
 // Math (KaTeX)
+// ============================================
 .katex-display {
   margin: 1.25rem 0;
   overflow-x: auto;
@@ -685,14 +778,15 @@ body {
 }
 
 .katex {
-  font-size: 0.85em;
+  font-size: 0.9em;
 }
 
-// Mobile responsive for code and math
 @media (max-width: 600px) {
   .post-content {
+    font-size: 1rem;
+
     pre {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       padding: 0.75rem 1rem;
     }
 
@@ -702,7 +796,7 @@ body {
   }
 
   .katex {
-    font-size: 0.75em;
+    font-size: 0.8em;
   }
 
   .katex-display > .katex {
@@ -710,7 +804,9 @@ body {
   }
 }
 
-// Post Footer
+// ============================================
+// Post Footer / Pagination
+// ============================================
 .post-footer {
   margin-top: 4rem;
   padding-top: 2rem;
@@ -735,11 +831,12 @@ body {
   gap: 0.5rem;
   color: $color-text;
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.2s ease, transform 0.2s ease;
+  font-family: $font-sans;
+  font-size: 0.875rem;
+  transition: color 0.15s ease, transform 0.15s ease;
 
   &:hover {
-    color: $color-text-light;
+    color: $color-text-secondary;
   }
 }
 
@@ -751,10 +848,8 @@ body {
   transform: translateX(3px);
 }
 
-.pagination-prev {
-  .pagination-text {
-    text-align: left;
-  }
+.pagination-prev .pagination-text {
+  text-align: left;
 }
 
 .pagination-next {
@@ -771,12 +866,14 @@ body {
 
 .keyboard-hint {
   margin-top: 1.5rem;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   color: $color-text-muted;
   text-align: center;
 }
 
-// Page (About, etc.)
+// ============================================
+// Page Layout (About, Projects, etc.)
+// ============================================
 .page-header {
   margin-bottom: 0;
   padding-bottom: 0;
@@ -788,7 +885,8 @@ body {
 }
 
 .page-content {
-  font-size: 1.05rem;
+  font-family: $font-sans;
+  font-size: 1rem;
   line-height: 1.75;
 
   p {
@@ -798,29 +896,32 @@ body {
   a {
     color: $color-link;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
+    text-decoration-color: $color-border;
 
     &:hover {
-      color: $color-link-hover;
+      text-decoration-color: $color-text;
     }
   }
 
   h2 {
-    font-size: 0.85rem;
+    font-family: $font-sans;
+    font-size: 0.6875rem;
     font-weight: 600;
     margin-top: 0;
     margin-bottom: 1.25rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: $color-text-muted;
   }
 
   h3 {
-    font-size: 0.8rem;
+    font-family: $font-sans;
+    font-size: 0.6875rem;
     font-weight: 600;
     margin-bottom: 1rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: $color-text-muted;
   }
 
@@ -838,7 +939,9 @@ body {
   }
 }
 
-// About Page Specific
+// ============================================
+// About Page
+// ============================================
 .about-hero {
   margin-bottom: 4rem;
 
@@ -868,19 +971,19 @@ body {
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      background: #e0e0e0;
+      background: $color-border-light;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 2.5rem;
       font-weight: 600;
-      color: #888;
-      letter-spacing: 0.05em;
+      color: $color-text-muted;
     }
   }
 
   .about-intro {
     h1 {
+      font-family: $font-serif;
       font-size: 2.5rem;
       font-weight: 600;
       letter-spacing: -0.03em;
@@ -892,13 +995,13 @@ body {
     }
 
     .tagline {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
       color: $color-text-muted;
       margin: 0 0 0.35rem 0;
     }
 
     .location {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       color: $color-text-muted;
       margin: 0;
     }
@@ -918,7 +1021,8 @@ body {
 }
 
 .section-number {
-  font-size: 0.85rem;
+  font-family: $font-sans;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: $color-text-muted;
   padding-top: 0.35rem;
@@ -927,7 +1031,8 @@ body {
 
 .section-content {
   h2 {
-    font-size: 0.75rem;
+    font-family: $font-sans;
+    font-size: 0.6875rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -982,7 +1087,7 @@ body {
 }
 
 .exp-period {
-  font-size: 0.85rem;
+  font-size: 0.8125rem;
   color: $color-text-muted;
   font-variant-numeric: tabular-nums;
   padding-top: 0.15rem;
@@ -1001,7 +1106,7 @@ body {
 }
 
 .exp-team {
-  font-size: 0.85rem;
+  font-size: 0.8125rem;
   color: $color-text-muted;
   margin-top: 0.2rem;
   font-style: italic;
@@ -1013,7 +1118,7 @@ body {
   list-style: none;
 
   li {
-    font-size: 0.85rem;
+    font-size: 0.8125rem;
     color: $color-text-muted;
     margin-bottom: 0.35rem;
     padding-left: 1rem;
@@ -1061,21 +1166,20 @@ body {
 
 .tool-tag {
   display: inline-block;
-  padding: 0.35rem 0.75rem;
-  font-size: 0.8rem;
-  color: $color-text-light;
-  background: #f5f5f5;
+  padding: 0.3rem 0.625rem;
+  font-size: 0.75rem;
+  color: $color-text-secondary;
+  background: $color-surface;
   border-radius: 4px;
   font-weight: 500;
-  transition: background-color 0.2s ease, transform 0.15s ease;
+  transition: background-color 0.15s ease;
 
   &:hover {
-    background: #ebebeb;
-    transform: translateY(-1px);
+    background: $color-border-light;
   }
 }
 
-// Social Links with Icons
+// Social Links
 .social-links {
   display: flex;
   gap: 1.5rem;
@@ -1091,7 +1195,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: $color-text;
   text-decoration: none;
   transition: color 0.15s ease;
@@ -1102,7 +1206,7 @@ body {
   }
 
   &:hover {
-    color: $color-text-light;
+    color: $color-text-secondary;
 
     svg {
       color: $color-text;
@@ -1114,11 +1218,12 @@ body {
 .about-contact {
   margin-top: 4rem;
   padding: 2.5rem;
-  background: #fafafa;
-  border-radius: 8px;
+  background: $color-surface;
+  border-radius: 12px;
   text-align: center;
 
   h2 {
+    font-family: $font-serif;
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
@@ -1133,10 +1238,12 @@ body {
   .contact-btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
+    font-family: $font-sans;
+    font-size: 0.875rem;
+    font-weight: 500;
     color: #fff;
     background: $color-text;
-    border-radius: 6px;
+    border-radius: 8px;
     text-decoration: none;
     transition: opacity 0.15s ease;
 
@@ -1147,7 +1254,216 @@ body {
   }
 }
 
-// Syntax Highlighting (Rouge - Light GitHub theme)
+// ============================================
+// Projects Page
+// ============================================
+.projects-page {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.projects-intro {
+  margin-bottom: 3rem;
+
+  p {
+    font-size: 1.05rem;
+    color: $color-text-secondary;
+    line-height: 1.7;
+  }
+}
+
+.projects-coming-soon {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: $color-surface;
+  border-radius: 12px;
+  margin: 2rem 0;
+
+  .coming-soon-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-family: $font-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-transform: none;
+    letter-spacing: normal;
+    color: $color-text;
+  }
+
+  p {
+    color: $color-text-muted;
+    font-size: 0.95rem;
+    margin: 0;
+
+    a {
+      color: $color-text;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+
+      &:hover {
+        color: $color-text-secondary;
+      }
+    }
+  }
+}
+
+.project-card {
+  padding: 1.5rem;
+  border: 1px solid $color-border;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    border-color: #d0d0d0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+
+  h3 {
+    font-family: $font-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.project-tag {
+  font-family: $font-sans;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  background: $color-border-light;
+  border-radius: 3px;
+  color: $color-text-muted;
+}
+
+.project-description {
+  font-size: 0.875rem;
+  color: $color-text-secondary;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.project-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: $color-surface;
+  border-radius: 8px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+
+  .stat-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $color-text;
+  }
+
+  .stat-label {
+    font-size: 0.6875rem;
+    color: $color-text-muted;
+  }
+}
+
+.project-tech {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.tech-tag {
+  font-family: $font-sans;
+  font-size: 0.6875rem;
+  padding: 0.15rem 0.5rem;
+  background: #e8f4f8;
+  color: #0969da;
+  border-radius: 3px;
+}
+
+.project-links {
+  display: flex;
+  gap: 1.5rem;
+
+  a {
+    font-size: 0.8125rem;
+    color: $color-text;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $color-text-secondary;
+    }
+  }
+}
+
+// ============================================
+// 404 Page
+// ============================================
+.error-page {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  max-width: 500px;
+  margin: 0 auto;
+
+  .error-code {
+    font-family: $font-serif;
+    font-size: 6rem;
+    font-weight: 700;
+    color: $color-border;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: $font-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: $color-text-muted;
+    margin-bottom: 2rem;
+  }
+
+  .error-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-family: $font-sans;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #fff;
+    background: $color-text;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// ============================================
+// Syntax Highlighting (Rouge - GitHub Light)
+// ============================================
 .highlight {
   .c, .c1, .cm, .cs { color: #6a737d; font-style: italic; }
   .k, .kd, .kn, .kp, .kr, .kt, .kv { color: #d73a49; }
@@ -1172,17 +1488,21 @@ body {
   .gi { color: #22863a; background: #e6ffed; }
 }
 
+// ============================================
 // Medium Zoom
+// ============================================
 .medium-zoom-overlay {
   z-index: 1000;
-  background: #fff !important;
+  background: $color-bg !important;
 }
 
 .medium-zoom-image--opened {
   z-index: 1001;
 }
 
+// ============================================
 // Reading Progress Bar
+// ============================================
 .reading-progress {
   position: fixed;
   top: 0;
@@ -1201,7 +1521,9 @@ body {
   }
 }
 
-// Code Block Wrapper & Copy Button
+// ============================================
+// Code Block Copy Button
+// ============================================
 .code-block-wrapper {
   position: relative;
 
@@ -1210,18 +1532,18 @@ body {
     top: 8px;
     right: 8px;
     padding: 4px 10px;
-    font-size: 0.7rem;
+    font-size: 0.6875rem;
     font-family: $font-sans;
     color: $color-text-muted;
-    background: #fff;
-    border: 1px solid #e0e0e0;
+    background: $color-bg;
+    border: 1px solid $color-border;
     border-radius: 4px;
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    transition: opacity 0.15s ease, background-color 0.15s ease;
 
     &:hover {
-      background: #f5f5f5;
+      background: $color-surface;
       color: $color-text;
     }
 
@@ -1236,28 +1558,30 @@ body {
   }
 }
 
+// ============================================
 // Back to Top Button
+// ============================================
 .back-to-top {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   background: $color-bg;
   border: 1px solid $color-border;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: $color-text-muted;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease,
-              background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.15s ease,
+              background-color 0.15s ease, color 0.15s ease;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 
   &:hover {
-    background: #f5f5f5;
+    background: $color-surface;
     color: $color-text;
     border-color: #d0d0d0;
     transform: translateY(-2px);
@@ -1271,203 +1595,8 @@ body {
   @media (max-width: 600px) {
     bottom: 1rem;
     right: 1rem;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     font-size: 1rem;
-  }
-}
-
-// Projects Page
-.projects-page {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.projects-intro {
-  margin-bottom: 3rem;
-
-  p {
-    font-size: 1.1rem;
-    color: $color-text-light;
-    line-height: 1.7;
-  }
-}
-
-.projects-coming-soon {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: #fafafa;
-  border-radius: 12px;
-  margin: 2rem 0;
-
-  .coming-soon-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    text-transform: none;
-    letter-spacing: normal;
-    color: $color-text;
-  }
-
-  p {
-    color: $color-text-muted;
-    font-size: 0.95rem;
-    margin: 0;
-
-    a {
-      color: $color-text;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-
-      &:hover {
-        color: $color-text-light;
-      }
-    }
-  }
-}
-
-.project-card {
-  padding: 1.5rem;
-  border: 1px solid $color-border;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    border-color: #d0d0d0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  }
-}
-
-.project-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 0.75rem;
-
-  h3 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin: 0;
-  }
-}
-
-.project-tag {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.2rem 0.5rem;
-  background: #f0f0f0;
-  border-radius: 3px;
-  color: $color-text-muted;
-}
-
-.project-description {
-  font-size: 0.9rem;
-  color: $color-text-light;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.project-stats {
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background: #fafafa;
-  border-radius: 6px;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-
-  .stat-value {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: $color-text;
-  }
-
-  .stat-label {
-    font-size: 0.75rem;
-    color: $color-text-muted;
-  }
-}
-
-.project-tech {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-
-.tech-tag {
-  font-size: 0.7rem;
-  padding: 0.2rem 0.5rem;
-  background: #e8f4f8;
-  color: #0969da;
-  border-radius: 3px;
-}
-
-.project-links {
-  display: flex;
-  gap: 1.5rem;
-
-  a {
-    font-size: 0.85rem;
-    color: $color-text;
-    text-decoration: none;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: $color-text-light;
-    }
-  }
-}
-
-// 404 Page
-.error-page {
-  text-align: center;
-  padding: 4rem 1.5rem;
-  max-width: 500px;
-  margin: 0 auto;
-
-  .error-code {
-    font-size: 6rem;
-    font-weight: 600;
-    color: $color-border;
-    line-height: 1;
-    margin-bottom: 1rem;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-
-  p {
-    color: $color-text-muted;
-    margin-bottom: 2rem;
-  }
-
-  .error-link {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
-    color: #fff;
-    background: $color-text;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-
-    &:hover {
-      opacity: 0.8;
-    }
   }
 }

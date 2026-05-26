@@ -1,11 +1,28 @@
 <header class="site-header">
   <nav class="nav">
-    <a href="{{ '/' | relative_url }}" class="nav-logo">{{ site.title | upcase }}</a>
+    <a href="{{ '/' | relative_url }}" class="nav-logo">{{ site.author }}</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line class="hamburger-top" x1="3" y1="5" x2="17" y2="5"/>
+        <line class="hamburger-mid" x1="3" y1="10" x2="17" y2="10"/>
+        <line class="hamburger-bot" x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
     <div class="nav-links">
-      <a href="{{ '/' | relative_url }}">Blog</a>
-      <a href="{{ '/projects' | relative_url }}">Projects</a>
-      <a href="{{ '/about' | relative_url }}">About</a>
-      <a href="https://allenphilip93.github.io/AllenPhilipCV_MLE_ver5.pdf" target="_blank">Resume</a>
+      <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Blog</a>
+      <a href="{{ '/projects' | relative_url }}"{% if page.url == '/projects' or page.url == '/projects/' %} class="active"{% endif %}>Projects</a>
+      <a href="{{ '/about' | relative_url }}"{% if page.url == '/about' or page.url == '/about/' %} class="active"{% endif %}>About</a>
+      <a href="{{ '/AllenPhilipCV_MLE_ver5.pdf' | relative_url }}" target="_blank">Resume</a>
     </div>
   </nav>
+  <script>
+    (function() {
+      var btn = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      btn.addEventListener('click', function() {
+        var open = links.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+      });
+    })();
+  </script>
 </header>

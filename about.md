@@ -6,9 +6,6 @@ permalink: /about/
 
 <div class="about-hero">
 <div class="about-hero-content">
-<div class="about-photo">
-<img src="/assets/images/profile.jpg" alt="Allen Philip J" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>AP</div>'">
-</div>
 <div class="about-intro">
 <h1>Allen Philip J</h1>
 <p class="tagline">Building AI platforms & making large models run fast</p>
