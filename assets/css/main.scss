@@ -1600,3 +1600,119 @@ body {
     font-size: 1rem;
   }
 }
+
+// ============================================
+// Animations
+// ============================================
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// Header fade-in on load
+.site-header {
+  animation: fadeIn 0.4s ease both;
+}
+
+// Main content fade-up on load
+.main {
+  animation: fadeUp 0.5s ease 0.1s both;
+}
+
+// Footer fade-in
+.site-footer {
+  animation: fadeIn 0.5s ease 0.3s both;
+}
+
+// Blog list items stagger in
+.blog-item {
+  opacity: 0;
+  animation: fadeUp 0.4s ease both;
+
+  @for $i from 1 through 15 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{0.05 + $i * 0.04}s;
+    }
+  }
+}
+
+// Post header entrance
+.post-header {
+  animation: fadeUp 0.5s ease 0.1s both;
+}
+
+.post-layout {
+  animation: fadeUp 0.5s ease 0.2s both;
+}
+
+// Scroll-triggered reveal
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Stagger about page sections
+.about-numbered {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-contact {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Subtle hover lift on project cards
+.project-card {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+// Respect reduced motion preference
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .about-numbered,
+  .about-contact,
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

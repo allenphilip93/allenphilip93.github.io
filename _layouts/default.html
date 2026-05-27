@@ -47,7 +47,7 @@
   <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js"></script>
   <script>
     // Medium zoom for images
-    mediumZoom('.post-content img', { margin: 48, background: '#fff' });
+    mediumZoom('.post-content img', { margin: 48, background: '#faf8f4' });
 
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
@@ -57,6 +57,21 @@
       if (e.keyCode === 37 && prev) window.location.href = prev.href;
       if (e.keyCode === 39 && next) window.location.href = next.href;
     });
+
+    // Scroll-triggered reveal animation
+    (function() {
+      var targets = document.querySelectorAll('.about-numbered, .about-contact, .reveal');
+      if (!targets.length) return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      targets.forEach(function(el) { observer.observe(el); });
+    })();
   </script>
   {% if page.katex %}
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
